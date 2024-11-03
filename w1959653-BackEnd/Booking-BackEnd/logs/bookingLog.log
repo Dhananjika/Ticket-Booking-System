@@ -1,0 +1,126 @@
+2024-10-21 20:03:56 INFO  BookingController:15 - test
+[lk.ticket.controller.BookingController.test(BookingController.java:15)evel] 2024-10-21 20:06:15.085 [http-nio-8080-exec-2] BookingController - testsg
+2024-10-21 20:07:36 INFO  BookingController:15 - test
+2024-10-21 20:13:26 INFO  lk.ticket.controller.BookingController.test:15 - test
+2024-10-21 20:15:20.15 INFO  BookingController - test - test
+2024-10-21 20:18:54.257.15 INFO   --- [http-nio-8080-exec-1] BookingController - test
+2024-10-21 20:21:31.633 INFO   15 --- BookingController -- test - test
+2024-10-21 20:23:10.913  INFO   15 --- [BookingController] -- test - test
+2024-10-21 20:25:06.185  INFO   15 --- [BookingController] -- test : test
+2024-10-21 20:33:23.689  INFO   15 --- [BookingController] -- test : test
+2024-10-22 20:27:25.685  INFO   15 --- [ConfigurationController] -- test : Test Configuration
+2024-10-22 21:36:29.229  INFO   24 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate10, Customer Retrieval Rate10, Maximum Ticket Capacity10]
+2024-10-22 21:36:46.560  INFO   24 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate10, Customer Retrieval Rate10, Maximum Ticket Capacity10]
+2024-10-22 21:47:45.248  INFO   29 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate10, Customer Retrieval Rate10, Maximum Ticket Capacity10]
+2024-10-22 22:51:13.458  INFO   30 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-22 22:51:31.351  INFO   25 --- [ConfigurationServiceImp] -- SubmitConfiguration : Inside the SubmitConfiguration method in ConfigurationServiceImp
+2024-10-22 22:51:52.872  INFO   18 --- [ConfigurationRepository] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-22
+2024-10-22 22:52:07.220  INFO   19 --- [ConfigurationRepository] -- SubmitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-22 22:52:38.654  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-22 22:52:49.197  INFO   38 --- [ConfigurationRepository] -- SubmitConfiguration : Insert Data into configuration table Success
+2024-10-22 22:52:55.815  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-22 22:52:58.496  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 13:49:44.057  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 13:49:44.061  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 13:49:57.079  INFO   36 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 13:50:05.241  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 13:50:05.241  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 13:50:05.857  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 13:50:05.857  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 13:50:05.877  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 13:50:05.877  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 13:50:16.743  INFO   55 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 13:50:44.164  ERROR  61 --- [ConfigurationServiceImp] -- saveJsonFile : An error occurred while saving json filesrc\json\configuration.json (The system cannot find the path specified)
+2024-10-23 13:56:07.433  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 13:56:07.437  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 13:56:10.358  INFO   37 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 13:56:12.675  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 13:56:12.676  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 13:56:13.361  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 13:56:13.362  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 13:56:13.384  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 13:56:13.384  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 13:56:16.710  INFO   56 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 13:56:43.026  ERROR  62 --- [ConfigurationServiceImp] -- saveJsonFile : An error occurred while saving json fileE:\CourseWork\Y3 - Semester 1\OOP\w1959653\Booking-BackEnd\src\json\configuration.json (The system cannot find the path specified)
+2024-10-23 13:58:20.611  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 13:58:20.611  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 13:58:28.807  INFO   37 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 13:58:32.415  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 13:58:32.416  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 13:58:32.458  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 13:58:32.459  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 13:58:32.460  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 13:58:32.461  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 13:58:38.687  INFO   56 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 13:58:49.373  ERROR  62 --- [ConfigurationServiceImp] -- saveJsonFile : An error occurred while saving json fileE:\CourseWork\Y3 - Semester 1\OOP\w1959653\Booking-BackEnd\src\json\configuration.json (The system cannot find the path specified)
+2024-10-23 13:59:17.617  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 13:59:17.620  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 13:59:22.189  INFO   37 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 13:59:23.368  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 13:59:23.369  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 13:59:23.921  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 13:59:23.921  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 13:59:23.938  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 13:59:23.939  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 13:59:25.969  INFO   56 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 14:13:43.152  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 14:13:43.153  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 14:13:49.991  INFO   37 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 14:13:51.205  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 14:13:51.206  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 14:13:51.791  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 14:13:51.792  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 14:13:51.811  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 14:13:51.812  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 14:13:54.832  INFO   56 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 14:15:43.341  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 14:15:43.342  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 14:15:47.166  INFO   37 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 14:15:48.286  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 14:15:48.287  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 14:15:48.862  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 14:15:48.863  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 14:15:48.882  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 14:15:48.883  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 14:15:57.344  INFO   56 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 14:16:10.216  INFO   61 --- [ConfigurationServiceImp] -- saveJsonFile : Details saved to configuration.json file
+2024-10-23 14:48:35.796  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 14:48:35.798  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 14:48:42.464  INFO   38 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 14:48:43.566  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 14:48:43.567  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 14:48:44.069  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 14:48:44.070  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 14:48:44.087  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 14:48:44.087  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 14:48:52.213  INFO   57 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 14:49:21.119  INFO   63 --- [ConfigurationServiceImp] -- saveJsonFile : Details saved to configuration.json file
+2024-10-23 15:01:28.570  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 15:01:28.572  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 15:01:28.572  INFO   38 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 15:01:28.590  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 15:01:28.590  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 15:01:28.822  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 15:01:28.822  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 15:01:28.829  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 15:01:28.829  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 15:01:32.547  INFO   80 --- [ConfigurationServiceImp] -- readJsonFile : Method called
+2024-10-23 15:01:59.700  INFO   85 --- [ConfigurationServiceImp] -- readJsonFile : Details read from configuration.json file
+2024-10-23 15:02:01.881  INFO   86 --- [ConfigurationServiceImp] -- readJsonFile : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 15:02:38.411  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 15:02:38.413  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 15:02:38.414  INFO   38 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 15:02:38.432  INFO   25 --- [ConfigurationRepository] -- submitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10], User - Admin, created date - 2024-10-23
+2024-10-23 15:02:38.432  INFO   26 --- [ConfigurationRepository] -- submitConfiguration : Inside the SubmitConfiguration method in ConfigurationRepository
+2024-10-23 15:02:38.595  INFO   104 --- [ConnectionManager] -- commit : Commit success
+2024-10-23 15:02:38.596  INFO   45 --- [ConfigurationRepository] -- submitConfiguration : Insert Data into configuration table Successful
+2024-10-23 15:02:38.601  INFO   44 --- [ConnectionManager] -- close : Connection close success
+2024-10-23 15:02:38.602  INFO   59 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-10-23 15:02:43.555  INFO   80 --- [ConfigurationServiceImp] -- readJsonFile : Method called
+2024-10-23 15:02:46.181  INFO   85 --- [ConfigurationServiceImp] -- readJsonFile : Details read from configuration.json file
+2024-10-23 15:02:52.961  INFO   86 --- [ConfigurationServiceImp] -- readJsonFile : Configuration[Total Number of Tickets - 20, Ticket Release Rate - 10, Customer Retrieval Rate - 20, Maximum Ticket Capacity - 10]
+2024-10-23 21:41:26.867  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-10-23 21:41:26.870  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 10, Ticket Release Rate - 10, Customer Retrieval Rate - 10, Maximum Ticket Capacity - 10]
+2024-10-23 21:41:26.871  INFO   38 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-10-23 21:41:26.877  INFO   54 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-10-23 21:41:26.891  INFO   60 --- [ConfigurationServiceImp] -- saveJsonFile : Details saved to configuration.json file

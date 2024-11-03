@@ -1,0 +1,5 @@
+2024-11-01 10:21:39.965  INFO   39 --- [ConfigurationController] -- SubmitConfiguration : Method called
+2024-11-01 10:21:39.970  INFO   40 --- [ConfigurationController] -- SubmitConfiguration : Configuration[Total Number of Tickets - 50, Ticket Release Rate - 10, Customer Retrieval Rate - 5, Maximum Ticket Capacity - 20]
+2024-11-01 10:21:39.970  INFO   38 --- [ConfigurationServiceImp] -- submitConfiguration : Method called
+2024-11-01 10:21:39.974  INFO   54 --- [ConfigurationServiceImp] -- saveJsonFile : Method called
+2024-11-01 10:21:39.974  ERROR  63 --- [ConfigurationServiceImp] -- saveJsonFile : An error occurred while saving json fileC:\Users\DhananjikaDissanayak\IdeaProjects\w1959653_dhananjika_niwarthani_backend\booking\booking\src\json\configuration.json (The system cannot find the path specified)
