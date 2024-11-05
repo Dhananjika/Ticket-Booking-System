@@ -1,3 +1,5 @@
+package cli;
+
 public class Logger {
     public static void info(String msg) {
         System.out.println("[Log] -- [INFO] --- " + msg);

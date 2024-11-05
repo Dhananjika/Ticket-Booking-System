@@ -1,3 +1,5 @@
+package cli;
+
 public class Vendor implements Runnable {
     private final TicketPool ticketPool;
 

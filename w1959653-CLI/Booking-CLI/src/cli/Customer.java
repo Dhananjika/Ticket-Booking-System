@@ -1,3 +1,5 @@
+package cli;
+
 public class Customer implements Runnable {
     private final TicketPool ticketPool;
 
