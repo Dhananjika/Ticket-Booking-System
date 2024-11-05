@@ -1,5 +1,12 @@
 package cli;
 
+/**
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
+
+//Customer class implemented by Runnable interface
 public class Customer implements Runnable {
     private final TicketPool ticketPool;
 
@@ -7,9 +14,18 @@ public class Customer implements Runnable {
         this.ticketPool = ticketPool;
     }
 
+    /**
+     *  This method is used to separately execute thread.
+     *  This will continue until all the tickets are purchased.
+     *  Here thread sleep time set to 100 milliseconds.
+     *  This will make wait threads for 100 milliseconds to execute.
+     *
+     *  @Exception InterruptedException
+     *  @out remove Tickets from Ticket Pool
+     * */
     @Override
     public void run() {
-        String methodDetails = "[Customer] -- run : ";
+        String methodDetails = "[Customer] -- [run] : ";
         while (true) {
             try {
                 ticketPool.removeTicket();
