@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class ControlPanel {
     //Created instance object for Configuration class
     Configuration configuration = new Configuration();
+    boolean ticketsSoldOut = false;
 
     /**
      *  This method is used to display the panel
@@ -19,14 +20,33 @@ public class ControlPanel {
      *  @out execution of that value
      * */
     public void displayPanel(){
+        String methodDetails = "[ControlPanel] -- [displayPanel] : ";
+        Scanner scanner = new Scanner(System.in);
         if (configuration.getTotalTickets() == 0){
             // Before set configuration values this will execute
             System.out.println();
             System.out.println("Configuration Form : ");
             executeOption("y");
-        }else{
+        } else if (ticketsSoldOut) {
+            System.out.println();
+            System.out.println("Do you want to stop the system ? (yes/no)");
+            System.out.println("Note : Selecting \"yes\" will terminate the system.");
+            System.out.println("       Selecting \"no\" requires configuring configuration settings for a different event.");
+            System.out.println();
+            System.out.print("Enter option: ");
+            String option = scanner.nextLine();
+
+            if (option.equals("yes")){
+                executeOption("2");
+            }else if (option.equals("no")){
+                ticketsSoldOut = false;
+                executeOption("y");
+            }else {
+                Logger.warn(methodDetails + "Invalid option selected.");
+            }
+
+        } else{
             // After set configuration values this will execute
-            Scanner scanner = new Scanner(System.in);
             System.out.println();
             System.out.println("1 - Start the System");
             System.out.println("2 - Stop the System");
@@ -74,6 +94,8 @@ public class ControlPanel {
                 } catch (InterruptedException e) {
                     Logger.error(methodDetails + " An error occurred while interrupting the vendor thread " + Thread.currentThread().getName() + " : " + e.getMessage());
                 }
+
+                ticketsSoldOut = true;
                 break;
             case "2":
                 //Stop the system

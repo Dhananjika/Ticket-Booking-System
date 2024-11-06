@@ -17,8 +17,8 @@ public class Vendor implements Runnable {
     /**
      *  This method is used to separately execute thread.
      *  This will continue until all the tickets are released.
-     *  Here thread sleep time set to 200 milliseconds.
-     *  This will make wait threads for 200 milliseconds to execute.
+     *  Here thread sleep time set to 1000 milliseconds.
+     *  This will make wait threads for 1000 milliseconds to execute.
      *
      *  @Exception InterruptedException
      *  @out add tickets to ticket pool
@@ -29,7 +29,7 @@ public class Vendor implements Runnable {
         while (true) {
             try {
                 ticketPool.addTicket();
-                Thread.sleep(200);
+                Thread.sleep(1000);
                 if (ticketPool.checkTicketAvailability()) {
                     Logger.info(methodDetails + "No more tickets left to release.");
                     break;

@@ -17,8 +17,8 @@ public class Customer implements Runnable {
     /**
      *  This method is used to separately execute thread.
      *  This will continue until all the tickets are purchased.
-     *  Here thread sleep time set to 100 milliseconds.
-     *  This will make wait threads for 100 milliseconds to execute.
+     *  Here thread sleep time set to 400 milliseconds.
+     *  This will make wait threads for 400 milliseconds to execute.
      *
      *  @Exception InterruptedException
      *  @out remove Tickets from Ticket Pool
@@ -33,7 +33,7 @@ public class Customer implements Runnable {
                     Logger.info(methodDetails + "No more tickets available to purchase.");
                     break;
                 }
-                Thread.sleep(100);
+                Thread.sleep(400);
             } catch (InterruptedException e) {
                 Logger.error(methodDetails + " An error occurred while interrupting the customer thread " + Thread.currentThread().getName() + " : " + e.getMessage());
                 break;
