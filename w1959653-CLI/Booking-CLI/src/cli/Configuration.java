@@ -1,5 +1,6 @@
 package cli;
 
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
  * IIT ID - 20223058
  */
 
-public class Configuration {
+public class Configuration implements Serializable {
 
     // Instance variables
     private int totalTickets;
@@ -25,6 +26,13 @@ public class Configuration {
         return "Configuration[Total Number of Tickets - " + totalTickets + ", Ticket Release Rate - " + ticketReleaseRate + ", Customer Retrieval Rate - " + customerRetrievalRate + ", Maximum Ticket Capacity - " + maxTicketCapacity + "]" ;
     }
 
+    /**
+     *  This method is used to set values for instance variables
+     *
+     *  @in  variable Name
+     *  @Exception InputMismatchException
+     *  @out variable Value
+     * */
     public void setConfiguration() {
         String methodDetails = "[Configuration] -- [setConfiguration] : ";
         try {
@@ -36,9 +44,8 @@ public class Configuration {
             customerRetrievalRate = setVariableValues("Customer Retrieval Rate");
 
             Logger.info(methodDetails + "Setting configuration completed.");
+            saveConfiguration();
             System.out.println();
-
-
         } catch (InputMismatchException e) {
             Logger.error(methodDetails + "Positive number expected" + e.getMessage());
             System.out.println();
@@ -117,6 +124,28 @@ public class Configuration {
         maxTicketCapacity = 0;
     }
 
+    /**
+     *  This method is used to save configuration setting to text file
+     *
+     *  @in  configuration values
+     *  @Exception IOException
+     *  @out text file
+     * */
+
+    public void saveConfiguration() {
+        String methodDetails = "[Configuration] -- [saveConfiguration] : ";
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("Booking-CLI/src/configuration.txt"));
+            writer.write("Total Number of Tickets : " + totalTickets + "\n");
+            writer.write("Maximum Ticket Capacity : " + maxTicketCapacity + "\n");
+            writer.write("Ticket Release Rate : " + ticketReleaseRate + "\n");
+            writer.write("Customer Retrieval Rate : " + customerRetrievalRate + "\n");
+            writer.close();
+            Logger.info(methodDetails + "Configuration save completed.");
+        }catch (IOException e){
+            Logger.error(methodDetails + "Configuration save failed." + e.getMessage());
+        }
+    }
 
     // Getters Setters of variables
     public int getTotalTickets() {

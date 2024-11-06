@@ -13,9 +13,7 @@ import java.util.Scanner;
  */
 
 
-/**
- * This system consider only one event
- */
+//This system consider only one event
 public class TicketSystemCLI {
 
     /**
@@ -28,7 +26,7 @@ public class TicketSystemCLI {
     public static void main(String[] args) {
         String methodDetails = "[TicketingSystem] -- [main] : ";
         try {
-            FileReader fileReader = new FileReader(new File("Booking-CLI/src/cli/Logo.txt").getAbsoluteFile());
+            FileReader fileReader = new FileReader(new File("Booking-CLI/src/Logo.txt").getAbsoluteFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while (bufferedReader.ready()) {
                 System.out.println(bufferedReader.readLine());
