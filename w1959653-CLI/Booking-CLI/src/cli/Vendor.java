@@ -28,12 +28,11 @@ public class Vendor implements Runnable {
         String methodDetails = "[Vendor] -- [run] : ";
         while (true) {
             try {
-                ticketPool.addTicket();
-                Thread.sleep(1000);
                 if (ticketPool.checkTicketAvailability()) {
-                    Logger.info(methodDetails + "No more tickets left to release.");
                     break;
                 }
+                ticketPool.addTicket(Thread.currentThread().getName());
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Logger.error(methodDetails + " An error occurred while interrupting the vendor thread " + Thread.currentThread().getName() + " : " + e.getMessage());
                 break;

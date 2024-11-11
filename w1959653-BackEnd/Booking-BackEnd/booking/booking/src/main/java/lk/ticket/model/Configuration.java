@@ -2,9 +2,10 @@ package lk.ticket.model;
 
 public class Configuration {
     private int totalTickets;
+    private int maxTicketCapacity;
     private int ticketReleaseRate;
     private int customerRetrievalRate;
-    private int maxTicketCapacity;
+
 
     @Override
     public String toString() {

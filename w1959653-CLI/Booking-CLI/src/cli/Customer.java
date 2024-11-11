@@ -28,11 +28,10 @@ public class Customer implements Runnable {
         String methodDetails = "[Customer] -- [run] : ";
         while (true) {
             try {
-                ticketPool.removeTicket();
-                if (ticketPool.checkTicketAvailability()) {
-                    Logger.info(methodDetails + "No more tickets available to purchase.");
+                if (ticketPool.checkTicketAvailability() && ticketPool.isTicketsSold()) {
                     break;
                 }
+                ticketPool.removeTicket(Thread.currentThread().getName());
                 Thread.sleep(400);
             } catch (InterruptedException e) {
                 Logger.error(methodDetails + " An error occurred while interrupting the customer thread " + Thread.currentThread().getName() + " : " + e.getMessage());

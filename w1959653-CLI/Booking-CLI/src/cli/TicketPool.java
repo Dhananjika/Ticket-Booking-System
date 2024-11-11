@@ -13,6 +13,8 @@ public class TicketPool {
     private final Configuration configuration;
     private int releasedTicketCount; // Total number of tickets issued by the vendor
     private final int poolSize; // size of the pool
+    private boolean ticketsSold = false;
+
 
     public TicketPool(Configuration configuration) {
         this.configuration = configuration;
@@ -29,13 +31,21 @@ public class TicketPool {
      *  @out ticketQueue
      * */
 
-    public synchronized void addTicket(){
+    public synchronized void addTicket(String vendorName){
         String methodDetails = "[TicketPool] -- [addTicket] : ";
         try{
             int ticketReleaseRate = configuration.getTicketReleaseRate();
             while (checkPoolSize()) {
+                System.out.println();
+                Logger.info(methodDetails + vendorName + " try to add tickets.");
                 Logger.warn(methodDetails + "Ticket pool is full. Wait until customer purchase tickets");
                 wait();
+            }
+            if(checkTicketAvailability()){
+                System.out.println();
+                Logger.info(methodDetails + vendorName + " try to add tickets.");
+                Logger.warn(methodDetails + "No more tickets left to release.");
+                return;
             }
             ticketReleaseRate = Math.min(poolSize - ticketQueue.size(), ticketReleaseRate);
             for (int i = 0; i < ticketReleaseRate; i++) {
@@ -45,7 +55,7 @@ public class TicketPool {
                 }
                 ticketQueue.add(releasedTicketCount++);
             }
-            Logger.info(methodDetails + ticketReleaseRate + " Tickets added. Total: " + ticketQueue.size());
+            Logger.info(methodDetails + vendorName + " added " + ticketReleaseRate +  " tickets. Total: " + ticketQueue.size());
             notifyAll();
         }catch (InterruptedException e){
             Logger.error(methodDetails + " An error occurred while adding tickets to pool : " + e.getMessage());
@@ -62,15 +72,20 @@ public class TicketPool {
      *  @Exception InterruptedException
      *  @out ticketQueue
      * */
-    public synchronized void removeTicket(){
+    public synchronized void removeTicket(String customerName){
         String methodDetails = "[TicketPool] -- [removeTicket] : ";
         try {
             int customerRetrievalRate = configuration.getCustomerRetrievalRate();
             while (ticketQueue.isEmpty()) {
-                if (checkTicketAvailability()) {
-                    Logger.warn(methodDetails + " No more tickets available for this event.");
-                    notifyAll();
+                if (checkTicketAvailability() && ticketQueue.isEmpty()) {
+                    ticketsSold = true;
+                    System.out.println();
+                    Logger.info(methodDetails + customerName + " try to purchase tickets.");
+                    Logger.warn(methodDetails + "No more tickets left to release.");
+                    return;
                 }else {
+                    System.out.println();
+                    Logger.info(methodDetails + customerName + " try to purchase tickets.");
                     Logger.warn(methodDetails + "Ticket pool is empty. Wait until vendor release tickets");
                     wait();
                 }
@@ -83,7 +98,7 @@ public class TicketPool {
                     ticketQueue.remove(0);
                 }
             }
-            Logger.info(methodDetails + customerRetrievalRate + " Tickets purchased. Remaining: " + ticketQueue.size());
+            Logger.info(methodDetails + customerName + " purchased " +  customerRetrievalRate + " tickets. Remaining: " + ticketQueue.size());
             notifyAll();
         }catch (InterruptedException e){
             Logger.error(methodDetails + " An error occurred while removing tickets to pool : " + e.getMessage());
@@ -96,8 +111,8 @@ public class TicketPool {
      *  @in  released Ticket Count, total ticket count, ticketQueue
      *  @out ticket available or not
      * */
-    public boolean checkTicketAvailability() {
-        return (releasedTicketCount >= configuration.getTotalTickets()) && ticketQueue.isEmpty();
+    public synchronized boolean checkTicketAvailability() {
+        return releasedTicketCount == configuration.getTotalTickets();
     }
 
     /**
@@ -106,7 +121,12 @@ public class TicketPool {
      *  @in  poolSize, ticketQueue
      *  @out pool is full or not
      * */
-    public boolean checkPoolSize(){
+    public synchronized boolean checkPoolSize(){
         return poolSize == ticketQueue.size();
     }
+
+    public synchronized boolean isTicketsSold() {
+        return ticketsSold;
+    }
+
 }

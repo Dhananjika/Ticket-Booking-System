@@ -1,5 +1,7 @@
 package cli;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -77,22 +79,35 @@ public class ControlPanel {
                 //Create TicketPool class object by parsing configuration object.
                 TicketPool ticketPool = new TicketPool(configuration);
 
-                //Create and start vendor Thread
-                Vendor vendor = new Vendor(ticketPool);
-                Thread vendorThread = new Thread(vendor);
-                vendorThread.start();
+                List<Thread> vendorThreads = new ArrayList<>();
+                List<Thread> customerThreads = new ArrayList<>();
 
-                //Create and start customer Thread
-                Customer customer = new Customer(ticketPool);
-                Thread customerThread = new Thread(customer);
-                customerThread.start();
+                // Create and start vendor threads
+                for (int i = 0; i < 5; i++) {
+                    Vendor vendor = new Vendor(ticketPool);
+                    Thread vendorThread = new Thread(vendor, "Vendor" + (i + 1));
+                    vendorThreads.add(vendorThread);
+                    vendorThread.start();
+                }
 
-                //waiting for a vendor and customer threads to terminate
+                // Create and start customer threads
+                for (int j = 0; j < 6; j++) {
+                    Customer customer = new Customer(ticketPool);
+                    Thread customerThread = new Thread(customer, "Customer" + (j + 1));
+                    customerThreads.add(customerThread);
+                    customerThread.start();
+                }
+
+                // Waiting for all vendor and customer threads to terminate
                 try {
-                    vendorThread.join();
-                    customerThread.join();
+                    for (Thread vendorThread : vendorThreads) {
+                        vendorThread.join();
+                    }
+                    for (Thread customerThread : customerThreads) {
+                        customerThread.join();
+                    }
                 } catch (InterruptedException e) {
-                    Logger.error(methodDetails + " An error occurred while interrupting the vendor thread " + Thread.currentThread().getName() + " : " + e.getMessage());
+                    Logger.error(methodDetails + " An error occurred while waiting for threads to finish: " + e.getMessage());
                 }
 
                 ticketsSoldOut = true;

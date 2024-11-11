@@ -2,15 +2,17 @@ package lk.ticket.util;
 
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class ConnectionManager {
     private static final Logger logger = Logger.getLogger(ConnectionManager.class);
 
-    /* This method is used to get the Connection */
+    /**
+     *  This method is used to get the Connection
+     *
+     *  @Exception SQLException, ClassNotFoundException
+     *  @out The database connection
+     * */
     public static Connection getConnection() {
         Connection connection = null;
         try{
@@ -26,17 +28,22 @@ public class ConnectionManager {
             driverClass = (driverClass != null)? driverClass.trim() : driverClass;
             Class.forName(driverClass);
 
+            assert connectionURL != null;
             connection = DriverManager.getConnection(connectionURL, userName, password);
             connection.setAutoCommit(false);
-        } catch (Exception e) {
+        } catch (SQLException | ClassNotFoundException e) {
             logger.error("An Error Occurred while getting Connection " + e.getMessage());
-            e.printStackTrace();
             return null;
         }
         return connection;
     }
 
-    /* This method is used to close the Connection */
+    /**
+     *  This method is used to close the Connection
+     *
+     *  @Exception SQLException
+     *  @out close the database Connection
+     * */
     public static void close(Connection con) {
         try {
             if (con != null){
@@ -45,13 +52,17 @@ public class ConnectionManager {
             }else{
                 logger.error("Connection is null");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error("An Error Occurred while closing Connection " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    /* This method is used to close the PreparedStatement */
+    /**
+     *  This method is used to close the Prepared Statement
+     *
+     *  @Exception SQLException
+     *  @out close the Prepared Statement
+     * */
     public static void close(PreparedStatement ps) {
         try {
             if (ps != null){
@@ -60,13 +71,17 @@ public class ConnectionManager {
             }else{
                 logger.error("PreparedStatement is null");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error("An Error Occurred while closing PreparedStatement " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    /* This method is used to close the ResultSet */
+    /**
+     *  This method is used to close the Result Set
+     *
+     *  @Exception SQLException
+     *  @out close the Result Set
+     * */
     public static void close(ResultSet rs) {
         try {
             if (rs != null){
@@ -75,13 +90,17 @@ public class ConnectionManager {
             }else{
                 logger.error("ResultSet is null");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error("An Error Occurred while closing ResultSet " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    /* This method is used to undo changes (RollBack) */
+    /**
+     *  This method is used to undo changes (RollBack)
+     *
+     *  @Exception SQLException
+     *  @out undo changes (RollBack)
+     * */
     public static void rollback(Connection con) {
         try {
             if (con != null){
@@ -90,13 +109,17 @@ public class ConnectionManager {
             }else{
                 logger.error("Connection is null");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error("An Error Occurred while doing rollback " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    /* This method is used to commit changes */
+    /**
+     *  This method is used to commit changes
+     *
+     *  @Exception SQLException
+     *  @out commit changes
+     * */
     public static void commit(Connection con) {
         try {
             if (con != null){
@@ -105,9 +128,8 @@ public class ConnectionManager {
             }else{
                 logger.error("Connection is null");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error("An Error Occurred while commiting " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }
