@@ -45,6 +45,7 @@ public class ControlPanel {
                 executeOption("y");
             }else {
                 Logger.warn(methodDetails + "Invalid option selected.");
+                displayPanel();
             }
 
         } else{
@@ -75,10 +76,9 @@ public class ControlPanel {
                 configuration.setConfiguration();
                 break;
             case "1":
+                TicketPool ticketPool = new TicketPool(configuration);
                 //Start the system
                 //Create TicketPool class object by parsing configuration object.
-                TicketPool ticketPool = new TicketPool(configuration);
-
                 List<Thread> vendorThreads = new ArrayList<>();
                 List<Thread> customerThreads = new ArrayList<>();
 
@@ -110,6 +110,9 @@ public class ControlPanel {
                     Logger.error(methodDetails + " An error occurred while waiting for threads to finish: " + e.getMessage());
                 }
 
+                System.out.println();
+                Logger.info(methodDetails + "Total Number of Tickets Released : " + ticketPool.getReleasedTicketCount());
+                Logger.info(methodDetails + "Total Number of Tickets Purchased : " + ticketPool.getPurchasedTicketCount());
                 ticketsSoldOut = true;
                 break;
             case "2":

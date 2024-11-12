@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
+ * This system consider only one event
+ * <p>
  * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
 
-
-//This system consider only one event
 public class TicketSystemCLI {
 
     /**

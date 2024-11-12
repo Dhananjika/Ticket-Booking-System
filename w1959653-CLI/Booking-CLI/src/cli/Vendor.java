@@ -1,12 +1,13 @@
 package cli;
 
 /**
+ * Vendor class implemented by Runnable interface
+ * <p>
  * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
 
-//Vendor class implemented by Runnable interface
 public class Vendor implements Runnable {
     private final TicketPool ticketPool;
 
@@ -29,6 +30,7 @@ public class Vendor implements Runnable {
         while (true) {
             try {
                 if (ticketPool.checkTicketAvailability()) {
+                    Logger.info(methodDetails + Thread.currentThread().getName() + " try to add tickets : No more tickets left to release.");
                     break;
                 }
                 ticketPool.addTicket(Thread.currentThread().getName());

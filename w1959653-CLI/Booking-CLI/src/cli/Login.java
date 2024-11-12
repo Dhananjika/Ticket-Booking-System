@@ -1,12 +1,13 @@
 package cli;
 
 /**
+ * Abstract class
+ * <p>
  * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
 
-//Abstract class
 public abstract class Login {
     protected String username;
     protected String password;

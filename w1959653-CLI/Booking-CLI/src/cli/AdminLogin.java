@@ -1,12 +1,13 @@
 package cli;
 
 /**
+ * Admin class inherited by Login abstract class
+ * <p>
  * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
 
-// Admin class inherited by Login abstract class
 public class AdminLogin extends Login{
 
     //Parameterized Constructor

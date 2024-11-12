@@ -14,6 +14,7 @@ public class TicketPool {
     private int releasedTicketCount; // Total number of tickets issued by the vendor
     private final int poolSize; // size of the pool
     private boolean ticketsSold = false;
+    private int purchasedTicketCount;
 
 
     public TicketPool(Configuration configuration) {
@@ -35,27 +36,19 @@ public class TicketPool {
         String methodDetails = "[TicketPool] -- [addTicket] : ";
         try{
             int ticketReleaseRate = configuration.getTicketReleaseRate();
-            while (checkPoolSize()) {
-                System.out.println();
-                Logger.info(methodDetails + vendorName + " try to add tickets.");
-                Logger.warn(methodDetails + "Ticket pool is full. Wait until customer purchase tickets");
-                wait();
-            }
             if(checkTicketAvailability()){
-                System.out.println();
-                Logger.info(methodDetails + vendorName + " try to add tickets.");
-                Logger.warn(methodDetails + "No more tickets left to release.");
                 return;
             }
+            while (checkPoolSize()) {
+                Logger.info(methodDetails + vendorName + " try to add tickets : Ticket pool is full. Wait until customer purchase tickets.");
+                wait();
+            }
             ticketReleaseRate = Math.min(poolSize - ticketQueue.size(), ticketReleaseRate);
+            ticketReleaseRate = Math.min(ticketReleaseRate, configuration.getTotalTickets() - releasedTicketCount);
             for (int i = 0; i < ticketReleaseRate; i++) {
-                if (releasedTicketCount >= configuration.getTotalTickets()) {
-                    notifyAll();
-                    return;
-                }
                 ticketQueue.add(releasedTicketCount++);
             }
-            Logger.info(methodDetails + vendorName + " added " + ticketReleaseRate +  " tickets. Total: " + ticketQueue.size());
+            Logger.info(methodDetails + vendorName + " added " + ticketReleaseRate +  " tickets. Available tickets in the pool: " + ticketQueue.size());
             notifyAll();
         }catch (InterruptedException e){
             Logger.error(methodDetails + " An error occurred while adding tickets to pool : " + e.getMessage());
@@ -79,14 +72,9 @@ public class TicketPool {
             while (ticketQueue.isEmpty()) {
                 if (checkTicketAvailability() && ticketQueue.isEmpty()) {
                     ticketsSold = true;
-                    System.out.println();
-                    Logger.info(methodDetails + customerName + " try to purchase tickets.");
-                    Logger.warn(methodDetails + "No more tickets left to release.");
                     return;
                 }else {
-                    System.out.println();
-                    Logger.info(methodDetails + customerName + " try to purchase tickets.");
-                    Logger.warn(methodDetails + "Ticket pool is empty. Wait until vendor release tickets");
+                    Logger.info(methodDetails + customerName + " try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.");
                     wait();
                 }
             }
@@ -96,9 +84,10 @@ public class TicketPool {
             for (int i = 0; i < customerRetrievalRate; i++) {
                 if (!ticketQueue.isEmpty()) {
                     ticketQueue.remove(0);
+                    purchasedTicketCount++;
                 }
             }
-            Logger.info(methodDetails + customerName + " purchased " +  customerRetrievalRate + " tickets. Remaining: " + ticketQueue.size());
+            Logger.info(methodDetails + customerName + " purchased " +  customerRetrievalRate + " tickets. Remaining tickets in the pool: " + ticketQueue.size());
             notifyAll();
         }catch (InterruptedException e){
             Logger.error(methodDetails + " An error occurred while removing tickets to pool : " + e.getMessage());
@@ -129,4 +118,11 @@ public class TicketPool {
         return ticketsSold;
     }
 
+    public synchronized int getReleasedTicketCount() {
+        return releasedTicketCount;
+    }
+
+    public synchronized int getPurchasedTicketCount() {
+        return purchasedTicketCount;
+    }
 }

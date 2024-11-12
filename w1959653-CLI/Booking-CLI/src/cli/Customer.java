@@ -1,12 +1,13 @@
 package cli;
 
 /**
+ * Customer class implemented by Runnable interface
+ * <p>
  * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
 
-//Customer class implemented by Runnable interface
 public class Customer implements Runnable {
     private final TicketPool ticketPool;
 
@@ -29,6 +30,7 @@ public class Customer implements Runnable {
         while (true) {
             try {
                 if (ticketPool.checkTicketAvailability() && ticketPool.isTicketsSold()) {
+                    Logger.info(methodDetails + Thread.currentThread().getName() + " try to purchase tickets : No more tickets left to purchase.");
                     break;
                 }
                 ticketPool.removeTicket(Thread.currentThread().getName());
