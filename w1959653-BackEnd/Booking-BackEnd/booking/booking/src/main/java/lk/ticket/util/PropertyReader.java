@@ -6,6 +6,13 @@ import org.apache.log4j.Logger;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * This class is used to read property file
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 public class PropertyReader {
     private static final Logger logger = Logger.getLogger(PropertyReader.class);
 

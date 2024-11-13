@@ -1,22 +1,31 @@
-package lk.ticket.controller;
+package lk.ticket.controller.configuration;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lk.ticket.model.Configuration;
-import lk.ticket.service.ConfigarationService;
+import lk.ticket.model.ConfigurationModule;
+import lk.ticket.service.configuration.ConfigurationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+/**
+ * This Controller class handles incoming HTTP requests of configuration setup and directs them
+ * to the appropriate service methods.
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 
 @RestController
 @RequestMapping("/configuration")
 public class ConfigurationController {
     private static final Logger logger = Logger.getLogger(ConfigurationController.class);
 
-    private final ConfigarationService configarationService;
+    private final ConfigurationService configurationService;
 
     @Autowired
-    public ConfigurationController(ConfigarationService configarationService) {
-        this.configarationService = configarationService;
+    public ConfigurationController(ConfigurationService configarationService) {
+        this.configurationService = configarationService;
     }
 
     /**
@@ -39,10 +48,10 @@ public class ConfigurationController {
 
     @PostMapping("/submitConfiguration")
     @Operation(summary = "Submit Configuration Parameters", description = "This used to set the configuration details. Use positive numbers.")
-    public String SubmitConfiguration(@RequestBody Configuration configuration){
+    public String SubmitConfiguration(@RequestBody ConfigurationModule configuration){
 
         logger.info("Method called");
         logger.info(configuration);
-        return configarationService.submitConfiguration(configuration);
+        return this.configurationService.submitConfiguration(configuration);
     }
 }

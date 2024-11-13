@@ -1,8 +1,8 @@
-package lk.ticket.service;
+package lk.ticket.service.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lk.ticket.model.Configuration;
+import lk.ticket.model.ConfigurationModule;
 import lk.ticket.util.PropertyReader;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This is the Configuration Service Class. Here handel all the business logics of configuration setup
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 @Service
-public class ConfigurationServiceImp implements ConfigarationService{
+public class ConfigurationServiceImp implements ConfigurationService {
     private static final Logger logger = Logger.getLogger(ConfigurationServiceImp.class);
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -23,10 +30,10 @@ public class ConfigurationServiceImp implements ConfigarationService{
      *  @in  totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity
      *  @out resultMessage
      * */
-
     @Override
-    public String submitConfiguration(Configuration configuration){
+    public String submitConfiguration(ConfigurationModule configuration){
         logger.info("Method called");
+        logger.info(configuration);
         String returnMessage = validateConfiguration(configuration, "Total Tickets");
 
         if(returnMessage == null){
@@ -55,7 +62,7 @@ public class ConfigurationServiceImp implements ConfigarationService{
      *  @out jsonFile
      * */
     @Override
-    public String saveJsonFile(Configuration configuration){
+    public String saveJsonFile(ConfigurationModule configuration){
         try {
             logger.info("Method called");
             String file = PropertyReader.getPropertyValue("json.file.path");
@@ -81,14 +88,14 @@ public class ConfigurationServiceImp implements ConfigarationService{
      *  @out Details in json file
      * */
     @Override
-    public Configuration readJsonFile(){
+    public ConfigurationModule readJsonFile(){
         logger.info("Method called");
-        Configuration configuration;
+        ConfigurationModule configuration;
         try {
             String file = PropertyReader.getPropertyValue("json.file.path");
             assert file != null;
             FileReader fileReader = new FileReader(new File(file).getAbsolutePath());
-            configuration = gson.fromJson(fileReader, Configuration.class);
+            configuration = gson.fromJson(fileReader, ConfigurationModule.class);
             logger.info("Details read from configuration.json file");
             logger.info(configuration);
         }catch (Exception e){
@@ -98,8 +105,13 @@ public class ConfigurationServiceImp implements ConfigarationService{
         return configuration;
     }
 
-
-    public String validateConfiguration(Configuration configuration, String variableName){
+    /**
+     *  This method is used to validate the configuration details
+     *
+     *  @in  configuration object
+     *  @out Error message or null (null means there is no error)
+     * */
+    public String validateConfiguration(ConfigurationModule configuration, String variableName){
         logger.info("Method called");
         String resultMessage = null;
 

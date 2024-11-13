@@ -4,6 +4,13 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 
+/**
+ * This class control all Connection methods (getConnection,close,commit,rollback)
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 public class ConnectionManager {
     private static final Logger logger = Logger.getLogger(ConnectionManager.class);
 
