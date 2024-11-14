@@ -1,7 +1,7 @@
 -- Event table
 INSERT INTO ticket.event (event_id, event_name, event_type)
 SELECT 1, 'Music Plaza', 'Music'
-    WHERE NOT EXISTS (SELECT 1 FROM ticket.vendor WHERE vendor_id = 1);
+    WHERE NOT EXISTS (SELECT 1 FROM ticket.event WHERE event_id = 1);
 
 -- Vendor table
 INSERT INTO ticket.vendor (vendor_id, vendor_name, email, event_id)

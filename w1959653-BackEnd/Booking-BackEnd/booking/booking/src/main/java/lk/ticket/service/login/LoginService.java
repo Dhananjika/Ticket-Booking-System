@@ -14,9 +14,13 @@ public abstract class LoginService {
 
     public abstract String register(UserModule userModule);
 
+    public abstract String login(UserModule userModule);
+
+    public abstract String logout(UserModule userModule);
+
     public String validateRegistration(UserModule userLogin) {
         return null;
     }
 
-    public abstract String login(UserModule userModule);
+
 }

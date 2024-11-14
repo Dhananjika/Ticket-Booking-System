@@ -2,7 +2,9 @@ package lk.ticket.controller.configuration;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.ConfigurationModule;
+import lk.ticket.model.UserModule;
 import lk.ticket.service.configuration.ConfigurationService;
+import lk.ticket.service.ticketPool.TicketPoolServiceImp;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ public class ConfigurationController {
     private static final Logger logger = Logger.getLogger(ConfigurationController.class);
 
     private final ConfigurationService configurationService;
+    @Autowired
+    private UserModule userModule;
 
     @Autowired
     public ConfigurationController(ConfigurationService configarationService) {
@@ -35,8 +39,8 @@ public class ConfigurationController {
     @GetMapping("/test")
     @Operation(summary = "Test", description = "Test the connection.")
     public String test(){
-        logger.info("Test Configuration");
-        return "Test Configuration";
+        logger.info(userModule.getUsername());
+        return "Test";
     }
 
     /**

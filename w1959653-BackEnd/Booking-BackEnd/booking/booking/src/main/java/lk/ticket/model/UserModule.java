@@ -1,7 +1,12 @@
 package lk.ticket.model;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
 import java.util.List;
 
+@SessionScope
+@Component
 public class UserModule {
     private String username;
     private String password;
@@ -11,23 +16,9 @@ public class UserModule {
     private String email;
     private List<UserModule> vendorList;
     private List<UserModule> customerList;
+    private int userID;
 
     public UserModule(){}
-
-    public UserModule(String username, String password, String userType, String vendorID) {
-        this.username = username;
-        this.password = password;
-        this.userType = userType;
-        this.vendorID = vendorID;
-    }
-
-    public UserModule(String username, String password, String userType, String customerName, String customerEmail) {
-        this.username = username;
-        this.password = password;
-        this.userType = userType;
-        this.name = customerName;
-        this.email = customerEmail;
-    }
 
     public UserModule(String username, String password) {
         this.username = username;
@@ -104,5 +95,13 @@ public class UserModule {
 
     public void setCustomerList(List<UserModule> customerList) {
         this.customerList = customerList;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

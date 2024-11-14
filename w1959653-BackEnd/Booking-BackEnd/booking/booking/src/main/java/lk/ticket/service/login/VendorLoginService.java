@@ -6,12 +6,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class VendorLoginService extends LoginService {
     private static final Logger logger = Logger.getLogger(VendorLoginService.class);
+
     @Autowired
     public VendorLoginService(LoginRepository loginRepository) {
         super(loginRepository);
@@ -44,8 +44,8 @@ public class VendorLoginService extends LoginService {
     @Override
     public String login(UserModule userModule) {
         logger.info("Method called");
-        if(loginRepository.checkLogin("vendor", userModule.getUsername(), userModule.getPassword())) {
-            logger.info("Successfully logged in");
+        if(loginRepository.checkLogin("vendor", userModule, "A")) {
+            logger.info("Successfully logged in as Vendor");
             return "Successfully logged in";
         }else {
             logger.warn("Invalid username or password");
@@ -53,5 +53,21 @@ public class VendorLoginService extends LoginService {
         }
     }
 
+    @Override
+    public String logout(UserModule userModule) {
+        logger.info("Method called");
+        if(loginRepository.checkLogin("vendor", userModule, "N")) {
+            logger.info("Successfully logged out");
+            return "Successfully logged out";
+        }
+        return null;
+    }
 
+    public String removeAccount(int id){
+        logger.info("Method called");
+        if(id == 0){
+            return "Please login to the system";
+        }
+        return loginRepository.removeAccount(id);
+    }
 }

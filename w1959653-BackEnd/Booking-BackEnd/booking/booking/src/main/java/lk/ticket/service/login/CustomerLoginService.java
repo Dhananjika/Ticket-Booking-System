@@ -45,8 +45,8 @@ public class CustomerLoginService extends LoginService {
     @Override
     public String login(UserModule userModule) {
         logger.info("Method called");
-        if(loginRepository.checkLogin("customer", userModule.getUsername(), userModule.getPassword())) {
-            logger.info("Successfully logged in");
+        if(loginRepository.checkLogin("customer", userModule, "A")) {
+            logger.info("Successfully logged in as Customer");
             return "Successfully logged in";
         }else {
             logger.warn("Invalid username or password");
@@ -54,4 +54,15 @@ public class CustomerLoginService extends LoginService {
         }
 
     }
+
+    @Override
+    public String logout(UserModule userModule) {
+        logger.info("Method called");
+        if(loginRepository.checkLogin("customer", userModule, "N")) {
+            logger.info("Successfully logged out");
+            return "Successfully logged out";
+        }
+        return null;
+    }
+
 }

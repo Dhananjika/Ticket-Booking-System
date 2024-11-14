@@ -3,6 +3,7 @@ package lk.ticket.repository.login;
 import lk.ticket.model.UserModule;
 import lk.ticket.util.ConnectionManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -46,13 +47,14 @@ public class LoginRepository {
                     preparedStatement.setString(3, userLogin.getPassword());
                     preparedStatement.setString(4, userLogin.getVendorID());
                     preparedStatement.setString(5, localDate.toString());
-                    preparedStatement.setString(6, "A");
+                    preparedStatement.setString(6, "R");
                     int psCount = preparedStatement.executeUpdate();
                     ConnectionManager.commit(connection);
                     logger.info("Insert data into register table as a vendor commited psCount :" + psCount);
                     if (psCount > 0) {
-                        logger.info("You have successfully registered in as Vendor");
-                        return "You have successfully registered in as Vendor!";
+                        checkLogin("vendor", userLogin, "R");
+                        logger.info("You have successfully registered as Vendor");
+                        return "You have successfully registered as Vendor!";
                     }
                 } else if (userLogin.getUserType().equals("customer")) {
                     logger.info("Insert data into register table as a customer start");
@@ -64,13 +66,14 @@ public class LoginRepository {
                     preparedStatement.setString(4, localDate.toString());
                     preparedStatement.setString(5, userLogin.getName());
                     preparedStatement.setString(6, userLogin.getEmail());
-                    preparedStatement.setString(7, "A");
+                    preparedStatement.setString(7, "R");
                     int psCount = preparedStatement.executeUpdate();
                     ConnectionManager.commit(connection);
                     logger.info("Insert data into register table as a customer commited psCount :" + psCount);
                     if (psCount > 0) {
-                        logger.info("You have successfully registered in as Customer");
-                        return "You have successfully registered in as Customer!";
+                        checkLogin("customer", userLogin, "R");
+                        logger.info("You have successfully registered as Customer");
+                        return "You have successfully registered as Customer!";
                     }
                 }
             }
@@ -152,7 +155,7 @@ public class LoginRepository {
         return vendorIDList;
     }
 
-    public boolean checkLogin(String loginType, String username, String password) {
+    public boolean checkLogin(String loginType, UserModule userModule, String status) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -160,13 +163,15 @@ public class LoginRepository {
         try {
             connection = ConnectionManager.getConnection();
             if(connection != null) {
-                String sql = "SELECT username, password FROM ticket.register WHERE login_type= ?;";
+                String sql = "SELECT id,username, password FROM ticket.register WHERE login_type= ?;";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, loginType);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    if (resultSet.getString("username").equals(username)
-                            && resultSet.getString("password").equals(password)) {
+                    if (resultSet.getString("username").equals(userModule.getUsername())
+                            && resultSet.getString("password").equals(userModule.getPassword())) {
+                        updateLoginStatus(resultSet.getInt("id"), loginType, status);
+                        userModule.setUserID(resultSet.getInt("id"));
                         return true;
                     }
                 }
@@ -181,4 +186,62 @@ public class LoginRepository {
         return false;
     }
 
+    public void updateLoginStatus(int id, String loginType, String status) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionManager.getConnection();
+            if(connection != null) {
+                String sql = "UPDATE ticket.register SET login_status = ? WHERE login_type = ? AND id = ?;";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, status);
+                preparedStatement.setString(2, loginType);
+                preparedStatement.setInt(3, id);
+                int psCount = preparedStatement.executeUpdate();
+                ConnectionManager.commit(connection);
+                if (psCount > 0) {
+                    logger.info("You have successfully updated the login status to " + status);
+                }else {
+                    logger.info("Status update failed");
+                }
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred while updating login status" + e.getMessage());
+        }finally {
+            ConnectionManager.close(preparedStatement);
+            ConnectionManager.close(connection);
+        }
+    }
+
+    public String removeAccount(int id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionManager.getConnection();
+            if(connection != null) {
+                String sql = "DELETE FROM ticket.register WHERE id = ?;";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, id);
+                int psCount = preparedStatement.executeUpdate();
+                ConnectionManager.commit(connection);
+                if (psCount > 0) {
+                    logger.info("You have successfully deleted the account " + id);
+                    return "Successfully removed the account";
+                }
+            }
+        }catch (SQLException se){
+            logger.error("An error occurred while removing account" + se.getMessage());
+            ConnectionManager.rollback(connection);
+            return "Removing account failed";
+        }catch (Exception e) {
+            logger.error("An error occurred while removing account" + e.getMessage());
+            return "Removing account failed";
+        }finally {
+            ConnectionManager.close(preparedStatement);
+            ConnectionManager.close(connection);
+        }
+        return "Removing account failed";
+    }
 }
