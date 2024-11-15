@@ -11,37 +11,55 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This Controller class handles incoming HTTP requests of ticket controlling and directs them
+ * to the appropriate service methods.
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
+
 @RestController
 @RequestMapping("/ticketController")
 public class TicketController {
     private static final Logger logger = Logger.getLogger(TicketController.class);
+    private final TicketPoolServiceImp ticketPoolService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    private UserModule userModule;
-
-    @Autowired
-    private TicketPoolServiceImp ticketPoolService;
-
-    @Autowired
-    private VendorService vendorService;
-
-    @Autowired
-    private CustomerService customerService;
+    public TicketController(TicketPoolServiceImp ticketPoolService, SimpMessagingTemplate messagingTemplate) {
+        this.ticketPoolService = ticketPoolService;
+        this.messagingTemplate = messagingTemplate;
+    }
 
     @Autowired
     private ConfigurationServiceImp configurationServiceImp;
 
     @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    private UserModule userModule;
 
-    @GetMapping("/addTicket")
+    /**
+     *  This is the end point of adding tickets to the system.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/ticketController/addTicket">Add Tickets</a>
+     *
+     *  @out added ticket count or confirmation message.
+     * */
+    @PostMapping("/addTicket")
     @Operation(summary = "Add Ticket", description = "Vendor release tickets to ticket pool.")
     public String addTicket() {
         logger.info("Method called");
-        ticketPoolService = new TicketPoolServiceImp(configurationServiceImp.readJsonFile());
+        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        logger.info(userModule);
 
-        vendorService = new VendorService(ticketPoolService);
-        Thread vendorThread = new Thread(vendorService);
+        VendorService vendorService = new VendorService(ticketPoolService);
+        vendorService.setAddTickets(false);
+
+        Thread vendorThread = new Thread(vendorService, userModule.getUsername());
         vendorThread.start();
 
         try {
@@ -53,15 +71,25 @@ public class TicketController {
         return vendorService.getReturnMessage();
     }
 
-    @GetMapping("/purchaseTicket")
+    /**
+     *  This is the end point of purchasing tickets from the system.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/ticketController/purchaseTicket">Purchase Ticket</a>
+     *
+     *  @out purchased ticket count or confirmation message.
+     * */
+    @PostMapping("/purchaseTicket")
     @Operation(summary = "Purchase Ticket", description = "Customer purchase tickets from the system.")
     public String purchaseTicket(@RequestParam int ticketCount) {
         logger.info("Method called");
-        ticketPoolService = new TicketPoolServiceImp(configurationServiceImp.readJsonFile());
+        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        logger.info(userModule);
 
-        customerService = new CustomerService(ticketPoolService);
+        CustomerService customerService = new CustomerService(ticketPoolService);
         customerService.setTicketCount(ticketCount);
-        Thread customerThread = new Thread(customerService);
+        customerService.setPurchaseTicket(false);
+
+        Thread customerThread = new Thread(customerService,userModule.getUsername());
         customerThread.start();
 
         try {
@@ -73,14 +101,21 @@ public class TicketController {
         return customerService.getReturnMessage();
     }
 
+    /**
+     *  This is the end point of adding tickets to the system after confirmation.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/ticketController/confirmAdding">Confirm Ticket Adding</a>
+     *
+     *  @out added ticket count.
+     * */
     @PostMapping("/confirmAdding")
     @Operation(summary = "Confirm Ticket Adding", description = "The confirmation box is provided on the first attempt to collect the ticket system. After confirmation proceed this will work.")
     public String addTicketConfirm() {
         logger.info("Method called");
-
-        vendorService = new VendorService(ticketPoolService);
+        VendorService vendorService = new VendorService(ticketPoolService);
         vendorService.setAddTickets(true);
-        Thread vendorThread = new Thread(vendorService);
+
+        Thread vendorThread = new Thread(vendorService, userModule.getUsername());
         vendorThread.start();
 
         try {
@@ -92,15 +127,21 @@ public class TicketController {
         return vendorService.getReturnMessage();
     }
 
+    /**
+     *  This is the end point of purchasing tickets from the system after confirmation.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/ticketController/confirmPurchase">Confirm Ticket Purchase</a>
+     *
+     *  @out purchased ticket count.
+     * */
     @PostMapping("/confirmPurchase")
     @Operation(summary = "Confirm Ticket Purchase", description = "The confirmation box is provided on the first attempt to purchase tickets from the ticket system. After confirmation proceed this will work.")
-    public String purchaseTicketConfirm(@RequestParam int ticketCount) {
+    public String purchaseTicketConfirm() {
         logger.info("Method called");
-
-        customerService = new CustomerService(ticketPoolService);
+        CustomerService customerService = new CustomerService(ticketPoolService);
         customerService.setPurchaseTicket(true);
-        customerService.setTicketCount(ticketCount);
-        Thread customerThread = new Thread(customerService);
+
+        Thread customerThread = new Thread(customerService,userModule.getUsername());
         customerThread.start();
 
         try {
@@ -109,6 +150,69 @@ public class TicketController {
             logger.error("An error occurred while waiting for customer thread to finish: " + e.getMessage());
         }
         messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
+        return customerService.getReturnMessage();
+    }
+
+    /**
+     * For Testing purpose of multithreading - vendor
+     */
+
+    @PostMapping("/addTicketTest")
+    @Operation(summary = "Add Ticket Test", description = "Vendor release tickets to ticket pool. - Multithreading Test")
+    public String addTicketTest() {
+        logger.info("Method called");
+        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        logger.info(userModule);
+
+        VendorService vendorService = new VendorService(ticketPoolService);
+        vendorService.setAddTickets(false);
+
+        List<Thread> vendorThreads = new ArrayList<Thread>();
+        for(int i = 0; i < 10; i++){
+            Thread vendorThread = new Thread(vendorService, "Vendor Tread : " + (i + 1));
+            vendorThreads.add(vendorThread);
+            vendorThread.start();
+        }
+
+        try {
+            for(Thread vendorThread : vendorThreads) {
+                vendorThread.join();
+            }
+        }catch (InterruptedException e){
+            logger.error("An error occurred while waiting for vendor thread to finish: " + e.getMessage());
+        }
+        return vendorService.getReturnMessage();
+    }
+
+    /**
+     * For Testing purpose of multithreading - customer
+     */
+    @PostMapping("/purchaseTicketTest")
+    @Operation(summary = "Purchase Ticket Test", description = "Customer purchase tickets from the system. - - Multithreading Test")
+    public String purchaseTicketTest(@RequestParam int ticketCount) {
+        logger.info("Method called");
+        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        logger.info(userModule);
+
+        CustomerService customerService = new CustomerService(ticketPoolService);
+        customerService.setTicketCount(ticketCount);
+        customerService.setPurchaseTicket(false);
+
+
+        List<Thread> customerThreads = new ArrayList<Thread>();
+        for(int i = 0; i < 10; i++){
+            Thread customerThread = new Thread(customerService,"Customer Tread : " + (i + 1));
+            customerThreads.add(customerThread);
+            customerThread.start();
+        }
+
+        try {
+            for(Thread customerThread : customerThreads) {
+                customerThread.join();
+            }
+        }catch (InterruptedException e){
+            logger.error("An error occurred while waiting for customer thread to finish: " + e.getMessage());
+        }
         return customerService.getReturnMessage();
     }
 }

@@ -1,4 +1,4 @@
-package lk.ticket.configuration;
+package lk.ticket.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

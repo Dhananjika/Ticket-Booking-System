@@ -3,6 +3,7 @@ package lk.ticket.util;
 import lk.ticket.exception.ApplicationException;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -23,16 +24,15 @@ public class PropertyReader {
      *  @Exception Exception
      *  @out Details in application.properties file
      * */
-    public static Properties loadPropertyFile() {
+    public static Properties loadPropertyFile() throws ApplicationException {
         Properties properties = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("application.properties");
         try {
             properties.load(inputStream);
-        } catch (Exception e) {
-            ApplicationException applicationException = new ApplicationException("An Error Occurred while loading application.properties " + e.getMessage());
-            logger.error(applicationException.getMessage());
-            return null;
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            throw new ApplicationException("Unable to Read Application Property File");
         }
        return properties;
     }
@@ -44,18 +44,21 @@ public class PropertyReader {
      *  @Exception Exception
      *  @out Value of property Key
      * */
-    public static String getPropertyValue(String key){
+    public static String getPropertyValue(String key) throws ApplicationException{
         try {
             Properties properties = loadPropertyFile();
             String value = null;
-            if (properties != null){
-                value = properties.getProperty(key);
+            if (properties == null){
+                throw new ApplicationException("Unable to Read  Property For Key " + key);
             }
+            value = properties.getProperty(key);
             return value;
         } catch (Exception e) {
-            ApplicationException applicationException = new ApplicationException("An Error Occurred while getting Property Value For " + key + " "  + e.getMessage());
-            logger.error(applicationException.getMessage());
-            return null;
+            if (e instanceof ApplicationException) {
+                throw (ApplicationException) e;
+            } else {
+                throw new ApplicationException("Unable to Read  Property For Key " + key);
+            }
         }
     }
 }

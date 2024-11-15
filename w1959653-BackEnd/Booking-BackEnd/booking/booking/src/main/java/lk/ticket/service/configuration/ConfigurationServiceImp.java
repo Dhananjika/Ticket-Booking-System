@@ -2,6 +2,7 @@ package lk.ticket.service.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lk.ticket.exception.ApplicationException;
 import lk.ticket.model.ConfigurationModule;
 import lk.ticket.util.PropertyReader;
 import org.apache.log4j.Logger;
@@ -75,7 +76,10 @@ public class ConfigurationServiceImp implements ConfigurationService {
             logger.info("Details saved to configuration.json file");
             return "Successful";
         } catch (IOException e) {
-            logger.error("An error occurred while saving json file" + e.getMessage());
+            logger.error("An error occurred while saving json file " + e.getMessage());
+            return "Unsuccessful";
+        } catch (ApplicationException e) {
+            logger.error("An error occurred while getting property key value " + e.getMessage());
             return "Unsuccessful";
         }
     }

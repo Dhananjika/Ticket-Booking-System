@@ -5,6 +5,13 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
 
+/**
+ * This User module class. This is session scope class
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 @SessionScope
 @Component
 public class UserModule {

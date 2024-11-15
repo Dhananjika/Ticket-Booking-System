@@ -1,5 +1,6 @@
 package lk.ticket.util;
 
+import lk.ticket.exception.ApplicationException;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -40,6 +41,9 @@ public class ConnectionManager {
             connection.setAutoCommit(false);
         } catch (SQLException | ClassNotFoundException e) {
             logger.error("An Error Occurred while getting Connection " + e.getMessage());
+            return null;
+        } catch (ApplicationException e) {
+            logger.error("An error occurred while getting property key value " + e.getMessage());
             return null;
         }
         return connection;

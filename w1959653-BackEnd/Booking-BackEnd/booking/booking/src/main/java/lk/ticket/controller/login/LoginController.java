@@ -2,7 +2,7 @@ package lk.ticket.controller.login;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.UserModule;
-import lk.ticket.repository.login.LoginRepository;
+import lk.ticket.repository.LoginRepository;
 import lk.ticket.service.login.CustomerLoginService;
 import lk.ticket.service.login.LoginService;
 import lk.ticket.service.login.VendorLoginService;
@@ -40,6 +40,14 @@ public class LoginController {
     @Autowired
     private HttpSession session;
 
+    /**
+     *  This is the end point of register to the system as vendors.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/login/vendorRegister">Vendor Registration</a>
+     *
+     *  @in  username, password, vendorID
+     *  @out registration success or unsuccessful
+     * */
     @PostMapping("/vendorRegister")
     @Operation(summary = "Vendor Registration", description = "User can register as vendor. But person should be already registered to the company.")
     public String vendorRegister(@RequestParam String username, @RequestParam String password,@RequestParam String vendorID) {
@@ -53,6 +61,14 @@ public class LoginController {
         return vendorLogin.register(userModule);
     }
 
+    /**
+     *  This is the end point of register to the system as customer.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/login/customerRegister">Customer Registration</a>
+     *
+     *  @in  username, password, customerName, customerEmail
+     *  @out registration success or unsuccessful
+     * */
     @PostMapping("/customerRegister")
     @Operation(summary = "Customer Registration", description = "User can register as customer.")
     public String customerRegister(@RequestParam String username, @RequestParam String password,@RequestParam String customerName, @RequestParam String customerEmail) {
@@ -67,6 +83,14 @@ public class LoginController {
         return customerLoginService.register(userModule);
     }
 
+    /**
+     *  This is the end point of user to login to the system.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/login/userLogin">User Login</a>
+     *
+     *  @in  username, password
+     *  @out login success or unsuccessful
+     * */
     @PostMapping("/userLogin")
     @Operation(summary = "User Login", description = "User can login to the system.")
     public String userLogin(@RequestParam String username, @RequestParam String password) {
@@ -89,17 +113,26 @@ public class LoginController {
         return login;
     }
 
-
+    /**
+     *  This is the end point of user to logout from the system.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/login/userLoginOut">User Logout</a>
+     *
+     *  @in  username, password
+     *  @out logout success or unsuccessful
+     * */
     @GetMapping("/userLoginOut")
     @Operation(summary = "User Logout", description = "User can logout from the system.")
     public String userLogOut() {
         logger.info("Method called");
         logger.info(userModule);
+        LoginService customerLogin = new CustomerLoginService(loginRepository);
+        LoginService vendorLogin = new VendorLoginService(loginRepository);
         String login = customerLogin.logout(userModule);
         if (login == null) {
             login = vendorLogin.logout(userModule);
             if (login == null) {
-                return "Invalid username or password";
+                return "Logout failed";
             }
         }
         if (session != null) {
@@ -108,7 +141,15 @@ public class LoginController {
         return login;
     }
 
-    @GetMapping("/removeAccount")
+    /**
+     *  This is the end point of user to remove their user account from the system.</br>
+     *  Used Mapping is - POST.</br>
+     *  <a href="http://localhost:8080/login/removeAccount">Remove User Account</a>
+     *
+     *  @in  userID
+     *  @out remove account success or unsuccessful
+     * */
+    @DeleteMapping("/removeAccount")
     @Operation(summary = "Remove User Account", description = "User can remove their user account from the system. After remove if user wants to login again user have to register to system again")
     public String removeAccount() {
         logger.info("Method called");

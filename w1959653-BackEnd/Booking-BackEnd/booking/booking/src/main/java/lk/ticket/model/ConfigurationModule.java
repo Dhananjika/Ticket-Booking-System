@@ -21,6 +21,7 @@ public class ConfigurationModule {
         return "Configuration[Total Number of Tickets - " + totalTickets + ", Ticket Release Rate - " + ticketReleaseRate + ", Customer Retrieval Rate - " + customerRetrievalRate + ", Maximum Ticket Capacity - " + maxTicketCapacity + "]" ;
     }
 
+    //Getters & Setters
     public int getTotalTickets() {
         return totalTickets;
     }

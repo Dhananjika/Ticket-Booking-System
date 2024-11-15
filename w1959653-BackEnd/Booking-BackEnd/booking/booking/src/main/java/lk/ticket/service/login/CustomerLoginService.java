@@ -1,7 +1,7 @@
 package lk.ticket.service.login;
 
 import lk.ticket.model.UserModule;
-import lk.ticket.repository.login.LoginRepository;
+import lk.ticket.repository.LoginRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

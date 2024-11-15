@@ -1,9 +1,8 @@
-package lk.ticket.repository.login;
+package lk.ticket.repository;
 
 import lk.ticket.model.UserModule;
 import lk.ticket.util.ConnectionManager;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -14,6 +13,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This Repository class handles data access and persistence operations of User Management.</br></br>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 @Repository
 public class LoginRepository {
     private static final Logger logger = Logger.getLogger(LoginRepository.class);
@@ -22,6 +27,7 @@ public class LoginRepository {
      * This method is used to store register details in register data table.
      * <p></p>
      * @in UserLoginModule
+     * @Exception SQLException, Exception
      * @out Successful or unsuccessful
      */
     public String userLoginRegister(UserModule userLogin) {
@@ -91,7 +97,13 @@ public class LoginRepository {
         return "User registration failed";
     }
 
-
+    /**
+     * This method is used to get all the registered account details.
+     * <p></p>
+     * @in userType
+     * @Exception Exception
+     * @out List of UserModule details
+     */
     public List<UserModule> getAccountLoginDetails(String userType) {
         logger.info("method called.");
         Connection connection = null;
@@ -128,6 +140,12 @@ public class LoginRepository {
         return accountDetails;
     }
 
+    /**
+     * This method is used to get all vendor ID list from vendor table.
+     * <p></p>
+     * @Exception Exception
+     * @out List of vendor ID
+     */
     public List<String> getVendorIDList(){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -155,6 +173,13 @@ public class LoginRepository {
         return vendorIDList;
     }
 
+    /**
+     * This method is used to check password and username is valid or not.
+     * <p></p>
+     * @in loginType, userModule, status
+     * @Exception Exception
+     * @out password and username is valid or not
+     */
     public boolean checkLogin(String loginType, UserModule userModule, String status) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -186,6 +211,13 @@ public class LoginRepository {
         return false;
     }
 
+    /**
+     * This method is used to update the login_status (A-login, N-logout, R-Registered).
+     * <p></p>
+     * @in id, loginType, status
+     * @Exception Exception
+     * @out update the status in register table
+     */
     public void updateLoginStatus(int id, String loginType, String status) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -214,6 +246,13 @@ public class LoginRepository {
         }
     }
 
+    /**
+     * This method is used to remove user account.
+     * <p></p>
+     * @in id
+     * @Exception Exception
+     * @out delete the record from register table
+     */
     public String removeAccount(int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

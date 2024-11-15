@@ -1,10 +1,7 @@
 package lk.ticket.service.ticketPool;
 
 import lk.ticket.model.ConfigurationModule;
-import lk.ticket.model.UserModule;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -13,17 +10,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class TicketPoolServiceImp implements TicketPool{
     private static final Logger logger = Logger.getLogger(TicketPoolServiceImp.class);
     private final ConcurrentLinkedQueue<Integer> ticketQueue = new ConcurrentLinkedQueue<>();
-    private final ConfigurationModule configurationModule;
-    private final int poolSize;
+    private ConfigurationModule configurationModule;
+    private int poolSize;
     private int releasedTicketCount;
 
-    @Autowired
-    UserModule userModule;
-
-    public TicketPoolServiceImp(ConfigurationModule configurationModule) {
-        this.configurationModule = configurationModule;
-        this.poolSize = configurationModule.getMaxTicketCapacity();
-        logger.info(configurationModule);
+    public void SetConfigurationModule(ConfigurationModule configurationModule) {
+        if (this.configurationModule == null) {
+            this.configurationModule = configurationModule;
+            this.poolSize = configurationModule.getMaxTicketCapacity();
+        }
     }
 
     /**
@@ -36,7 +31,7 @@ public class TicketPoolServiceImp implements TicketPool{
      *  @out ticketQueue
      * */
     @Override
-    public String addTicket(boolean add){
+    public String addTicket(boolean add, String vendorName){
         synchronized (this){
             String returnMessage = null;
             try{
@@ -44,11 +39,11 @@ public class TicketPoolServiceImp implements TicketPool{
                 if(checkTicketAvailability()){
                     return "All Tickets Are Released. No More Tickets Available.";
                 }
-                while (checkPoolSize()) {
-                    returnMessage = "Ticket Addition On Hold. Please Wait Until Customers Purchase Tickets To Free Up Space.";
-                    logger.info(userModule.getUsername() + " try to add tickets : Ticket pool is full. Wait until customer purchase tickets.");
-                    wait();
+                if (checkPoolSize()) {
+                    logger.info( vendorName + " try to add tickets : Ticket pool is full. Wait until customer purchase tickets.");
+                    return "Ticket Addition On Hold. Please Wait Until Customers Purchase Tickets To Free Up Space.";
                 }
+
                 ticketReleaseRate = Math.min(poolSize - ticketQueue.size(), ticketReleaseRate);
                 ticketReleaseRate = Math.min(ticketReleaseRate, configurationModule.getTotalTickets() - releasedTicketCount);
 
@@ -59,10 +54,10 @@ public class TicketPoolServiceImp implements TicketPool{
                 for (int i = 0; i < ticketReleaseRate; i++) {
                     ticketQueue.add(releasedTicketCount++);
                 }
-                logger.info(userModule.getUsername() + " added " + ticketReleaseRate +  " tickets. Available tickets in the pool: " + ticketQueue.size());
+                logger.info(vendorName + " added " + ticketReleaseRate +  " tickets. Available tickets in the pool: " + ticketQueue.size());
                 returnMessage = ticketReleaseRate + " Tickets Added.";
                 notifyAll();
-            }catch (InterruptedException e){
+            }catch (Exception e){
                 logger.error("An error occurred while adding tickets to pool : " + e.getMessage());
                 return "Add Tickets Failed!";
             }
@@ -81,34 +76,33 @@ public class TicketPoolServiceImp implements TicketPool{
      *  @out ticketQueue
      * */
     @Override
-    public String removeTicket(int purchaseTicketCount, boolean purchase){
+    public String removeTicket(int purchaseTicketCount, boolean purchase, String customerName){
         synchronized (this){
             String returnMessage = null;
             try {
-                while (ticketQueue.isEmpty()) {
-                    if (checkTicketAvailability() && ticketQueue.isEmpty()) {
-                        return "Tickets Sold Out.";
-                    }else {
-                        logger.info(userModule.getUsername() + " try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.");
-                        returnMessage = "Tickets Are Currently Unavailable. Please Wait Until More Tickets Become Available.";
-                        wait();
-                    }
+                if (checkTicketAvailability() && ticketQueue.isEmpty()) {
+                   return "Tickets Sold Out.";
+                }else if(!checkTicketAvailability() && ticketQueue.isEmpty()){
+                   logger.info(customerName + " try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.");
+                   return "Tickets Are Currently Unavailable. Please Wait Until More Tickets Become Available.";
                 }
 
-                if(purchaseTicketCount > configurationModule.getCustomerRetrievalRate() && !purchase){
+                if((purchaseTicketCount > configurationModule.getCustomerRetrievalRate() && !purchase)
+                        || purchaseTicketCount > ticketQueue.size()){
                     int allowedPurchaseCount = Math.min(ticketQueue.size(), configurationModule.getCustomerRetrievalRate());
                     return "You Can Purchase Up To " + allowedPurchaseCount + " Tickets At This Time. Would You Like To Proceed With Your Purchase?";
                 }
 
+                purchaseTicketCount = Math.min(ticketQueue.size(), configurationModule.getCustomerRetrievalRate());
                 for (int i = 0; i < purchaseTicketCount; i++) {
                     if (!ticketQueue.isEmpty()) {
                         ticketQueue.remove();
                     }
                 }
-                logger.info(userModule.getUsername() + " purchased " +  purchaseTicketCount + " tickets. Remaining tickets in the pool: " + ticketQueue.size());
+                logger.info(customerName + " purchased " +  purchaseTicketCount + " tickets. Remaining tickets in the pool: " + ticketQueue.size());
                 returnMessage = purchaseTicketCount + " Tickets Purchased.";
                 notifyAll();
-            }catch (InterruptedException e){
+            }catch (Exception e){
                 logger.error(" An error occurred while removing tickets to pool : " + e.getMessage());
                 return "Remove Tickets Failed!";
             }
