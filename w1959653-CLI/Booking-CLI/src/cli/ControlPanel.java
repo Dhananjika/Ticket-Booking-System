@@ -73,6 +73,7 @@ public class ControlPanel {
         switch (option){
             case "y":
                 //For set configuration values
+                configuration.resetConfiguration();
                 configuration.setConfiguration();
                 break;
             case "1":

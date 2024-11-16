@@ -36,18 +36,21 @@ public class Configuration implements Serializable {
     public void setConfiguration() {
         String methodDetails = "[Configuration] -- [setConfiguration] : ";
         try {
-            resetConfiguration();
-
-            totalTickets = setVariableValues("Total Number of Tickets");
-            maxTicketCapacity = setVariableValues("Maximum Ticket Capacity");
-            ticketReleaseRate = setVariableValues("Ticket Release Rate");
-            customerRetrievalRate = setVariableValues("Customer Retrieval Rate");
+            if(totalTickets == 0){
+                totalTickets = setVariableValues("Total Number of Tickets");
+            }if(maxTicketCapacity == 0){
+                maxTicketCapacity = setVariableValues("Maximum Ticket Capacity");
+            }if(ticketReleaseRate == 0){
+                ticketReleaseRate = setVariableValues("Ticket Release Rate");
+            }if(customerRetrievalRate == 0){
+                customerRetrievalRate = setVariableValues("Customer Retrieval Rate");
+            }
 
             Logger.info(methodDetails + "Setting configuration completed.");
             saveConfiguration();
             System.out.println();
         } catch (InputMismatchException e) {
-            Logger.error(methodDetails + "Positive number expected" + e.getMessage());
+            Logger.error(methodDetails + "Positive number expected");
             System.out.println();
             setConfiguration();
         }
