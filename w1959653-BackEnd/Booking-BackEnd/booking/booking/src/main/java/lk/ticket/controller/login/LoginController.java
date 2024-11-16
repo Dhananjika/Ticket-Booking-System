@@ -1,8 +1,9 @@
 package lk.ticket.controller.login;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lk.ticket.model.UserModule;
-import lk.ticket.repository.LoginRepository;
+import lk.ticket.model.login.UserModule;
+import lk.ticket.repository.login.LoginRepository;
+import lk.ticket.service.login.AdminLoginService;
 import lk.ticket.service.login.CustomerLoginService;
 import lk.ticket.service.login.LoginService;
 import lk.ticket.service.login.VendorLoginService;
@@ -98,15 +99,22 @@ public class LoginController {
         userModule.setUsername(username);
         userModule.setPassword(password);
         logger.info(userModule);
+
+        LoginService adminLogin = new AdminLoginService(loginRepository);
         LoginService customerLogin = new CustomerLoginService(loginRepository);
         LoginService vendorLogin = new VendorLoginService(loginRepository);
-        String login = customerLogin.login(userModule);
+
+        String login = adminLogin.login(userModule);
         if (login == null) {
-            login = vendorLogin.login(userModule);
+            login = customerLogin.login(userModule);
             if (login == null) {
-                return "Invalid username or password";
+                login = vendorLogin.login(userModule);
+                if (login == null) {
+                    return "Invalid username or password";
+                }
             }
         }
+
         session.setAttribute("username", username);
         session.setAttribute("password", password);
         session.setMaxInactiveInterval(15 * 60); // 15 minutes session timeout
@@ -126,13 +134,19 @@ public class LoginController {
     public String userLogOut() {
         logger.info("Method called");
         logger.info(userModule);
+
+        LoginService adminLogin = new AdminLoginService(loginRepository);
         LoginService customerLogin = new CustomerLoginService(loginRepository);
         LoginService vendorLogin = new VendorLoginService(loginRepository);
-        String login = customerLogin.logout(userModule);
+
+        String login = adminLogin.logout(userModule);
         if (login == null) {
-            login = vendorLogin.logout(userModule);
+            login = customerLogin.logout(userModule);
             if (login == null) {
-                return "Logout failed";
+                login = vendorLogin.logout(userModule);
+                if (login == null) {
+                    return "Invalid username or password";
+                }
             }
         }
         if (session != null) {

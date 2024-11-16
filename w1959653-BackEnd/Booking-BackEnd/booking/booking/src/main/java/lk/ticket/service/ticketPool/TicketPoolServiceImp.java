@@ -1,23 +1,40 @@
 package lk.ticket.service.ticketPool;
 
-import lk.ticket.model.ConfigurationModule;
+import lk.ticket.model.configuration.ConfigurationModule;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * This is the Ticket Pool Service Class. Here handel all the business logics of the ticket Pool.
+ * This is inherited by TicketPoolService interface.
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 @Service
-public class TicketPoolServiceImp implements TicketPool{
+public class TicketPoolServiceImp implements TicketPoolService {
     private static final Logger logger = Logger.getLogger(TicketPoolServiceImp.class);
     private final ConcurrentLinkedQueue<Integer> ticketQueue = new ConcurrentLinkedQueue<>();
     private ConfigurationModule configurationModule;
     private int poolSize;
     private int releasedTicketCount;
 
-    public void SetConfigurationModule(ConfigurationModule configurationModule) {
-        if (this.configurationModule == null) {
-            this.configurationModule = configurationModule;
-            this.poolSize = configurationModule.getMaxTicketCapacity();
+    /**
+     *  This method is used to set configuration module and pool size.
+     *  synchronized block used.
+     *
+     *  @in  ConfigurationModule
+     *  @out configurationModule, pool size
+     * */
+    public void setConfigurationModule(ConfigurationModule configurationModule) {
+        synchronized (this) {
+            if (this.configurationModule == null) {
+                this.configurationModule = configurationModule;
+                this.poolSize = configurationModule.getMaxTicketCapacity();
+            }
         }
     }
 
@@ -138,5 +155,9 @@ public class TicketPoolServiceImp implements TicketPool{
      * */
     public synchronized int getAvailableTicketsCount(){
         return ticketQueue.size();
+    }
+
+    public synchronized int getReleasedTicketCount() {
+        return releasedTicketCount;
     }
 }

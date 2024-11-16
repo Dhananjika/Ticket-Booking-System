@@ -1,8 +1,15 @@
 package lk.ticket.service.login;
 
-import lk.ticket.model.UserModule;
-import lk.ticket.repository.LoginRepository;
+import lk.ticket.model.login.UserModule;
+import lk.ticket.repository.login.LoginRepository;
 
+/**
+ * This is the Vendor Login abstract Class. Here store all the common methods for login.
+ *  <p>
+ * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
+ * UoW ID - W1959653
+ * IIT ID - 20223058
+ */
 public abstract class LoginService {
     protected LoginRepository loginRepository;
 
@@ -19,6 +26,4 @@ public abstract class LoginService {
     public String validateRegistration(UserModule userLogin) {
         return null;
     }
-
-
 }

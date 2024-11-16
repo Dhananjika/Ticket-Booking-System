@@ -1,4 +1,4 @@
-package lk.ticket.model;
+package lk.ticket.model.configuration;
 
 /**
  * This Controller module class. Here initiate all parameters

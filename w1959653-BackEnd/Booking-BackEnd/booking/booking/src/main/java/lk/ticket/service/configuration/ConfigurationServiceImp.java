@@ -3,9 +3,12 @@ package lk.ticket.service.configuration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lk.ticket.exception.ApplicationException;
-import lk.ticket.model.ConfigurationModule;
+import lk.ticket.model.configuration.ConfigurationModule;
+import lk.ticket.model.systemControl.SystemControlModule;
+import lk.ticket.repository.configuration.SystemControlRepository;
 import lk.ticket.util.PropertyReader;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -14,7 +17,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * This is the Configuration Service Class. Here handel all the business logics of configuration setup
+ * This is the Configuration Service Class. Here handel all the business logics of configuration setup.
+ * This is implemented by ConfigurationService Interface.
  *  <p>
  * Author - DISSANAYAKA MUDIYANSELAGE DHANANJIKA NIWARTHANI
  * UoW ID - W1959653
@@ -25,6 +29,9 @@ public class ConfigurationServiceImp implements ConfigurationService {
     private static final Logger logger = Logger.getLogger(ConfigurationServiceImp.class);
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+    @Autowired
+    private SystemControlRepository systemControlRepository;
+
     /**
      *  This method is used to submit the configuration details
      *
@@ -32,27 +39,37 @@ public class ConfigurationServiceImp implements ConfigurationService {
      *  @out resultMessage
      * */
     @Override
-    public String submitConfiguration(ConfigurationModule configuration){
+    public String submitConfiguration(ConfigurationModule configuration, int eventId){
         logger.info("Method called");
         logger.info(configuration);
-        String returnMessage = validateConfiguration(configuration, "Total Tickets");
 
-        if(returnMessage == null){
-            returnMessage = validateConfiguration(configuration, "Maximum Tickets");
-
+        if (systemControlRepository.configurationExists(eventId)){
+            String returnMessage = validateConfiguration(configuration, "Total Tickets");
             if(returnMessage == null){
-                returnMessage = validateConfiguration(configuration, "Ticket Release Rate");
+                returnMessage = validateConfiguration(configuration, "Maximum Tickets");
 
-                if (returnMessage == null){
-                    returnMessage = validateConfiguration(configuration, "Customer Rate");
+                if(returnMessage == null){
+                    returnMessage = validateConfiguration(configuration, "Ticket Release Rate");
 
                     if (returnMessage == null){
-                        returnMessage = saveJsonFile(configuration);
+                        returnMessage = validateConfiguration(configuration, "Customer Rate");
+
+                        if (returnMessage == null){
+                            returnMessage = saveJsonFile(configuration);
+                            SystemControlModule systemControlModule = new SystemControlModule();
+                            systemControlModule.setConfigurationStatus("A");
+                            systemControlModule.setSystemStatus("I");
+                            systemControlModule.setSystemStoppedReleasedTicketCount(0);
+                            systemControlModule.setSystemStoppedPoolSize(0);
+                            systemControlRepository.addConfiguration(systemControlModule, eventId);
+                        }
                     }
                 }
             }
+            return returnMessage;
         }
-        return returnMessage;
+
+        return "Already added configuration";
     }
 
     /**
@@ -149,5 +166,4 @@ public class ConfigurationServiceImp implements ConfigurationService {
 
         return resultMessage;
     }
-
 }

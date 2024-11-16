@@ -1,7 +1,7 @@
 package lk.ticket.controller.ticket;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lk.ticket.model.UserModule;
+import lk.ticket.model.login.UserModule;
 import lk.ticket.service.configuration.ConfigurationServiceImp;
 import lk.ticket.service.ticketPool.TicketPoolServiceImp;
 import lk.ticket.service.userThread.CustomerService;
@@ -31,16 +31,16 @@ public class TicketController {
     private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    public TicketController(TicketPoolServiceImp ticketPoolService, SimpMessagingTemplate messagingTemplate) {
-        this.ticketPoolService = ticketPoolService;
-        this.messagingTemplate = messagingTemplate;
-    }
-
-    @Autowired
     private ConfigurationServiceImp configurationServiceImp;
 
     @Autowired
     private UserModule userModule;
+
+    @Autowired
+    public TicketController(TicketPoolServiceImp ticketPoolService, SimpMessagingTemplate messagingTemplate) {
+        this.ticketPoolService = ticketPoolService;
+        this.messagingTemplate = messagingTemplate;
+    }
 
     /**
      *  This is the end point of adding tickets to the system.</br>
@@ -53,7 +53,7 @@ public class TicketController {
     @Operation(summary = "Add Ticket", description = "Vendor release tickets to ticket pool.")
     public String addTicket() {
         logger.info("Method called");
-        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
         VendorService vendorService = new VendorService(ticketPoolService);
@@ -82,7 +82,7 @@ public class TicketController {
     @Operation(summary = "Purchase Ticket", description = "Customer purchase tickets from the system.")
     public String purchaseTicket(@RequestParam int ticketCount) {
         logger.info("Method called");
-        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
         CustomerService customerService = new CustomerService(ticketPoolService);
@@ -161,7 +161,7 @@ public class TicketController {
     @Operation(summary = "Add Ticket Test", description = "Vendor release tickets to ticket pool. - Multithreading Test")
     public String addTicketTest() {
         logger.info("Method called");
-        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
         VendorService vendorService = new VendorService(ticketPoolService);
@@ -191,7 +191,7 @@ public class TicketController {
     @Operation(summary = "Purchase Ticket Test", description = "Customer purchase tickets from the system. - - Multithreading Test")
     public String purchaseTicketTest(@RequestParam int ticketCount) {
         logger.info("Method called");
-        ticketPoolService.SetConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
         CustomerService customerService = new CustomerService(ticketPoolService);

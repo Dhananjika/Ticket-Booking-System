@@ -1,4 +1,4 @@
-package lk.ticket.model;
+package lk.ticket.model.login;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -21,9 +21,8 @@ public class UserModule {
     private String vendorID;
     private String name;
     private String email;
-    private List<UserModule> vendorList;
-    private List<UserModule> customerList;
     private int userID;
+    private int eventID;
 
     public UserModule(){}
 
@@ -88,22 +87,6 @@ public class UserModule {
         this.email = email;
     }
 
-    public List<UserModule> getVendorList() {
-        return vendorList;
-    }
-
-    public void setVendorList(List<UserModule> vendorList) {
-        this.vendorList = vendorList;
-    }
-
-    public List<UserModule> getCustomerList() {
-        return customerList;
-    }
-
-    public void setCustomerList(List<UserModule> customerList) {
-        this.customerList = customerList;
-    }
-
     public int getUserID() {
         return userID;
     }
@@ -111,4 +94,8 @@ public class UserModule {
     public void setUserID(int userID) {
         this.userID = userID;
     }
+
+    public int getEventID() {return eventID;}
+
+    public void setEventID(int eventID) {this.eventID = eventID;}
 }

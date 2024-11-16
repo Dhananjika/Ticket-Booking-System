@@ -1,6 +1,6 @@
-package lk.ticket.repository;
+package lk.ticket.repository.login;
 
-import lk.ticket.model.UserModule;
+import lk.ticket.model.login.UserModule;
 import lk.ticket.util.ConnectionManager;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;

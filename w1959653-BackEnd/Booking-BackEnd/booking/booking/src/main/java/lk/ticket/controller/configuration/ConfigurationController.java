@@ -1,8 +1,9 @@
 package lk.ticket.controller.configuration;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lk.ticket.model.ConfigurationModule;
-import lk.ticket.model.UserModule;
+import lk.ticket.model.configuration.ConfigurationModule;
+import lk.ticket.model.event.EventModule;
+import lk.ticket.model.login.UserModule;
 import lk.ticket.service.configuration.ConfigurationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,6 @@ public class ConfigurationController {
 
         logger.info("Method called");
         logger.info(configuration);
-        return this.configurationService.submitConfiguration(configuration);
+        return this.configurationService.submitConfiguration(configuration, userModule.getEventID());
     }
 }
