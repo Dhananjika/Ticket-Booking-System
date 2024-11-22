@@ -36,7 +36,9 @@ public class ConnectionManager {
             driverClass = (driverClass != null)? driverClass.trim() : driverClass;
             Class.forName(driverClass);
 
-            assert connectionURL != null;
+            if (connectionURL == null) {
+                throw new ApplicationException("Connection URL is not set");
+            }
             connection = DriverManager.getConnection(connectionURL, userName, password);
             connection.setAutoCommit(false);
         } catch (SQLException | ClassNotFoundException e) {

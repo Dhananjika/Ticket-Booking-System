@@ -2,7 +2,6 @@ package lk.ticket.controller.configuration;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.configuration.ConfigurationModule;
-import lk.ticket.model.event.EventModule;
 import lk.ticket.model.login.UserModule;
 import lk.ticket.service.configuration.ConfigurationService;
 import org.apache.log4j.Logger;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/configuration")
 public class ConfigurationController {
@@ -55,8 +55,6 @@ public class ConfigurationController {
     @PostMapping("/submitConfiguration")
     @Operation(summary = "Submit Configuration Parameters", description = "This used to set the configuration details. Use positive numbers.")
     public String submitConfiguration(@RequestBody ConfigurationModule configuration){
-
-        logger.info("Method called");
         logger.info(configuration);
         return this.configurationService.submitConfiguration(configuration, userModule.getEventID());
     }

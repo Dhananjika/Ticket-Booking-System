@@ -44,12 +44,13 @@ public class SystemControlRepository {
         logger.info("method called");
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        logger.info(systemControlModule);
 
         try {
             connection = ConnectionManager.getConnection();
 
             if (connection != null) {
-                String sql = "UPDATE ticket.configuration SET system_status=?, config_status=?, stop_release_count=?, stop_purchased_count=? WHERE event_id=?;";
+                String sql = "UPDATE ticket.configuration SET system_status=?, config_status=?, stop_release_count=?, stop_pool_size=? WHERE event_id=?;";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, systemControlModule.getSystemStatus());
                 preparedStatement.setString(2, systemControlModule.getConfigurationStatus());
@@ -93,7 +94,7 @@ public class SystemControlRepository {
                     systemControlModule.setSystemStatus(resultSet.getString("system_status"));
                     systemControlModule.setConfigurationStatus(resultSet.getString("config_status"));
                     systemControlModule.setSystemStoppedReleasedTicketCount(resultSet.getInt("stop_release_count"));
-                    systemControlModule.setSystemStoppedPoolSize(resultSet.getInt("stop_purchased_count"));
+                    systemControlModule.setSystemStoppedPoolSize(resultSet.getInt("stop_pool_size"));
                 }
 
             }

@@ -1,7 +1,10 @@
 package lk.ticket.service.userThread;
 
+import lk.ticket.model.systemControl.SystemControlModule;
+import lk.ticket.repository.configuration.SystemControlRepository;
 import lk.ticket.service.ticketPool.TicketPoolServiceImp;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * CustomerService class implemented by Runnable interface
@@ -13,13 +16,20 @@ import org.apache.log4j.Logger;
 public class CustomerService implements Runnable{
     private static final Logger logger = Logger.getLogger(CustomerService.class);
     private final TicketPoolServiceImp ticketPoolServiceImp;
+    private final SystemControlRepository systemControlRepository;
     private String returnMessage;
     private boolean purchaseTicket;
     private int ticketCount;
+    private final int id;
 
-    public CustomerService(TicketPoolServiceImp ticketPoolServiceImp) {
+    public CustomerService(TicketPoolServiceImp ticketPoolServiceImp, int id) {
         this.ticketPoolServiceImp = ticketPoolServiceImp;
+        this.id = id;
+        this.systemControlRepository = new SystemControlRepository();
     }
+
+    @Autowired
+
 
     /**
      *  This method is used to separately execute thread.
@@ -30,7 +40,13 @@ public class CustomerService implements Runnable{
      * */
     @Override
     public void run() {
-        returnMessage = ticketPoolServiceImp.removeTicket(ticketCount, purchaseTicket,Thread.currentThread().getName());
+        SystemControlModule systemControlModuleExist = systemControlRepository.getSystemConfiguration(id);
+        logger.info(systemControlModuleExist);
+        if (systemControlModuleExist.getSystemStatus().equals("A")) {
+            returnMessage = ticketPoolServiceImp.removeTicket(ticketCount, purchaseTicket,Thread.currentThread().getName());
+        }else{
+            returnMessage = "System is not started";
+        }
     }
 
     public String getReturnMessage() {

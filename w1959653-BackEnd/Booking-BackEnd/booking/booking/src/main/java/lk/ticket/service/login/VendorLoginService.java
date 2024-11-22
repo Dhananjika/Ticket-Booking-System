@@ -72,7 +72,7 @@ public class VendorLoginService extends LoginService {
         logger.info("Method called");
         if(loginRepository.checkLogin("vendor", userModule, "A")) {
             logger.info("Successfully logged in as Vendor");
-            return "Successfully logged in as Vendor";
+            return "Vendor";
         }else {
             logger.warn("Invalid username or password");
             return null;

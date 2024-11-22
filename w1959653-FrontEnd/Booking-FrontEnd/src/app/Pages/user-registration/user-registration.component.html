@@ -1,0 +1,76 @@
+<section class="registration-user">
+  <div class="container py-5 h-500">
+    <div class="row d-flex justify-content-center">
+      <div class="col col col col">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5">
+
+            <h2 class="fw-bold mb-2 text-uppercase text-center">Register</h2>
+            <p class="text-white-50 mb-5 text-center">Please fill out the form to register!</p>
+
+            <!-- User Type Selection -->
+            <div class="form-group text-start mb-4">
+              <label class="form-label" for="userType">Select User Type</label>
+              <select class="form-control" [(ngModel)]="registerUser.userType" id="userType" name="userType"  required>
+                <option value="customer">Customer</option>
+                <option value="vendor">Vendor</option>
+              </select>
+            </div>
+
+            <!-- Customer Fields (Rendered when Vendor is selected) -->
+            <div *ngIf="registerUser.userType === 'vendor'">
+              <div class="form-group text-start">
+                <label class="form-label" for="vendorId">Vendor ID<label style="color:rgb(253, 118, 118);">*</label></label>
+                <input type="text" class="form-control" [(ngModel)]="registerUser.vendorID" id="vendorId" name="userType" placeholder="Enter Your Vendor ID" required>
+              </div>
+            </div>
+
+            <!-- Vendor Fields (Rendered when Customer is selected) -->
+            <div *ngIf="registerUser.userType === 'customer'">
+              <div class="row">
+                <div class="col">
+                  <label class="form-label" for="name">Name<label style="color:rgb(253, 118, 118);">*</label></label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter your name" [(ngModel)]="registerUser.name">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="exampleInputEmail1">Email<label style="color:rgb(253, 118, 118);">*</label></label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" [(ngModel)]="registerUser.email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="middle_class"></div>
+            <div *ngIf="registerUser.userType === 'customer' || registerUser.userType === 'vendor'">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label class="form-label" for="username" >Username<label style="color:rgb(253, 118, 118);">*</label></label>
+                    </div>
+                    <div *ngIf="registerUser.userType === 'customer'">
+                      <input class="form-check-input" type="checkbox" id="gridCheck" [(ngModel)]="useEmail" (change)="changeUserName()" />
+                      <label class="form-check-label" for="gridCheck">Keep email as username</label>
+                    </div>
+                  </div>
+                  <input type="text" id="username" class="form-control" placeholder="Username." [disabled]="useEmail" [(ngModel)]="registerUser.username"/>
+                </div>
+                <div class="col">
+                  <label class="form-label" for="typePasswordX">Password<label style="color:rgb(253, 118, 118);">*</label></label>
+                  <input type="password" class="form-control" id="typePasswordX" placeholder="Password" [(ngModel)]="registerUser.password">
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+              <button class="btn btn-outline-secondary btn-lg px-5" type="button" (click)="submitForm()" [disabled]="(!registerUser.name || !registerUser.email) && (!registerUser.vendorID || !registerUser.username || !registerUser.password)">Register</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

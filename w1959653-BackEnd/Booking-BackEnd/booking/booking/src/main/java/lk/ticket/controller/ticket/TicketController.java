@@ -23,6 +23,7 @@ import java.util.List;
  * IIT ID - 20223058
  */
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ticketController")
 public class TicketController {
@@ -56,7 +57,7 @@ public class TicketController {
         ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
-        VendorService vendorService = new VendorService(ticketPoolService);
+        VendorService vendorService = new VendorService(ticketPoolService, userModule.getEventID());
         vendorService.setAddTickets(false);
 
         Thread vendorThread = new Thread(vendorService, userModule.getUsername());
@@ -85,7 +86,7 @@ public class TicketController {
         ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
-        CustomerService customerService = new CustomerService(ticketPoolService);
+        CustomerService customerService = new CustomerService(ticketPoolService, userModule.getEventID());
         customerService.setTicketCount(ticketCount);
         customerService.setPurchaseTicket(false);
 
@@ -112,7 +113,7 @@ public class TicketController {
     @Operation(summary = "Confirm Ticket Adding", description = "The confirmation box is provided on the first attempt to collect the ticket system. After confirmation proceed this will work.")
     public String addTicketConfirm() {
         logger.info("Method called");
-        VendorService vendorService = new VendorService(ticketPoolService);
+        VendorService vendorService = new VendorService(ticketPoolService, userModule.getEventID());
         vendorService.setAddTickets(true);
 
         Thread vendorThread = new Thread(vendorService, userModule.getUsername());
@@ -138,7 +139,7 @@ public class TicketController {
     @Operation(summary = "Confirm Ticket Purchase", description = "The confirmation box is provided on the first attempt to purchase tickets from the ticket system. After confirmation proceed this will work.")
     public String purchaseTicketConfirm() {
         logger.info("Method called");
-        CustomerService customerService = new CustomerService(ticketPoolService);
+        CustomerService customerService = new CustomerService(ticketPoolService, userModule.getEventID());
         customerService.setPurchaseTicket(true);
 
         Thread customerThread = new Thread(customerService,userModule.getUsername());
@@ -164,7 +165,7 @@ public class TicketController {
         ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
-        VendorService vendorService = new VendorService(ticketPoolService);
+        VendorService vendorService = new VendorService(ticketPoolService, userModule.getEventID());
         vendorService.setAddTickets(false);
 
         List<Thread> vendorThreads = new ArrayList<Thread>();
@@ -194,7 +195,7 @@ public class TicketController {
         ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
         logger.info(userModule);
 
-        CustomerService customerService = new CustomerService(ticketPoolService);
+        CustomerService customerService = new CustomerService(ticketPoolService, userModule.getEventID());
         customerService.setTicketCount(ticketCount);
         customerService.setPurchaseTicket(false);
 

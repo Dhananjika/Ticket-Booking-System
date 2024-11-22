@@ -1,0 +1,62 @@
+<section class="login-user">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5">
+
+            <h2 class="fw-bold mb-2 text-uppercase text-center">Login</h2>
+            <p class="text-white-50 mb-5 text-center">Please enter your login and password!</p>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center">
+              {{ errorMessage }}
+            </div>
+            
+            <!-- Username -->
+            <div class="form-group text-start">
+              <label class="form-label" for="username">Username<label style="color:rgb(253, 118, 118);">*</label></label>
+              <input type="text" id="username" class="form-control" [(ngModel)]="loginModule.username" #username="ngModel" placeholder="Enter your username" required
+                [class.is-invalid]="username.invalid && username.touched" />
+              <div class="invalid-feedback" *ngIf="username.invalid && username.touched">
+                Username is required.
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group text-start mt-4">
+              <label class="form-label" for="typePasswordX">Password<label style="color:rgb(253, 118, 118);">*</label></label>
+              <div class="input-group">
+                <input [type]="showPassword ? 'text' : 'password'" id="typePasswordX" class="form-control"
+                  [(ngModel)]="loginModule.password" #username="ngModel" placeholder="Enter your password" required
+                [class.is-invalid]="username.invalid && username.touched" />
+                <div class="invalid-feedback" *ngIf="username.invalid && username.touched">
+                  Password is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Login Button -->
+            <div class="text-center mt-4">
+              <button class="btn btn-outline-secondary btn-lg px-5" type="button" (click)="submitLogin()" [disabled]="!loginModule.username || !loginModule.password" >Login</button>
+            </div>
+
+            <!-- Sign Up Link -->
+            <div class="text-center mt-4">
+              <p class="mb-0">Don't you have an account? <a routerLink="/user-registration" class="text-white-50 fw-bold">Register</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="successMessage" class="custom-box">
+  <div class="box-content">
+    <form >
+      <p>{{successMessage}}</p>
+      <button (click)="closeBox()" class="btn btn-secondary" style="margin-top:10px;margin-bottom:10px">OK</button>
+    </form>
+  </div>
+</div>

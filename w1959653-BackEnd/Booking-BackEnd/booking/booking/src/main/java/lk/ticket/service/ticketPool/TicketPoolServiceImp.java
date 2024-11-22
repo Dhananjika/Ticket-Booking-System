@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 @Service
 public class TicketPoolServiceImp implements TicketPoolService {
-    private static final Logger logger = Logger.getLogger(TicketPoolServiceImp.class);
+    private static final Logger logger = Logger.getLogger("com.example.specificLogger");
     private final ConcurrentLinkedQueue<Integer> ticketQueue = new ConcurrentLinkedQueue<>();
     private ConfigurationModule configurationModule;
     private int poolSize;
@@ -54,10 +54,11 @@ public class TicketPoolServiceImp implements TicketPoolService {
             try{
                 int ticketReleaseRate = configurationModule.getTicketReleaseRate();
                 if(checkTicketAvailability()){
+                    logger.info("All Tickets Are Released. No More Tickets Available. Total Released Ticket Count : " + releasedTicketCount);
                     return "All Tickets Are Released. No More Tickets Available.";
                 }
                 if (checkPoolSize()) {
-                    logger.info( vendorName + " try to add tickets : Ticket pool is full. Wait until customer purchase tickets.");
+                    logger.warn(vendorName + " try to add tickets : Ticket pool is full. Wait until customer purchase tickets.");
                     return "Ticket Addition On Hold. Please Wait Until Customers Purchase Tickets To Free Up Space.";
                 }
 
@@ -65,7 +66,8 @@ public class TicketPoolServiceImp implements TicketPoolService {
                 ticketReleaseRate = Math.min(ticketReleaseRate, configurationModule.getTotalTickets() - releasedTicketCount);
 
                 if(ticketReleaseRate < configurationModule.getTicketReleaseRate() && !add){
-                   return "Only " + ticketReleaseRate + " Tickets Can Be Added Right Now. Would You Like To Add Them?";
+                    logger.warn("Only " + ticketReleaseRate + " Tickets Can Be Added Right Now. Would You Like To Add Them?");
+                    return "Only " + ticketReleaseRate + " Tickets Can Be Added Right Now. Would You Like To Add Them?";
                 }
 
                 for (int i = 0; i < ticketReleaseRate; i++) {
@@ -98,15 +100,17 @@ public class TicketPoolServiceImp implements TicketPoolService {
             String returnMessage = null;
             try {
                 if (checkTicketAvailability() && ticketQueue.isEmpty()) {
-                   return "Tickets Sold Out.";
+                    logger.info("Tickets Sold Out. Ticket Queue size : " + ticketQueue.size());
+                    return "Tickets Sold Out.";
                 }else if(!checkTicketAvailability() && ticketQueue.isEmpty()){
-                   logger.info(customerName + " try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.");
-                   return "Tickets Are Currently Unavailable. Please Wait Until More Tickets Become Available.";
+                    logger.info(customerName + " try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.");
+                    return "Tickets Are Currently Unavailable. Please Wait Until More Tickets Become Available.";
                 }
 
                 if((purchaseTicketCount > configurationModule.getCustomerRetrievalRate() && !purchase)
                         || purchaseTicketCount > ticketQueue.size()){
                     int allowedPurchaseCount = Math.min(ticketQueue.size(), configurationModule.getCustomerRetrievalRate());
+                    logger.warn("Only " + allowedPurchaseCount + " tickets can purchase");
                     return "You Can Purchase Up To " + allowedPurchaseCount + " Tickets At This Time. Would You Like To Proceed With Your Purchase?";
                 }
 
@@ -159,5 +163,14 @@ public class TicketPoolServiceImp implements TicketPoolService {
 
     public synchronized int getReleasedTicketCount() {
         return releasedTicketCount;
+    }
+
+    public synchronized boolean resumeTicketPool(int releasedTicketCount, int queueSize){
+        this.ticketQueue.clear();
+        this.releasedTicketCount = releasedTicketCount;
+        for (int i = 0; i < queueSize; i++) {
+            ticketQueue.add(i);
+        }
+        return true;
     }
 }

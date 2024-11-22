@@ -22,7 +22,7 @@ public class UserModule {
     private String name;
     private String email;
     private int userID;
-    private int eventID;
+    private int eventID = 1;
 
     public UserModule(){}
 

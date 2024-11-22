@@ -3,7 +3,6 @@ package lk.ticket.controller.login;
 import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.login.UserModule;
 import lk.ticket.repository.login.LoginRepository;
-import lk.ticket.service.login.AdminLoginService;
 import lk.ticket.service.login.CustomerLoginService;
 import lk.ticket.service.login.LoginService;
 import lk.ticket.service.login.VendorLoginService;
@@ -21,6 +20,7 @@ import javax.servlet.http.HttpSession;
  * UoW ID - W1959653
  * IIT ID - 20223058
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -100,18 +100,14 @@ public class LoginController {
         userModule.setPassword(password);
         logger.info(userModule);
 
-        LoginService adminLogin = new AdminLoginService(loginRepository);
         LoginService customerLogin = new CustomerLoginService(loginRepository);
         LoginService vendorLogin = new VendorLoginService(loginRepository);
 
-        String login = adminLogin.login(userModule);
+        String login = customerLogin.login(userModule);
         if (login == null) {
-            login = customerLogin.login(userModule);
+            login = vendorLogin.login(userModule);
             if (login == null) {
-                login = vendorLogin.login(userModule);
-                if (login == null) {
-                    return "Invalid username or password";
-                }
+                login = "Invalid username or password";
             }
         }
 
@@ -135,18 +131,14 @@ public class LoginController {
         logger.info("Method called");
         logger.info(userModule);
 
-        LoginService adminLogin = new AdminLoginService(loginRepository);
         LoginService customerLogin = new CustomerLoginService(loginRepository);
         LoginService vendorLogin = new VendorLoginService(loginRepository);
 
-        String login = adminLogin.logout(userModule);
+        String login = customerLogin.logout(userModule);
         if (login == null) {
-            login = customerLogin.logout(userModule);
+            login = vendorLogin.logout(userModule);
             if (login == null) {
-                login = vendorLogin.logout(userModule);
-                if (login == null) {
-                    return "Invalid username or password";
-                }
+                return "Invalid username or password";
             }
         }
         if (session != null) {

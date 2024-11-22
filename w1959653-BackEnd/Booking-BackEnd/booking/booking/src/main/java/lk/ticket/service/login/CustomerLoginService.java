@@ -73,7 +73,7 @@ public class CustomerLoginService extends LoginService {
         logger.info("Method called");
         if(super.loginRepository.checkLogin("customer", userModule, "A")) {
             logger.info("Successfully logged in as Customer");
-            return "Successfully logged in";
+            return "Customer";
         }else {
             logger.warn("Invalid username or password");
             return null;
