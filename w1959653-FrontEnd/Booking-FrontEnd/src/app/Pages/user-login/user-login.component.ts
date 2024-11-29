@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { UserModule } from "src/app/module/user-login/user-module";
 import { HttpClient } from "@angular/common/http";
-import { TicketServiceService } from "src/app/Service/ticket-service.service";
+import { TicketServiceService } from "src/app/Service/TicketService/ticket-service.service";
 import { Router } from "@angular/router";
 import { HttpParams } from "@angular/common/http";
+import { AuthService } from "../..//Service/AuthService/auth-service.service";
 
 @Component({
   selector: "app-user-login",
@@ -18,9 +19,9 @@ export class UserLoginComponent implements OnInit {
   errorMessage: String;
 
   constructor(
-    private http: HttpClient,
     private env: TicketServiceService,
     private route: Router,
+    private auth: AuthService,
   ) {
     this.loginModule = new UserModule();
     this.showPassword = false;
@@ -37,33 +38,30 @@ export class UserLoginComponent implements OnInit {
       .set("username", this.loginModule.username)
       .set("password", this.loginModule.password);
 
-    this.http
-      .post<string>(this.env.BaseURL + "login/userLogin", null, {
-        params: params,
-        responseType: "text" as "json",
-      })
-      .subscribe(
-        (value) => {
-          if (value === "Vendor") {
-            this.route.navigate(["/vendor-dashboard"]);
-          } else if (value === "Customer") {
-            this.route.navigate(["/dashboard"]);
-          } else {
-            this.errorMessage = value;
-          }
-        },
-        (error) => {
-          console.error("Error:", error); // Log the error for debugging
-          this.errorMessage = "Error connecting to the server."; // Show generic error if the server fails
-        },
-      );
+    const url = this.env.setApi("login/userLogin");
+
+    this.env.sendPostRequestWithParams(url, params).subscribe(
+      (response) => {
+        if (response === "Vendor") {
+          this.auth.setUserRole(response);
+          console.log("VendorGuard activated, role:", this.auth.getUserRole());
+          this.env.setUsername(this.loginModule.username);
+          this.route.navigate(["/vendor-dashboard"]);
+        } else if (response === "Customer") {
+          this.auth.setUserRole(response);
+          this.env.setUsername(this.loginModule.username);
+          this.route.navigate(["/dashboard"]);
+        } else {
+          this.errorMessage = response;
+        }
+      },
+      (error) => {
+        console.error("Error:", error);
+      },
+    );
   }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
-  }
-
-  closeBox() {
-    this.successMessage = null; // Hide the box when OK is clicked
   }
 }

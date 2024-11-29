@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { UserModule } from "src/app/module/user-login/user-module";
 import { HttpClient } from "@angular/common/http";
-import { TicketServiceService } from "src/app/Service/ticket-service.service";
+import { TicketServiceService } from "src/app/Service/TicketService/ticket-service.service";
 import { Router } from "@angular/router";
 import { HttpParams } from "@angular/common/http";
+import { AuthService } from "../../Service/AuthService/auth-service.service";
 
 @Component({
   selector: "app-user-registration",
@@ -14,36 +15,65 @@ import { HttpParams } from "@angular/common/http";
 export class UserRegistrationComponent implements OnInit {
   useEmail: boolean;
   registerUser: UserModule;
+  successMessage: string;
+  errorMessage: string;
 
   constructor(
     private http: HttpClient,
     private env: TicketServiceService,
     private route: Router,
+    private auth: AuthService,
   ) {
     this.useEmail = false;
     this.registerUser = new UserModule();
+    this.successMessage = null;
+    this.errorMessage = null;
   }
 
   ngOnInit() {}
 
   submitForm() {
     console.log(this.registerUser);
+    debugger;
 
-    this.http
-      .post<string>(this.env.BaseURL + "login/userLogin", this.registerUser)
-      .subscribe(
-        (value) => {
-          if (value === "Vendor") {
-            this.route.navigate(["/vendor-dashboard"]);
-          } else if (value === "Customer") {
-            this.route.navigate(["/dashboard"]);
-          } else {
-          }
+    if (this.registerUser.userType === "Vendor") {
+      const params = new HttpParams()
+        .set("username", this.registerUser.username)
+        .set("password", this.registerUser.password)
+        .set("vendorID", this.registerUser.vendorID);
+
+      const url = this.env.setApi("login/vendorRegister");
+
+      this.env.sendPostRequestWithParams(url, params).subscribe(
+        (response) => {
+          this.auth.setUserRole(this.registerUser.userType);
+          console.log("Response:", response);
+          this.route.navigate(["/vendor-dashboard"]);
         },
         (error) => {
-          console.error("Error:", error); // Log the error for debugging
+          console.error("Error:", error);
         },
       );
+    } else if (this.registerUser.userType == "Customer") {
+      const url = this.env.setApi("login/customerRegister");
+
+      const params = new HttpParams()
+        .set("username", this.registerUser.username)
+        .set("password", this.registerUser.password)
+        .set("name", this.registerUser.name)
+        .set("email", this.registerUser.email);
+
+      this.env.sendPostRequestWithParams(url, params).subscribe(
+        (response) => {
+          this.auth.setUserRole(this.registerUser.userType);
+          console.log("Response:", response);
+          this.route.navigate(["/dashboard"]);
+        },
+        (error) => {
+          console.error("Error:", error);
+        },
+      );
+    }
   }
 
   changeUserName() {

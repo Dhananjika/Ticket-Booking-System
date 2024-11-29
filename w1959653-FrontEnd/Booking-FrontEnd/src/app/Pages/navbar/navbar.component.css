@@ -1,0 +1,7 @@
+/* src/app/components/navbar/navbar.component.css */
+.user-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

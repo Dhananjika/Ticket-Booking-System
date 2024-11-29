@@ -5,14 +5,28 @@ import { ConfigurationSetupComponent } from "./Pages/configuration-setup/configu
 import { UserRegistrationComponent } from "./Pages/user-registration/user-registration.component";
 import { VendorDashbordComponent } from "./Pages/vendor-dashbord/vendor-dashbord.component";
 import { CustomerDashboardComponent } from "./Pages/customer-dashboard/customer-dashboard.component";
+import { VendorGuard } from "./Security/vendor.guard";
+import { CustomerGuard } from "./Security/customer.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: UserLoginComponent },
-  { path: "configuration-setup", component: ConfigurationSetupComponent },
   { path: "user-registration", component: UserRegistrationComponent },
-  { path: "vendor-dashboard", component: VendorDashbordComponent },
-  { path: "dashboard", component: CustomerDashboardComponent },
+  {
+    path: "configuration-setup",
+    component: ConfigurationSetupComponent,
+    canActivate: [VendorGuard],
+  },
+  {
+    path: "vendor-dashboard",
+    component: VendorDashbordComponent,
+    canActivate: [VendorGuard],
+  },
+  {
+    path: "dashboard",
+    component: CustomerDashboardComponent,
+    canActivate: [CustomerGuard],
+  },
 ];
 
 @NgModule({

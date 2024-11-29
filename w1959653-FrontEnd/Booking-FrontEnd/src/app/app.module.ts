@@ -11,6 +11,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ConfigurationSetupComponent } from "./Pages/configuration-setup/configuration-setup.component";
 import { VendorDashbordComponent } from "./Pages/vendor-dashbord/vendor-dashbord.component";
 import { CustomerDashboardComponent } from "./Pages/customer-dashboard/customer-dashboard.component";
+import { NavbarComponent } from "./Pages/navbar/navbar.component";
+import { AuthService } from "./Service/AuthService/auth-service.service";
+import { VendorGuard } from "./Security/vendor.guard";
+import { CustomerGuard } from "./Security/customer.guard";
+import { EventComponent } from "./Pages/event/event.component";
 
 @NgModule({
   declarations: [
@@ -20,9 +25,11 @@ import { CustomerDashboardComponent } from "./Pages/customer-dashboard/customer-
     ConfigurationSetupComponent,
     VendorDashbordComponent,
     CustomerDashboardComponent,
+    NavbarComponent,
+    EventComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [AuthService, VendorGuard, CustomerGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
