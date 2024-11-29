@@ -72,12 +72,12 @@ public class LoginController {
      * */
     @PostMapping("/customerRegister")
     @Operation(summary = "Customer Registration", description = "User can register as customer.")
-    public String customerRegister(@RequestParam String username, @RequestParam String password,@RequestParam String customerName, @RequestParam String customerEmail) {
+    public String customerRegister(@RequestParam String username, @RequestParam String password, @RequestParam String name, @RequestParam String email) {
         logger.info("Method called");
         userModule.setUsername(username);
         userModule.setPassword(password);
-        userModule.setName(customerName);
-        userModule.setEmail(customerEmail);
+        userModule.setName(name);
+        userModule.setEmail(email);
         userModule.setUserType("customer");
         logger.info(userModule);
         LoginService customerLoginService = new CustomerLoginService(loginRepository);

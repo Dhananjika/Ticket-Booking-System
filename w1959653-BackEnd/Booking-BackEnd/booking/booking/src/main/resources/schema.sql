@@ -4,7 +4,9 @@ CREATE TABLE IF NOT EXISTS event (
     event_type VARCHAR(255) NOT NULL,
     location VARCHAR(255) NOT NULL,
     event_date VARCHAR(255) NOT NULL,
-    event_time VARCHAR(255) NOT NULL
+    event_time VARCHAR(255) NOT NULL,
+    event_normal_ticket_price INT NOT NULL,
+    event_vip_ticket_price INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS vendor (

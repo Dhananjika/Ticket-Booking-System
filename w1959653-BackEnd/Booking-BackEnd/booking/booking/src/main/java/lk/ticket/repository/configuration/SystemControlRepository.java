@@ -25,7 +25,7 @@ public class SystemControlRepository {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 if(resultSet.getString("config_status").equals("I")) {
                     return true;
                 }

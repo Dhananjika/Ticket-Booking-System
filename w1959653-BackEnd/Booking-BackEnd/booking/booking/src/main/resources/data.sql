@@ -1,6 +1,6 @@
 -- Event table
-INSERT INTO ticket.event (event_id, event_name, event_type, location, event_date, event_time)
-SELECT 1, 'Music Plaza', 'Music', 'London', '20-12-2024', '19:00'
+INSERT INTO ticket.event (event_id, event_name, event_type, location, event_date, event_time,event_normal_ticket_price, event_vip_ticket_price)
+SELECT 1, 'Music Plaza', 'Music', 'London', '20-12-2024', '19:00', 1500, 3000
     WHERE NOT EXISTS (SELECT 1 FROM ticket.event WHERE event_id = 1);
 
 -- Vendor table

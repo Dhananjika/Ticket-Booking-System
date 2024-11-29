@@ -1,0 +1,67 @@
+2024-11-23 11:40:19.873  INFO   55 --- [LoginController] -- vendorRegister : Method called
+2024-11-23 11:40:19.882  INFO   60 --- [LoginController] -- vendorRegister : UserLoginModule [username=vendor, password=vendor, userType=vendor, vendorID=003, customerName=null, customerEmail=null]
+2024-11-23 11:40:19.882  INFO   36 --- [VendorLoginService] -- register : Method called
+2024-11-23 11:40:19.882  INFO   52 --- [VendorLoginService] -- validateRegistration : Method called
+2024-11-23 11:40:19.882  INFO   108 --- [LoginRepository] -- getAccountLoginDetails : method called.
+2024-11-23 11:40:19.930  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 11:40:19.930  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:40:19.930  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:40:19.930  INFO   60 --- [VendorLoginService] -- validateRegistration : 
+2024-11-23 11:40:19.930  INFO   34 --- [LoginRepository] -- userLoginRegister : method called.
+2024-11-23 11:40:19.944  INFO   43 --- [LoginRepository] -- userLoginRegister : Insert data into register table as a vendor start
+2024-11-23 11:40:19.960  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 11:40:19.960  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:40:19.960  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:40:19.960  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-23 11:40:19.960  INFO   59 --- [LoginRepository] -- userLoginRegister : Insert data into register table as a vendor commited psCount :1
+2024-11-23 11:40:19.999  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-23 11:40:19.999  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to R
+2024-11-23 11:40:19.999  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:40:19.999  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:40:19.999  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 11:40:19.999  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:40:20.002  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:40:20.002  INFO   62 --- [LoginRepository] -- userLoginRegister : You have successfully registered as Vendor
+2024-11-23 11:40:20.002  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:40:20.002  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:58:47.614  INFO   76 --- [LoginController] -- customerRegister : Method called
+2024-11-23 11:58:47.632  INFO   82 --- [LoginController] -- customerRegister : UserLoginModule [username=customer1234, password=customer1234, userType=customer, vendorID=null, customerName=Dhananjika, customerEmail=dhananjika.20223058@iit.ac.lk]
+2024-11-23 11:58:47.632  INFO   36 --- [CustomerLoginService] -- register : Method called
+2024-11-23 11:58:47.632  INFO   52 --- [CustomerLoginService] -- validateRegistration : Method called
+2024-11-23 11:58:47.644  INFO   108 --- [LoginRepository] -- getAccountLoginDetails : method called.
+2024-11-23 11:58:47.676  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 11:58:47.682  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:58:47.682  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:58:47.682  INFO   61 --- [CustomerLoginService] -- validateRegistration : 
+2024-11-23 11:58:47.682  INFO   34 --- [LoginRepository] -- userLoginRegister : method called.
+2024-11-23 11:58:47.692  INFO   66 --- [LoginRepository] -- userLoginRegister : Insert data into register table as a customer start
+2024-11-23 11:58:47.709  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-23 11:58:47.709  INFO   78 --- [LoginRepository] -- userLoginRegister : Insert data into register table as a customer commited psCount :1
+2024-11-23 11:58:47.740  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-23 11:58:47.740  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to R
+2024-11-23 11:58:47.740  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:58:47.740  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:58:47.740  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 11:58:47.740  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:58:47.740  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 11:58:47.740  INFO   81 --- [LoginRepository] -- userLoginRegister : You have successfully registered as Customer
+2024-11-23 11:58:47.740  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 11:58:47.740  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 13:18:13.489  INFO   76 --- [LoginController] -- customerRegister : Method called
+2024-11-23 13:18:13.491  INFO   82 --- [LoginController] -- customerRegister : UserLoginModule [username=customer123, password=12345, userType=customer, vendorID=null, customerName=Dhananjika , customerEmail=dhananjika.20223058@iit.ac.lk]
+2024-11-23 13:18:13.491  INFO   36 --- [CustomerLoginService] -- register : Method called
+2024-11-23 13:18:13.491  INFO   52 --- [CustomerLoginService] -- validateRegistration : Method called
+2024-11-23 13:18:13.491  INFO   108 --- [LoginRepository] -- getAccountLoginDetails : method called.
+2024-11-23 13:18:13.606  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 13:18:13.617  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 13:18:13.617  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 13:18:13.632  INFO   61 --- [CustomerLoginService] -- validateRegistration : This email has already registered.
+2024-11-23 13:28:00.716  INFO   76 --- [LoginController] -- customerRegister : Method called
+2024-11-23 13:28:00.749  INFO   82 --- [LoginController] -- customerRegister : UserLoginModule [username=customer123, password=custi, userType=customer, vendorID=null, customerName=Dhananjika , customerEmail=dhananjika.20223058@iit.ac.lk]
+2024-11-23 13:28:00.749  INFO   36 --- [CustomerLoginService] -- register : Method called
+2024-11-23 13:28:00.749  INFO   52 --- [CustomerLoginService] -- validateRegistration : Method called
+2024-11-23 13:28:00.763  INFO   108 --- [LoginRepository] -- getAccountLoginDetails : method called.
+2024-11-23 13:28:00.826  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-23 13:28:00.826  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-23 13:28:00.826  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-23 13:28:00.826  INFO   61 --- [CustomerLoginService] -- validateRegistration : This email has already registered.

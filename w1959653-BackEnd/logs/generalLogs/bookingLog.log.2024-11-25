@@ -1,0 +1,178 @@
+2024-11-25 09:49:47.862  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 09:49:47.895  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 09:49:47.895  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 09:49:47.962  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 09:49:47.962  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:49:47.966  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:49:47.966  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 09:49:47.966  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 09:49:48.013  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 09:49:48.013  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 09:49:48.013  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:49:48.013  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:49:48.013  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 09:49:48.013  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:49:48.029  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:49:48.029  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 09:50:53.189  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 09:50:53.193  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 09:50:53.193  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 09:50:53.215  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 09:50:53.215  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:50:53.215  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:50:53.215  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 09:50:53.215  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 09:50:53.256  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 09:50:53.256  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 09:50:53.256  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:50:53.256  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:50:53.256  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 09:50:53.256  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:50:53.256  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:50:53.256  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 09:59:44.134  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 09:59:44.134  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 09:59:44.134  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 09:59:44.151  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 09:59:44.151  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:59:44.156  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:59:44.156  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 09:59:44.156  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 09:59:44.181  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 09:59:44.181  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 09:59:44.181  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:59:44.181  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:59:44.181  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 09:59:44.181  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 09:59:44.181  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 09:59:44.181  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 10:02:23.107  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:02:23.108  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:02:23.108  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:02:23.123  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:02:23.123  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:02:23.123  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:02:23.123  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 10:02:23.123  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 10:02:23.138  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 10:02:23.138  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 10:02:23.138  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:02:23.152  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:02:23.152  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:02:23.152  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:02:23.152  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:02:23.152  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 10:03:04.451  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:03:04.451  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=customer123, password=customer123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:03:04.451  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:03:04.482  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 10:03:04.482  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 10:03:04.482  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:03:04.482  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:03:04.482  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:03:04.482  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:03:04.482  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:03:04.482  INFO   75 --- [CustomerLoginService] -- login : Successfully logged in as Customer
+2024-11-25 10:11:32.931  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:11:32.931  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:11:32.931  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:11:32.946  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:11:32.946  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:11:32.956  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:11:32.956  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 10:11:32.956  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 10:11:32.978  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 10:11:32.978  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 10:11:32.978  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:11:32.978  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:11:32.978  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:11:32.978  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:11:32.978  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:11:32.978  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 10:14:33.164  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:14:33.164  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:14:33.164  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:14:33.174  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:14:33.174  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:14:33.174  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:14:33.174  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 10:14:33.174  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 10:14:33.205  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 10:14:33.205  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 10:14:33.205  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:14:33.205  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:14:33.205  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:14:33.205  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:14:33.205  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:14:33.205  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 10:16:29.716  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:16:29.716  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor1234, password=vendor1234, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:16:29.716  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:16:29.720  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:16:29.720  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:16:29.720  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:16:29.720  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 10:16:29.734  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 10:16:29.737  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:16:29.737  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:16:29.737  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:16:29.737  WARN   77 --- [VendorLoginService] -- login : Invalid username or password
+2024-11-25 10:16:39.774  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:16:39.774  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor, password=vendor, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:16:39.775  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:16:39.786  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:16:39.786  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:16:39.786  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:16:39.786  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 10:16:39.786  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 10:16:39.813  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 10:16:39.813  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 10:16:39.813  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:16:39.813  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:16:39.813  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:16:39.813  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:16:39.813  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:16:39.813  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 10:27:59.573  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 10:27:59.584  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 10:27:59.584  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 10:27:59.587  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:27:59.587  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:27:59.600  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:27:59.600  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 10:27:59.600  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 10:27:59.616  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 10:27:59.616  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 10:27:59.616  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:27:59.616  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:27:59.616  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 10:27:59.616  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 10:27:59.616  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 10:27:59.616  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-11-25 15:19:46.601  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 15:19:46.618  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=customer123, password=customer123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 15:19:46.618  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 15:19:46.649  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 15:19:46.649  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 15:19:46.649  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 15:19:46.650  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 15:19:46.650  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 15:19:46.650  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 15:19:46.651  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 15:19:46.651  INFO   75 --- [CustomerLoginService] -- login : Successfully logged in as Customer
+2024-11-25 15:20:01.034  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-11-25 15:20:01.034  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-11-25 15:20:01.034  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-11-25 15:20:01.057  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 15:20:01.067  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 15:20:01.067  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 15:20:01.067  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-11-25 15:20:01.067  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-11-25 15:20:01.117  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-11-25 15:20:01.117  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-11-25 15:20:01.117  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 15:20:01.118  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 15:20:01.119  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-11-25 15:20:01.119  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-11-25 15:20:01.120  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-11-25 15:20:01.121  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
