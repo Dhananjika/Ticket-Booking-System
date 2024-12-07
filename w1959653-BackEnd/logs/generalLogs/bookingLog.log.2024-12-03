@@ -1,0 +1,96 @@
+2024-12-03 11:52:09.778  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-03 11:52:09.823  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor123, password=vendor123, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-03 11:52:09.823  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-03 11:52:09.892  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 11:52:09.892  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 11:52:09.892  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 11:52:09.892  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-12-03 11:52:09.892  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-12-03 11:52:09.920  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 11:52:09.923  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 11:52:09.924  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 11:52:09.924  WARN   77 --- [VendorLoginService] -- login : Invalid username or password
+2024-12-03 12:01:47.663  INFO   55 --- [LoginController] -- vendorRegister : Method called
+2024-12-03 12:01:47.664  INFO   60 --- [LoginController] -- vendorRegister : UserLoginModule [username=vendor, password=vendor, userType=vendor, vendorID=001, customerName=null, customerEmail=null]
+2024-12-03 12:01:47.664  INFO   36 --- [VendorLoginService] -- register : Method called
+2024-12-03 12:01:47.665  INFO   52 --- [VendorLoginService] -- validateRegistration : Method called
+2024-12-03 12:01:47.667  INFO   108 --- [LoginRepository] -- getAccountLoginDetails : method called.
+2024-12-03 12:01:47.695  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:01:47.695  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:01:47.699  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:01:47.699  INFO   60 --- [VendorLoginService] -- validateRegistration : 
+2024-12-03 12:01:47.699  INFO   34 --- [LoginRepository] -- userLoginRegister : method called.
+2024-12-03 12:01:47.703  INFO   43 --- [LoginRepository] -- userLoginRegister : Insert data into register table as a vendor start
+2024-12-03 12:01:47.720  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:01:47.720  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:01:47.720  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:01:47.728  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-03 12:01:47.733  INFO   59 --- [LoginRepository] -- userLoginRegister : Insert data into register table as a vendor commited psCount :1
+2024-12-03 12:01:47.761  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-03 12:01:47.761  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to R
+2024-12-03 12:01:47.761  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:01:47.761  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:01:47.761  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:01:47.761  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:01:47.761  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:01:47.761  INFO   62 --- [LoginRepository] -- userLoginRegister : You have successfully registered as Vendor
+2024-12-03 12:01:47.761  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:01:47.761  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:02:12.597  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-03 12:02:12.600  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor, password=vendor, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-03 12:02:12.600  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-03 12:02:12.613  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:02:12.613  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:02:12.616  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:02:12.616  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-12-03 12:02:12.616  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-12-03 12:02:12.646  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-03 12:02:12.646  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-12-03 12:02:12.646  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:02:12.646  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:02:12.646  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:02:12.646  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:02:12.646  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:02:12.649  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-12-03 12:29:32.885  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:29:32.887  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:29:32.889  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:29:35.969  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:29:35.969  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:29:35.974  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:30:26.227  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:30:26.227  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:30:26.228  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:31:49.051  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:31:49.051  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:31:49.051  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:32:25.777  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:32:25.777  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:32:25.778  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:37:40.456  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:37:40.456  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:37:40.456  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:37:42.522  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:37:42.522  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:37:42.525  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:40:56.714  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:40:56.722  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:40:56.723  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:41:09.327  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:41:09.327  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:41:09.328  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:41:25.721  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:41:25.721  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:41:25.725  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:42:03.682  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:42:03.682  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:42:03.687  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:58:59.425  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:58:59.425  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:58:59.429  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:59:44.796  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:59:44.796  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:59:44.796  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-03 12:59:49.009  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-03 12:59:49.009  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-03 12:59:49.015  INFO   64 --- [ConnectionManager] -- close : Connection close success

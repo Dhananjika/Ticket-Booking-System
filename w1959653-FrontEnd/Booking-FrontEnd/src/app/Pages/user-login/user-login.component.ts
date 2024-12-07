@@ -38,16 +38,11 @@ export class UserLoginComponent implements OnInit {
       .set("username", this.loginModule.username)
       .set("password", this.loginModule.password);
 
-    const url = this.env.setApi("login/userLogin");
+    const url = "login/userLogin";
 
     this.env.sendPostRequestWithParams(url, params).subscribe(
       (response) => {
-        if (response === "Vendor") {
-          this.auth.setUserRole(response);
-          console.log("VendorGuard activated, role:", this.auth.getUserRole());
-          this.env.setUsername(this.loginModule.username);
-          this.route.navigate(["/vendor-dashboard"]);
-        } else if (response === "Customer") {
+        if (response === "Vendor" || response === "Customer") {
           this.auth.setUserRole(response);
           this.env.setUsername(this.loginModule.username);
           this.route.navigate(["/dashboard"]);

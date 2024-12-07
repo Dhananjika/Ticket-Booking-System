@@ -1,0 +1,26 @@
+<div class="search-container">
+    <input type="text" class="search-box" placeholder="Search events..." [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchTermChange()" />
+</div>
+
+<div class="events-container">
+    <div class="event-card" *ngFor="let event of searchEventList">
+        <img [src]="event.eventImage" alt="event.eventName" class="event-image"/>
+        <div class="event-details">
+            <h3 class="event-name">{{ event.eventName }}</h3>
+            <p class ="event-data">
+                <b>{{event.eventType}} Genre</b>
+            </p>
+            <p class="event-data">
+                <img src="assets/icon/calendar.png" class="icon"/> {{ event.eventDate }} • {{ event.eventTime }}
+            </p>
+            <p class="event-data"><img src="assets/icon/location.png" class="icon" /> {{ event.eventLocation }}</p>
+            <p class="event-price">
+                {{ event.eventNormalTicketPrice }} LKR Upwards
+            </p>
+            <button class="btn btn-secondary">{{this.buttonName}}</button>
+        </div>
+    </div>
+</div>
+
+<app-configuration-setup *ngIf = "this.isConfigurationSet === 'N'"></app-configuration-setup>

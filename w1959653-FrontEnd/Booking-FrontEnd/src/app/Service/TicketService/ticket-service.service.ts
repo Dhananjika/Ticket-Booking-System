@@ -20,9 +20,9 @@ export class TicketServiceService {
   }
 
   //Set API full URL
-  setApi(url: string): string {
-    return `${this.BaseURL}${url}`;
-  }
+  // setApi(url: string): string {
+  //   return `${this.BaseURL}${url}`;
+  // }
 
   //Set Login username
   setUsername(username: string): void {
@@ -39,12 +39,12 @@ export class TicketServiceService {
   //Request Body - Post Request
   sendPostRequest(url: string, data: any): Observable<any> {
     const headers = { "Content-Type": "application/json" };
-    return this.http.post(url, data, { headers });
+    return this.http.post(`${this.BaseURL}${url}`, data, { headers });
   }
 
   //Parameters - Post Request
   sendPostRequestWithParams(url: string, params: HttpParams): Observable<any> {
-    return this.http.post(url, null, {
+    return this.http.post(`${this.BaseURL}${url}`, null, {
       params,
       responseType: "text" as "json",
     });
@@ -56,7 +56,7 @@ export class TicketServiceService {
     data: any,
     params: HttpParams,
   ): Observable<any> {
-    return this.http.post(url, data, {
+    return this.http.post(`${this.BaseURL}${url}`, data, {
       params,
       responseType: "text" as "json",
     });
@@ -64,6 +64,13 @@ export class TicketServiceService {
 
   //Without Body Or Parameters - Get Request
   sendGetRequestWithoutBodyOrParameters(url: string): Observable<any> {
-    return this.http.get(url);
+    return this.http.get(`${this.BaseURL}${url}`);
+  }
+
+  //Paramerters - Get Request
+  sendGetRequestWithParams(url: string, params: HttpParams): Observable<any> {
+    return this.http.get(`${this.BaseURL}${url}`, {
+      params: params,
+    });
   }
 }

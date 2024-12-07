@@ -22,12 +22,6 @@ export class NavbarComponent implements OnInit {
     this.env.username$.subscribe((username: string) => {
       this.username = username;
     });
-
-    if (this.authService.getUserRole() === "Vendor") {
-      this.routeLink = "/vendor-dashboard";
-    } else if (this.authService.getUserRole() === "Customer") {
-      this.routeLink = "/dashboard";
-    }
   }
 
   Logout(): void {

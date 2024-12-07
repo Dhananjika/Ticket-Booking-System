@@ -42,20 +42,21 @@ export class UserRegistrationComponent implements OnInit {
         .set("password", this.registerUser.password)
         .set("vendorID", this.registerUser.vendorID);
 
-      const url = this.env.setApi("login/vendorRegister");
+      const url = "login/vendorRegister";
 
       this.env.sendPostRequestWithParams(url, params).subscribe(
         (response) => {
           this.auth.setUserRole(this.registerUser.userType);
+          this.env.setUsername(this.registerUser.username);
           console.log("Response:", response);
-          this.route.navigate(["/vendor-dashboard"]);
+          this.route.navigate(["/dashboard"]);
         },
         (error) => {
           console.error("Error:", error);
         },
       );
     } else if (this.registerUser.userType == "Customer") {
-      const url = this.env.setApi("login/customerRegister");
+      const url = "login/customerRegister";
 
       const params = new HttpParams()
         .set("username", this.registerUser.username)
@@ -66,6 +67,7 @@ export class UserRegistrationComponent implements OnInit {
       this.env.sendPostRequestWithParams(url, params).subscribe(
         (response) => {
           this.auth.setUserRole(this.registerUser.userType);
+          this.env.setUsername(this.registerUser.username);
           console.log("Response:", response);
           this.route.navigate(["/dashboard"]);
         },

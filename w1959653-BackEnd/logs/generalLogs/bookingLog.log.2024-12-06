@@ -1,0 +1,117 @@
+2024-12-06 00:01:02.398  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:01:02.400  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:01:02.401  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:01:02.403  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:01:13.464  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:01:13.466  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:01:13.466  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:01:13.466  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:03:19.270  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:03:19.270  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:03:19.271  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:03:19.271  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:05:21.949  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:05:21.951  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:05:21.951  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:05:21.952  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:05:59.735  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:05:59.736  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:05:59.736  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:05:59.738  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:19.224  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-06 00:06:19.225  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=customer, password=customer, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-06 00:06:19.225  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-06 00:06:19.254  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-06 00:06:19.254  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-12-06 00:06:19.255  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:19.255  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:19.256  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:06:19.256  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:19.257  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:19.258  INFO   75 --- [CustomerLoginService] -- login : Successfully logged in as Customer
+2024-12-06 00:06:19.281  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:06:19.282  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=2, eventName=Christmas Concert, eventLocation=Bishops College Auditorium, eventType=Music, eventDate=24-12-2024, eventTime=22:00, eventNormalTicketPrice=2000, eventVIPTicketPrice=5000, eventImage=assets/event/2.jpg]
+2024-12-06 00:06:19.282  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=3, eventName=Dance On Sunset, eventLocation=University Of Moratuwa, eventType=Dance, eventDate=16-12-2024, eventTime=18:00, eventNormalTicketPrice=1250, eventVIPTicketPrice=2500, eventImage=assets/event/3.jpg]
+2024-12-06 00:06:19.282  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:06:19.282  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:19.283  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:35.191  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-06 00:06:35.192  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor, password=vendor, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-06 00:06:35.193  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-06 00:06:35.209  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:06:35.209  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:35.210  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:35.210  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-12-06 00:06:35.210  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-12-06 00:06:35.244  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-06 00:06:35.246  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-12-06 00:06:35.246  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:35.247  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:35.247  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:06:35.248  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:35.248  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 00:06:35.249  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-12-06 00:06:35.277  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 00:06:35.277  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 00:06:35.278  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 00:06:35.278  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:45:37.055  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-06 23:45:37.067  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=vendor, password=vendor, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-06 23:45:37.067  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-06 23:45:37.089  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:45:37.090  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:45:37.091  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:45:37.091  WARN   78 --- [CustomerLoginService] -- login : Invalid username or password
+2024-12-06 23:45:37.091  INFO   72 --- [VendorLoginService] -- login : Method called
+2024-12-06 23:45:37.109  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-06 23:45:37.109  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-12-06 23:45:37.109  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:45:37.110  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:45:37.110  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:45:37.110  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:45:37.110  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:45:37.111  INFO   74 --- [VendorLoginService] -- login : Successfully logged in as Vendor
+2024-12-06 23:45:37.190  INFO   80 --- [EventRepository] -- getVendorEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 23:45:37.191  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:45:37.192  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:45:37.194  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:46:03.092  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-06 23:46:03.094  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=customer, password=customer, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-06 23:46:03.094  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-06 23:46:03.120  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-06 23:46:03.120  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-12-06 23:46:03.121  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:46:03.122  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:46:03.122  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:46:03.123  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:46:03.124  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:46:03.124  INFO   75 --- [CustomerLoginService] -- login : Successfully logged in as Customer
+2024-12-06 23:46:03.154  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 23:46:03.155  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=2, eventName=Christmas Concert, eventLocation=Bishops College Auditorium, eventType=Music, eventDate=24-12-2024, eventTime=22:00, eventNormalTicketPrice=2000, eventVIPTicketPrice=5000, eventImage=assets/event/2.jpg]
+2024-12-06 23:46:03.155  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=3, eventName=Dance On Sunset, eventLocation=University Of Moratuwa, eventType=Dance, eventDate=16-12-2024, eventTime=18:00, eventNormalTicketPrice=1250, eventVIPTicketPrice=2500, eventImage=assets/event/3.jpg]
+2024-12-06 23:46:03.156  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:46:03.156  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:46:03.158  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:46:37.970  INFO   98 --- [LoginController] -- userLogin : Method called
+2024-12-06 23:46:37.971  INFO   101 --- [LoginController] -- userLogin : UserLoginModule [username=customer, password=customer, userType=null, vendorID=null, customerName=null, customerEmail=null]
+2024-12-06 23:46:37.971  INFO   73 --- [CustomerLoginService] -- login : Method called
+2024-12-06 23:46:38.001  INFO   140 --- [ConnectionManager] -- commit : Commit success
+2024-12-06 23:46:38.001  INFO   236 --- [LoginRepository] -- updateLoginStatus : You have successfully updated the login status to A
+2024-12-06 23:46:38.001  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:46:38.002  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:46:38.002  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:46:38.003  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:46:38.003  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:46:38.003  INFO   75 --- [CustomerLoginService] -- login : Successfully logged in as Customer
+2024-12-06 23:46:38.035  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 23:46:38.036  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=2, eventName=Christmas Concert, eventLocation=Bishops College Auditorium, eventType=Music, eventDate=24-12-2024, eventTime=22:00, eventNormalTicketPrice=2000, eventVIPTicketPrice=5000, eventImage=assets/event/2.jpg]
+2024-12-06 23:46:38.036  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=3, eventName=Dance On Sunset, eventLocation=University Of Moratuwa, eventType=Dance, eventDate=16-12-2024, eventTime=18:00, eventNormalTicketPrice=1250, eventVIPTicketPrice=2500, eventImage=assets/event/3.jpg]
+2024-12-06 23:46:38.036  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:46:38.036  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:46:38.038  INFO   64 --- [ConnectionManager] -- close : Connection close success
+2024-12-06 23:51:12.756  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=1, eventName=Music Plaza, eventLocation=Lotus Tower Car Park Colombo, eventType=Music, eventDate=20-12-2024, eventTime=19:00, eventNormalTicketPrice=1500, eventVIPTicketPrice=3000, eventImage=assets/event/1.jpg]
+2024-12-06 23:51:12.758  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=2, eventName=Christmas Concert, eventLocation=Bishops College Auditorium, eventType=Music, eventDate=24-12-2024, eventTime=22:00, eventNormalTicketPrice=2000, eventVIPTicketPrice=5000, eventImage=assets/event/2.jpg]
+2024-12-06 23:51:12.758  INFO   41 --- [EventRepository] -- getEvents : EventModule [eventId=3, eventName=Dance On Sunset, eventLocation=University Of Moratuwa, eventType=Dance, eventDate=16-12-2024, eventTime=18:00, eventNormalTicketPrice=1250, eventVIPTicketPrice=2500, eventImage=assets/event/3.jpg]
+2024-12-06 23:51:12.758  INFO   102 --- [ConnectionManager] -- close : ResultSet close success
+2024-12-06 23:51:12.758  INFO   83 --- [ConnectionManager] -- close : PreparedStatement close success
+2024-12-06 23:51:12.759  INFO   64 --- [ConnectionManager] -- close : Connection close success

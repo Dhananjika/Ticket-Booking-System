@@ -18,7 +18,7 @@
             </div>
 
             <!-- Customer Fields (Rendered when Vendor is selected) -->
-            <div *ngIf="registerUser.userType === 'vendor'">
+            <div *ngIf="registerUser.userType === 'Vendor'">
               <div class="form-group text-start">
                 <label class="form-label" for="vendorId">Vendor ID<label style="color:rgb(253, 118, 118);">*</label></label>
                 <input type="text" class="form-control" [(ngModel)]="registerUser.vendorID" id="vendorId" name="userType" placeholder="Enter Your Vendor ID" required>
@@ -26,7 +26,7 @@
             </div>
 
             <!-- Vendor Fields (Rendered when Customer is selected) -->
-            <div *ngIf="registerUser.userType === 'customer'">
+            <div *ngIf="registerUser.userType === 'Customer'">
               <div class="row">
                 <div class="col">
                   <label class="form-label" for="name">Name<label style="color:rgb(253, 118, 118);">*</label></label>
@@ -41,14 +41,14 @@
             </div>
 
             <div class="middle_class"></div>
-            <div *ngIf="registerUser.userType === 'customer' || registerUser.userType === 'vendor'">
+            <div *ngIf="registerUser.userType === 'Customer' || registerUser.userType === 'Vendor'">
               <div class="row">
                 <div class="col">
                   <div class="row">
                     <div class="col-sm-3">
                       <label class="form-label" for="username" >Username<label style="color:rgb(253, 118, 118);">*</label></label>
                     </div>
-                    <div *ngIf="registerUser.userType === 'customer'">
+                    <div *ngIf="registerUser.userType === 'Customer'">
                       <input class="form-check-input" type="checkbox" id="gridCheck" [(ngModel)]="useEmail" (change)="changeUserName()" />
                       <label class="form-check-label" for="gridCheck">Keep email as username</label>
                     </div>
