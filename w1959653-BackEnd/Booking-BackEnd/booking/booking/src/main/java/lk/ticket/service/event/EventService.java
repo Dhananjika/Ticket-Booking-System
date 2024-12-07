@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface EventService {
     List<EventModule> getEvents();
+    List<EventModule> getVendorEvents(String userName);
 }

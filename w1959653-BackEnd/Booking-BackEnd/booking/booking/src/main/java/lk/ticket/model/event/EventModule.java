@@ -9,11 +9,12 @@ public class EventModule {
     private String eventTime;
     private int eventNormalTicketPrice;
     private int eventVIPTicketPrice;
+    private String eventImage;
 
     public EventModule() {}
 
     public String toString(){
-        return "EventModule [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation + ", eventType=" + eventType + ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", eventNormalTicketPrice=" + eventNormalTicketPrice + ", eventVIPTicketPrice=" + eventVIPTicketPrice + "]";
+        return "EventModule [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation + ", eventType=" + eventType + ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", eventNormalTicketPrice=" + eventNormalTicketPrice + ", eventVIPTicketPrice=" + eventVIPTicketPrice + ", eventImage=" + eventImage + "]";
     }
 
     public int getEventId() {
@@ -78,5 +79,13 @@ public class EventModule {
 
     public void setEventVIPTicketPrice(int eventVIPTicketPrice) {
         this.eventVIPTicketPrice = eventVIPTicketPrice;
+    }
+
+    public String getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(String eventImage) {
+        this.eventImage = eventImage;
     }
 }

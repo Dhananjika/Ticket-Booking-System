@@ -37,6 +37,8 @@ public class EventRepository {
                     eventModule.setEventDate(resultSet.getString("event_date"));
                     eventModule.setEventNormalTicketPrice(resultSet.getInt("event_normal_ticket_price"));
                     eventModule.setEventVIPTicketPrice(resultSet.getInt("event_vip_ticket_price"));
+                    eventModule.setEventImage("assets/event/" + resultSet.getString("event_image") + ".jpg");
+                    logger.info(eventModule);
                     events.add(eventModule);
                 }
             }
@@ -48,5 +50,44 @@ public class EventRepository {
             ConnectionManager.close(connection);
         }
         return events;
+    }
+
+    public List<EventModule> getVendorEvents(String userName) {
+        List<EventModule> eventsForVendor = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionManager.getConnection();
+            if (connection != null) {
+                String sql = "select * from event inner join vendor on event.event_id = vendor.event_id inner join register on vendor.vendor_id = register.vendor_id where username = ?";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, userName);
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    EventModule eventModule = new EventModule();
+                    eventModule.setEventId(resultSet.getInt("event_id"));
+                    eventModule.setEventName(resultSet.getString("event_name"));
+                    eventModule.setEventType(resultSet.getString("event_type"));
+                    eventModule.setEventLocation(resultSet.getString("location"));
+                    eventModule.setEventTime(resultSet.getString("event_time"));
+                    eventModule.setEventDate(resultSet.getString("event_date"));
+                    eventModule.setEventNormalTicketPrice(resultSet.getInt("event_normal_ticket_price"));
+                    eventModule.setEventVIPTicketPrice(resultSet.getInt("event_vip_ticket_price"));
+                    eventModule.setEventImage("assets/event/" + resultSet.getString("event_image") + ".jpg");
+                    logger.info(eventModule);
+                    eventsForVendor.add(eventModule);
+                }
+            }
+        }catch (Exception e){
+            logger.error("An error occurred while retrieving events for vendor "+ e.getMessage());
+        }finally {
+            ConnectionManager.close(resultSet);
+            ConnectionManager.close(preparedStatement);
+            ConnectionManager.close(connection);
+        }
+        return eventsForVendor;
     }
 }

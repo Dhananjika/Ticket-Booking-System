@@ -3,10 +3,7 @@ package lk.ticket.controller.event;
 import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.event.EventModule;
 import lk.ticket.service.event.EventService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +30,11 @@ public class EventController {
     @Operation(summary = "Event", description = "Get all details of all events.")
     public List<EventModule> getEvents(){
         return eventService.getEvents();
+    }
+
+    @GetMapping("/getVendorEvents")
+    @Operation(summary = "Vendor Event", description = "Get all details of all events.")
+    public List<EventModule> getEventsForVendor(@RequestParam String username){
+        return eventService.getVendorEvents(username);
     }
 }

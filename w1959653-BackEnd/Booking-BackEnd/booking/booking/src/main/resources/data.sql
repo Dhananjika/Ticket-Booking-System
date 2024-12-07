@@ -1,7 +1,15 @@
 -- Event table
-INSERT INTO ticket.event (event_id, event_name, event_type, location, event_date, event_time,event_normal_ticket_price, event_vip_ticket_price)
-SELECT 1, 'Music Plaza', 'Music', 'London', '20-12-2024', '19:00', 1500, 3000
+INSERT INTO ticket.event (event_id, event_name, event_type, location, event_date, event_time,event_normal_ticket_price, event_vip_ticket_price, event_image)
+SELECT 1, 'Music Plaza', 'Music', 'Lotus Tower Car Park Colombo', '20-12-2024', '19:00', 1500, 3000, "1"
     WHERE NOT EXISTS (SELECT 1 FROM ticket.event WHERE event_id = 1);
+
+INSERT INTO ticket.event (event_id, event_name, event_type, location, event_date, event_time,event_normal_ticket_price, event_vip_ticket_price, event_image)
+SELECT 2, 'Christmas Concert', 'Music', 'Bishops College Auditorium', '24-12-2024', '22:00', 2000, 5000, "2"
+    WHERE NOT EXISTS (SELECT 1 FROM ticket.event WHERE event_id = 2);
+
+INSERT INTO ticket.event (event_id, event_name, event_type, location, event_date, event_time,event_normal_ticket_price, event_vip_ticket_price, event_image)
+SELECT 3, 'Dance On Sunset', 'Dance', 'University Of Moratuwa', '16-12-2024', '18:00', 1250, 2500, "3"
+    WHERE NOT EXISTS (SELECT 1 FROM ticket.event WHERE event_id = 3);
 
 -- Vendor table
 INSERT INTO ticket.vendor (vendor_id, vendor_name, email, event_id)
