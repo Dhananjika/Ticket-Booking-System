@@ -13,4 +13,5 @@ public interface ConfigurationService {
     String submitConfiguration(ConfigurationModule configuration, int event_id);
     String saveJsonFile(ConfigurationModule configuration);
     ConfigurationModule readJsonFile();
+    boolean configurationExists(int id);
 }

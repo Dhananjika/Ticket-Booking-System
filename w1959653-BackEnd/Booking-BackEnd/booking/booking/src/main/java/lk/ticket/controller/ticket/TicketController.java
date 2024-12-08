@@ -3,7 +3,7 @@ package lk.ticket.controller.ticket;
 import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.login.UserModule;
 import lk.ticket.service.configuration.ConfigurationServiceImp;
-import lk.ticket.service.ticketPool.TicketPoolServiceImp;
+import lk.ticket.service.ticketPool.TicketPoolService;
 import lk.ticket.service.userThread.CustomerService;
 import lk.ticket.service.userThread.VendorService;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping("/ticketController")
 public class TicketController {
     private static final Logger logger = Logger.getLogger(TicketController.class);
-    private final TicketPoolServiceImp ticketPoolService;
+    private final TicketPoolService ticketPoolService;
     private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
@@ -38,7 +38,7 @@ public class TicketController {
     private UserModule userModule;
 
     @Autowired
-    public TicketController(TicketPoolServiceImp ticketPoolService, SimpMessagingTemplate messagingTemplate) {
+    public TicketController(TicketPoolService ticketPoolService, SimpMessagingTemplate messagingTemplate) {
         this.ticketPoolService = ticketPoolService;
         this.messagingTemplate = messagingTemplate;
     }

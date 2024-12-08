@@ -9,6 +9,7 @@ import lk.ticket.repository.configuration.SystemControlRepository;
 import lk.ticket.util.PropertyReader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -188,5 +189,10 @@ public class ConfigurationServiceImp implements ConfigurationService {
         }finally {
             lock.unlock();
         }
+    }
+
+    @Override
+    public boolean configurationExists(int id) {
+        return systemControlRepository.configurationExists(id);
     }
 }

@@ -2,6 +2,7 @@ package lk.ticket.service.systemControl;
 
 import lk.ticket.model.systemControl.SystemControlModule;
 import lk.ticket.repository.configuration.SystemControlRepository;
+import lk.ticket.service.ticketPool.TicketPoolService;
 import lk.ticket.service.ticketPool.TicketPoolServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,13 @@ public class SystemControlServiceImp implements SystemControlService {
     private SystemControlRepository systemControlRepository;
 
     @Override
-    public String startSystem(SystemControlModule systemControlModule, int id, TicketPoolServiceImp ticketPoolServiceImp) {
+    public String startSystem(SystemControlModule systemControlModule, int id, TicketPoolService ticketPoolService) {
         SystemControlModule systemControlModuleExist = systemControlRepository.getSystemConfiguration(id);
         if(systemControlModuleExist.getSystemStatus().equals("I")){
             systemControlModule.setSystemStoppedReleasedTicketCount(systemControlModuleExist.getSystemStoppedReleasedTicketCount());
             systemControlModule.setSystemStoppedPoolSize(systemControlModuleExist.getSystemStoppedPoolSize());
 
-            ticketPoolServiceImp.resumeTicketPool(systemControlModuleExist.getSystemStoppedReleasedTicketCount(), systemControlModuleExist.getSystemStoppedPoolSize());
+            ticketPoolService.resumeTicketPool(systemControlModuleExist.getSystemStoppedReleasedTicketCount(), systemControlModuleExist.getSystemStoppedPoolSize());
             String message = systemControlRepository.addConfiguration(systemControlModule, id);
             if (message != null) {
                 return "System Started";
@@ -45,4 +46,11 @@ public class SystemControlServiceImp implements SystemControlService {
             return "System Already Stopped";
         }
     }
+
+    @Override
+    public SystemControlModule getSystemStatus(int id) {
+        return systemControlRepository.getSystemConfiguration(id);
+    }
+
+
 }

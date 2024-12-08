@@ -2,6 +2,7 @@ package lk.ticket.service.userThread;
 
 import lk.ticket.model.systemControl.SystemControlModule;
 import lk.ticket.repository.configuration.SystemControlRepository;
+import lk.ticket.service.ticketPool.TicketPoolService;
 import lk.ticket.service.ticketPool.TicketPoolServiceImp;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class CustomerService implements Runnable{
     private static final Logger logger = Logger.getLogger(CustomerService.class);
-    private final TicketPoolServiceImp ticketPoolServiceImp;
+    private final TicketPoolService ticketPoolService;
     private final SystemControlRepository systemControlRepository;
     private String returnMessage;
     private boolean purchaseTicket;
     private int ticketCount;
     private final int id;
 
-    public CustomerService(TicketPoolServiceImp ticketPoolServiceImp, int id) {
-        this.ticketPoolServiceImp = ticketPoolServiceImp;
+    public CustomerService(TicketPoolService ticketPoolService, int id) {
+        this.ticketPoolService = ticketPoolService;
         this.id = id;
         this.systemControlRepository = new SystemControlRepository();
     }
@@ -43,7 +44,7 @@ public class CustomerService implements Runnable{
         SystemControlModule systemControlModuleExist = systemControlRepository.getSystemConfiguration(id);
         logger.info(systemControlModuleExist);
         if (systemControlModuleExist.getSystemStatus().equals("A")) {
-            returnMessage = ticketPoolServiceImp.removeTicket(ticketCount, purchaseTicket,Thread.currentThread().getName());
+            returnMessage = ticketPoolService.removeTicket(ticketCount, purchaseTicket,Thread.currentThread().getName());
         }else{
             returnMessage = "System is not started";
         }

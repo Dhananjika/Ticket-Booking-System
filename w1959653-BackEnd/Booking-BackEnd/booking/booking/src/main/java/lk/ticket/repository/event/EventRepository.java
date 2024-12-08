@@ -19,33 +19,45 @@ public class EventRepository {
         List<EventModule> events = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement2 = null;
         ResultSet resultSet = null;
-
+        ResultSet resultSet2 = null;
         try {
             connection = ConnectionManager.getConnection();
             if (connection != null) {
                 String sql = "select * from event";
+                String activeEventSql = "SELECT system_status FROM ticket.configuration WHERE event_id=?;";
                 preparedStatement = connection.prepareStatement(sql);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    EventModule eventModule = new EventModule();
-                    eventModule.setEventId(resultSet.getInt("event_id"));
-                    eventModule.setEventName(resultSet.getString("event_name"));
-                    eventModule.setEventType(resultSet.getString("event_type"));
-                    eventModule.setEventLocation(resultSet.getString("location"));
-                    eventModule.setEventTime(resultSet.getString("event_time"));
-                    eventModule.setEventDate(resultSet.getString("event_date"));
-                    eventModule.setEventNormalTicketPrice(resultSet.getInt("event_normal_ticket_price"));
-                    eventModule.setEventVIPTicketPrice(resultSet.getInt("event_vip_ticket_price"));
-                    eventModule.setEventImage("assets/event/" + resultSet.getString("event_image") + ".jpg");
-                    logger.info(eventModule);
-                    events.add(eventModule);
+                    preparedStatement2 = connection.prepareStatement(activeEventSql);
+                    preparedStatement2.setInt(1, resultSet.getInt("event_id"));
+                    resultSet2 = preparedStatement2.executeQuery();
+
+                    while (resultSet2.next()) {
+                        if (resultSet2.getString("system_status").equals("A")) {
+                            EventModule eventModule = new EventModule();
+                            eventModule.setEventId(resultSet.getInt("event_id"));
+                            eventModule.setEventName(resultSet.getString("event_name"));
+                            eventModule.setEventType(resultSet.getString("event_type"));
+                            eventModule.setEventLocation(resultSet.getString("location"));
+                            eventModule.setEventTime(resultSet.getString("event_time"));
+                            eventModule.setEventDate(resultSet.getString("event_date"));
+                            eventModule.setEventNormalTicketPrice(resultSet.getInt("event_normal_ticket_price"));
+                            eventModule.setEventVIPTicketPrice(resultSet.getInt("event_vip_ticket_price"));
+                            eventModule.setEventImage("assets/event/" + resultSet.getString("event_image") + ".jpg");
+                            logger.info(eventModule);
+                            events.add(eventModule);
+                        }
+                    }
                 }
             }
         }catch (Exception e){
             logger.error("An error occurred while retrieving events "+ e.getMessage());
         }finally {
+            ConnectionManager.close(resultSet2);
             ConnectionManager.close(resultSet);
+            ConnectionManager.close(preparedStatement2);
             ConnectionManager.close(preparedStatement);
             ConnectionManager.close(connection);
         }

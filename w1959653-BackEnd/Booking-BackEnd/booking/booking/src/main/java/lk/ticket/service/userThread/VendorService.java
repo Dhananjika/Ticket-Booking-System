@@ -2,9 +2,8 @@ package lk.ticket.service.userThread;
 
 import lk.ticket.model.systemControl.SystemControlModule;
 import lk.ticket.repository.configuration.SystemControlRepository;
-import lk.ticket.service.ticketPool.TicketPoolServiceImp;
+import lk.ticket.service.ticketPool.TicketPoolService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * VendorService class implemented by Runnable interface
@@ -15,14 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class VendorService implements Runnable {
     private static final Logger logger = Logger.getLogger(VendorService.class);
-    private final TicketPoolServiceImp ticketPoolServiceImp;
+    private final TicketPoolService ticketPoolService;
     private final SystemControlRepository systemControlRepository;
     private String returnMessage;
     private boolean addTickets;
     private final int id;
 
-    public VendorService(TicketPoolServiceImp ticketPoolServiceImp, int id) {
-        this.ticketPoolServiceImp = ticketPoolServiceImp;
+    public VendorService(TicketPoolService ticketPoolService, int id) {
+        this.ticketPoolService = ticketPoolService;
         this.id = id;
         this.systemControlRepository = new SystemControlRepository();
     }
@@ -40,7 +39,7 @@ public class VendorService implements Runnable {
         SystemControlModule systemControlModuleExist = systemControlRepository.getSystemConfiguration(id);
         logger.info(systemControlModuleExist);
         if ((systemControlModuleExist.getSystemStatus().equals("A"))){
-            returnMessage = ticketPoolServiceImp.addTicket(addTickets,Thread.currentThread().getName());
+            returnMessage = ticketPoolService.addTicket(addTickets,Thread.currentThread().getName());
         }else{
             returnMessage = "System is not started";
         }

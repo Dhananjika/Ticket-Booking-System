@@ -4,13 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import lk.ticket.model.login.UserModule;
 import lk.ticket.model.systemControl.SystemControlModule;
 import lk.ticket.service.systemControl.SystemControlService;
-import lk.ticket.service.ticketPool.TicketPoolServiceImp;
+import lk.ticket.service.ticketPool.TicketPoolService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * This Controller class handles incoming HTTP requests of system control and directs them
@@ -30,7 +27,7 @@ public class SystemController {
     private final SystemControlService systemControlService;
 
     @Autowired
-    private TicketPoolServiceImp ticketPoolServiceImp;
+    private TicketPoolService ticketPoolService;
 
     @Autowired
     private UserModule userModule;
@@ -42,23 +39,29 @@ public class SystemController {
 
     @PostMapping("/startSystem")
     @Operation(summary = "Start System", description = "Start the system ticketing control.")
-    public String startSystem() {
+    public String startSystem(@RequestParam int eventID) {
         logger.info("Method called");
 
         systemControlModule.setConfigurationStatus("A");
         systemControlModule.setSystemStatus("A");
-        return systemControlService.startSystem(systemControlModule, userModule.getEventID(), ticketPoolServiceImp);
+        return systemControlService.startSystem(systemControlModule, eventID, ticketPoolService);
     }
 
     @PostMapping("/stopSystem")
     @Operation(summary = "Stop System", description = "Stop the system ticketing control.")
-    public String stopSystem() {
+    public String stopSystem(@RequestParam int eventID) {
         logger.info("Method called");
 
         systemControlModule.setConfigurationStatus("A");
         systemControlModule.setSystemStatus("I");
-        systemControlModule.setSystemStoppedReleasedTicketCount(ticketPoolServiceImp.getReleasedTicketCount());
-        systemControlModule.setSystemStoppedPoolSize(ticketPoolServiceImp.getAvailableTicketsCount());
-        return systemControlService.stopSystem(systemControlModule, userModule.getEventID());
+        systemControlModule.setSystemStoppedReleasedTicketCount(ticketPoolService.getReleasedTicketCount());
+        systemControlModule.setSystemStoppedPoolSize(ticketPoolService.getAvailableTicketsCount());
+        return systemControlService.stopSystem(systemControlModule, eventID);
+    }
+
+    @GetMapping("/systemStatus")
+    public SystemControlModule getSystemStatus(int eventID){
+        logger.info("Method called");
+        return systemControlService.getSystemStatus(eventID);
     }
 }

@@ -12,13 +12,14 @@ public class ConfigurationModule {
     private int maxTicketCapacity;
     private int ticketReleaseRate;
     private int customerRetrievalRate;
+    private int eventId;
 
     /**
      *  This method is used to display the Configuration variable values
      * */
     @Override
     public String toString() {
-        return "Configuration[Total Number of Tickets - " + totalTickets + ", Ticket Release Rate - " + ticketReleaseRate + ", Customer Retrieval Rate - " + customerRetrievalRate + ", Maximum Ticket Capacity - " + maxTicketCapacity + "]" ;
+        return "Configuration[Total Number of Tickets - " + totalTickets + ", Ticket Release Rate - " + ticketReleaseRate + ", Customer Retrieval Rate - " + customerRetrievalRate + ", Maximum Ticket Capacity - " + maxTicketCapacity + ", Event ID - " + eventId + "]";
     }
 
     //Getters & Setters
@@ -52,5 +53,13 @@ public class ConfigurationModule {
 
     public void setMaxTicketCapacity(int maxTicketCapacity) {
         this.maxTicketCapacity = maxTicketCapacity;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 }
