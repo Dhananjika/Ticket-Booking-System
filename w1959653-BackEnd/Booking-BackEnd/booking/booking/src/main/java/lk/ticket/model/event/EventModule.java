@@ -10,11 +10,13 @@ public class EventModule {
     private int eventNormalTicketPrice;
     private int eventVIPTicketPrice;
     private String eventImage;
+    private String systemStatus;
+    private String configurationStatus;
 
     public EventModule() {}
 
     public String toString(){
-        return "EventModule [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation + ", eventType=" + eventType + ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", eventNormalTicketPrice=" + eventNormalTicketPrice + ", eventVIPTicketPrice=" + eventVIPTicketPrice + ", eventImage=" + eventImage + "]";
+        return "EventModule [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation + ", eventType=" + eventType + ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", eventNormalTicketPrice=" + eventNormalTicketPrice + ", eventVIPTicketPrice=" + eventVIPTicketPrice + ", eventImage=" + eventImage + ", System Status=" + systemStatus +", Configuration status="+ configurationStatus +"]";
     }
 
     public int getEventId() {
@@ -87,5 +89,21 @@ public class EventModule {
 
     public void setEventImage(String eventImage) {
         this.eventImage = eventImage;
+    }
+
+    public String getSystemStatus() {
+        return systemStatus;
+    }
+
+    public void setSystemStatus(String systemStatus) {
+        this.systemStatus = systemStatus;
+    }
+
+    public String getConfigurationStatus() {
+        return configurationStatus;
+    }
+
+    public void setConfigurationStatus(String configurationStatus) {
+        this.configurationStatus = configurationStatus;
     }
 }

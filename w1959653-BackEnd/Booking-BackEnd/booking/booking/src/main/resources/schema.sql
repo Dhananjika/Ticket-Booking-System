@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS event (
 );
 
 CREATE TABLE IF NOT EXISTS vendor (
-    vendor_id VARCHAR(255) PRIMARY KEY,
+    vendor_id VARCHAR(255) NOT NULL,
     vendor_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     event_id INT NOT NULL,
@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS register (
     signup_date  VARCHAR(15) NOT NULL,
     customer_name VARCHAR(255) ,
     customer_email VARCHAR(255) ,
-    login_status VARCHAR(1) NOT NULL,
-    FOREIGN KEY (vendor_id) REFERENCES vendor(vendor_id)
+    login_status VARCHAR(1) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS configuration (

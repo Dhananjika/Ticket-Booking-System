@@ -73,7 +73,7 @@ public class EventRepository {
         try {
             connection = ConnectionManager.getConnection();
             if (connection != null) {
-                String sql = "select * from event inner join vendor on event.event_id = vendor.event_id inner join register on vendor.vendor_id = register.vendor_id where username = ?";
+                String sql = "select * from event inner join vendor on event.event_id = vendor.event_id inner join register on vendor.vendor_id = register.vendor_id inner join configuration on event.event_id = configuration.event_id where username = ?";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, userName);
                 resultSet = preparedStatement.executeQuery();
@@ -89,6 +89,8 @@ public class EventRepository {
                     eventModule.setEventNormalTicketPrice(resultSet.getInt("event_normal_ticket_price"));
                     eventModule.setEventVIPTicketPrice(resultSet.getInt("event_vip_ticket_price"));
                     eventModule.setEventImage("assets/event/" + resultSet.getString("event_image") + ".jpg");
+                    eventModule.setSystemStatus(resultSet.getString("system_status"));
+                    eventModule.setConfigurationStatus(resultSet.getString("config_status"));
                     logger.info(eventModule);
                     eventsForVendor.add(eventModule);
                 }
