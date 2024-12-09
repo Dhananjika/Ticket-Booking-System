@@ -3,13 +3,14 @@
         (ngModelChange)="onSearchTermChange()" />
 </div>
 
+<p *ngIf="searchEventList.length === 0">Event Ticket Releasing Not Started.</p>
 <div class="events-container">
     <div class="event-card" *ngFor="let event of searchEventList">
         <img [src]="event.eventImage" alt="event.eventName" class="event-image"/>
         <div class="event-details">
             <h3 class="event-name">{{ event.eventName }}</h3>
             <p class ="event-data">
-                <b>{{event.eventType}} Genre</b>
+                <b>Available Ticket Count - {{ availableTickets }}</b>
             </p>
             <p class="event-data">
                 <img src="assets/icon/calendar.png" class="icon"/> {{ event.eventDate }} • {{ event.eventTime }}
@@ -18,9 +19,29 @@
             <p class="event-price">
                 {{ event.eventNormalTicketPrice }} LKR Upwards
             </p>
-            <button class="btn btn-secondary">{{this.buttonName}}</button>
+            <button class="btn btn-secondary" (click)="addTickets(event)" *ngIf="(event.configurationStatus) === 'A'">Add Configurations</button>
+            <button class="btn btn-secondary" (click)="StartEvent(event)" *ngIf = "(event.systemStatus) === 'I'">Start System</button>
+            <button class="btn btn-secondary" (click)="addTickets(event)" *ngIf = "(event.systemStatus) === 'A'">Add Tickets</button>
+            <button class="btn btn-secondary" (click)="buyTickets(event)" *ngIf = "this.authService.getUserRole() === 'Customer'">Buy Tickets</button>
+            <button class="btn btn-danger" (click)="stopEvent(event)" *ngIf = "(event.systemStatus) === 'A'">Stop System</button>
         </div>
     </div>
 </div>
 
-<app-configuration-setup *ngIf = "this.isConfigurationSet === 'N'"></app-configuration-setup>
+<!-- Modal -->
+<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
+    <div class="modal-dialog" role="document" style="max-width: 800px; width: 80%; height: 500px;">
+        <div class="modal-content" style="height: 100%;background-color: rgba(0, 0, 0, 0.8); color: white;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="configModalLabel">System Initialization</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-configuration-setup [eventId]="passingValue"></app-configuration-setup>
+            </div>
+        </div>
+    </div>
+</div>

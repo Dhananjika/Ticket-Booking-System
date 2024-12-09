@@ -1,9 +1,12 @@
 import { HttpParams } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Key } from "protractor";
 import { EventModule } from "src/app/module/event/event-module";
 import { AuthService } from "src/app/Service/AuthService/auth-service.service";
 import { TicketServiceService } from "src/app/Service/TicketService/ticket-service.service";
+
+declare var $: any;
 
 @Component({
   selector: "app-dashboard",
@@ -12,26 +15,22 @@ import { TicketServiceService } from "src/app/Service/TicketService/ticket-servi
 })
 export class DashboardComponent implements OnInit {
   eventList: EventModule[] = [];
-  buttonName: string;
   username: string;
   searchEventList: EventModule[] = [];
   searchTerm: string;
-  isConfigurationSet: string;
+  passingValue: any;
 
   constructor(
     private env: TicketServiceService,
     private route: Router,
     private authService: AuthService,
   ) {
-    this.buttonName = null;
     this.username = null;
     this.searchTerm = null;
-    this.isConfigurationSet = "N";
   }
 
   ngOnInit() {
     if (this.authService.getUserRole() === "Vendor") {
-      this.buttonName = "Add Tickets";
       const url = "event/getVendorEvents";
       this.env.username$.subscribe((username: string) => {
         this.username = username;
@@ -39,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
       const params = new HttpParams().set("username", this.username);
 
-      this.env.sendGetRequestWithParams(url, params).subscribe(
+      this.env.sendGetRequestWithParamsForArray(url, params).subscribe(
         (response) => {
           this.eventList = response;
           this.searchEventList = [...this.eventList];
@@ -49,7 +48,6 @@ export class DashboardComponent implements OnInit {
         },
       );
     } else if (this.authService.getUserRole() === "Customer") {
-      this.buttonName = "Buy Tickets";
       const url = "event/getEvents";
       this.env.sendGetRequestWithoutBodyOrParameters(url).subscribe(
         (response) => {
@@ -65,14 +63,18 @@ export class DashboardComponent implements OnInit {
     console.log(this.eventList);
   }
 
-  onSearchTermChange() {
-    this.searchEventList = this.eventList.filter(
-      (event) =>
-        event.eventName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.eventLocation
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase()) ||
-        event.eventType.toLowerCase().includes(this.searchTerm.toLowerCase()),
-    );
+  addTickets(eventModule: EventModule) {
+    if (eventModule.configurationStatus === "I") {
+      const modal = document.getElementById("configModal");
+      if (modal) {
+        this.passingValue = { key: eventModule.eventId };
+        $(modal).modal("show");
+      }
+    }
+  }
+
+  submitConfiguration() {
+    console.log("Configuration submitted:");
+    $("#addTicketsModal").modal("hide"); // Close modal after submission
   }
 }

@@ -67,10 +67,21 @@ export class TicketServiceService {
     return this.http.get(`${this.BaseURL}${url}`);
   }
 
-  //Paramerters - Get Request
+  //Paramerters For Array - Get Request
+  sendGetRequestWithParamsForArray(
+    url: string,
+    params: HttpParams,
+  ): Observable<any> {
+    return this.http.get(`${this.BaseURL}${url}`, {
+      params: params,
+    });
+  }
+
+  //Paramerters For Array - Get Request
   sendGetRequestWithParams(url: string, params: HttpParams): Observable<any> {
     return this.http.get(`${this.BaseURL}${url}`, {
       params: params,
+      responseType: "text" as "json",
     });
   }
 }

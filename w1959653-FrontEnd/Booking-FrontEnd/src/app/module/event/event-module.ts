@@ -10,6 +10,10 @@ export class EventModule {
   eventNormalTicketPrice: number;
   eventVIPTicketPrice: number;
   eventImage: string;
+  buttonName: string;
+  systemStatus: string;
+  configurationStatus: string;
+  availableTickets: number;
 
   constructor() {
     this.eventId = 0;
@@ -21,5 +25,7 @@ export class EventModule {
     this.eventNormalTicketPrice = 0;
     this.eventVIPTicketPrice = 0;
     this.eventImage = null;
+    this.buttonName = null;
+    this.availableTickets = 0;
   }
 }

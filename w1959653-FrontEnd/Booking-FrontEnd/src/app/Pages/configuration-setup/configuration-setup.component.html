@@ -1,3 +1,24 @@
-<p>
-  configuration-setup works!
-</p>
+<form>
+  <div class="form-group">
+    <label for="totalTicket">Total Number of Tickets</label>
+    <input type="number" class="form-control custom-input" id="totalTicket"
+      placeholder="Enter Total Number of Tickets" />
+  </div>
+  <div class="form-group">
+    <label for="maxCapacity">Maximum Ticket Capacity</label>
+    <input type="number" class="form-control custom-input" id="maxCapacity"
+      placeholder="Enter Maximum Ticket Capacity" />
+  </div>
+  <div class="form-group">
+    <label for="releaseRate">Ticket Release Rate</label>
+    <input type="number" class="form-control custom-input" id="releaseRate" placeholder="Enter Ticket Release Rate" />
+  </div>
+  <div class="form-group">
+    <label for="purchaseRate">Customer Retrieval Rate</label>
+    <input type="number" class="form-control custom-input" id="purchaseRate"
+      placeholder="Enter Customer Retrieval Rate" />
+  </div>
+  <div class="text-center mt-4">
+    <button class="btn btn-outline-secondary btn-lg btn-block" type="button" (click)="submitForm()">Register</button>
+  </div>
+</form>

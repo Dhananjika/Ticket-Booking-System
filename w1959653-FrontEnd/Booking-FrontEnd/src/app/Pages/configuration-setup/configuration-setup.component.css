@@ -1,0 +1,16 @@
+/* Adjusting input field width */
+.form-group .form-control {
+    width: 50%;
+}
+
+/* Changing the background color to match black background */
+.custom-input {
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+}
+
+.custom-input:focus {
+    background-color: #444;
+    border-color: #666;
+}
