@@ -1,9 +1,8 @@
 package lk.ticket.service.systemControl;
 
 import lk.ticket.model.systemControl.SystemControlModule;
-import lk.ticket.repository.configuration.SystemControlRepository;
+import lk.ticket.repository.systemControl.SystemControlRepository;
 import lk.ticket.service.ticketPool.TicketPoolService;
-import lk.ticket.service.ticketPool.TicketPoolServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

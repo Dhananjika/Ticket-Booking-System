@@ -8,6 +8,7 @@ import lk.ticket.service.userThread.CustomerService;
 import lk.ticket.service.userThread.VendorService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,15 +53,15 @@ public class TicketController {
      * */
     @PostMapping("/addTicket")
     @Operation(summary = "Add Ticket", description = "Vendor release tickets to ticket pool.")
-    public String addTicket() {
+    public String addTicket(@RequestParam int eventID, @RequestParam String username) {
         logger.info("Method called");
-        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile(eventID), eventID);
         logger.info(userModule);
 
-        VendorService vendorService = new VendorService(ticketPoolService, userModule.getEventID());
+        VendorService vendorService = new VendorService(ticketPoolService, eventID);
         vendorService.setAddTickets(false);
 
-        Thread vendorThread = new Thread(vendorService, userModule.getUsername());
+        Thread vendorThread = new Thread(vendorService, username);
         vendorThread.start();
 
         try {
@@ -68,7 +69,6 @@ public class TicketController {
         }catch (InterruptedException e){
             logger.error("An error occurred while waiting for vendor thread to finish: " + e.getMessage());
         }
-        messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
         return vendorService.getReturnMessage();
     }
 
@@ -81,16 +81,16 @@ public class TicketController {
      * */
     @PostMapping("/purchaseTicket")
     @Operation(summary = "Purchase Ticket", description = "Customer purchase tickets from the system.")
-    public String purchaseTicket(@RequestParam int ticketCount) {
+    public String purchaseTicket(@RequestParam int ticketCount, @RequestParam int eventID, @RequestParam String username) {
         logger.info("Method called");
-        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile(eventID), eventID);
         logger.info(userModule);
 
-        CustomerService customerService = new CustomerService(ticketPoolService, userModule.getEventID());
+        CustomerService customerService = new CustomerService(ticketPoolService, eventID);
         customerService.setTicketCount(ticketCount);
         customerService.setPurchaseTicket(false);
 
-        Thread customerThread = new Thread(customerService,userModule.getUsername());
+        Thread customerThread = new Thread(customerService, username);
         customerThread.start();
 
         try {
@@ -98,7 +98,6 @@ public class TicketController {
         }catch (InterruptedException e){
             logger.error("An error occurred while waiting for customer thread to finish: " + e.getMessage());
         }
-        messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
         return customerService.getReturnMessage();
     }
 
@@ -111,12 +110,14 @@ public class TicketController {
      * */
     @PostMapping("/confirmAdding")
     @Operation(summary = "Confirm Ticket Adding", description = "The confirmation box is provided on the first attempt to collect the ticket system. After confirmation proceed this will work.")
-    public String addTicketConfirm() {
+    public String addTicketConfirm(@RequestParam int eventID, @RequestParam String username) {
         logger.info("Method called");
-        VendorService vendorService = new VendorService(ticketPoolService, userModule.getEventID());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile(eventID), eventID);
+
+        VendorService vendorService = new VendorService(ticketPoolService, eventID);
         vendorService.setAddTickets(true);
 
-        Thread vendorThread = new Thread(vendorService, userModule.getUsername());
+        Thread vendorThread = new Thread(vendorService, username);
         vendorThread.start();
 
         try {
@@ -124,7 +125,6 @@ public class TicketController {
         }catch (InterruptedException e){
             logger.error("An error occurred while waiting for vendor thread to finish: " + e.getMessage());
         }
-        messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
         return vendorService.getReturnMessage();
     }
 
@@ -137,12 +137,14 @@ public class TicketController {
      * */
     @PostMapping("/confirmPurchase")
     @Operation(summary = "Confirm Ticket Purchase", description = "The confirmation box is provided on the first attempt to purchase tickets from the ticket system. After confirmation proceed this will work.")
-    public String purchaseTicketConfirm() {
+    public String purchaseTicketConfirm(@RequestParam int eventID, @RequestParam String username) {
         logger.info("Method called");
-        CustomerService customerService = new CustomerService(ticketPoolService, userModule.getEventID());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile(eventID), eventID);
+
+        CustomerService customerService = new CustomerService(ticketPoolService,eventID);
         customerService.setPurchaseTicket(true);
 
-        Thread customerThread = new Thread(customerService,userModule.getUsername());
+        Thread customerThread = new Thread(customerService,username);
         customerThread.start();
 
         try {
@@ -150,7 +152,6 @@ public class TicketController {
         }catch (InterruptedException e){
             logger.error("An error occurred while waiting for customer thread to finish: " + e.getMessage());
         }
-        messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
         return customerService.getReturnMessage();
     }
 
@@ -160,12 +161,12 @@ public class TicketController {
 
     @PostMapping("/addTicketTest")
     @Operation(summary = "Add Ticket Test", description = "Vendor release tickets to ticket pool. - Multithreading Test")
-    public String addTicketTest() {
+    public String addTicketTest(@RequestParam int eventID) {
         logger.info("Method called");
-        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile(eventID),eventID);
         logger.info(userModule);
 
-        VendorService vendorService = new VendorService(ticketPoolService, userModule.getEventID());
+        VendorService vendorService = new VendorService(ticketPoolService, eventID);
         vendorService.setAddTickets(false);
 
         List<Thread> vendorThreads = new ArrayList<Thread>();
@@ -190,12 +191,12 @@ public class TicketController {
      */
     @PostMapping("/purchaseTicketTest")
     @Operation(summary = "Purchase Ticket Test", description = "Customer purchase tickets from the system. - - Multithreading Test")
-    public String purchaseTicketTest(@RequestParam int ticketCount) {
+    public String purchaseTicketTest(@RequestParam int ticketCount,@RequestParam int eventID) {
         logger.info("Method called");
-        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile());
+        ticketPoolService.setConfigurationModule(configurationServiceImp.readJsonFile(eventID),eventID);
         logger.info(userModule);
 
-        CustomerService customerService = new CustomerService(ticketPoolService, userModule.getEventID());
+        CustomerService customerService = new CustomerService(ticketPoolService, eventID);
         customerService.setTicketCount(ticketCount);
         customerService.setPurchaseTicket(false);
 
@@ -215,5 +216,10 @@ public class TicketController {
             logger.error("An error occurred while waiting for customer thread to finish: " + e.getMessage());
         }
         return customerService.getReturnMessage();
+    }
+
+    @MessageMapping("/sendUpdate")
+    public void sendTicketPoolStatus(){
+        messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
     }
 }

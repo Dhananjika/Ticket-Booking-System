@@ -35,7 +35,7 @@ public class EventRepository {
                     resultSet2 = preparedStatement2.executeQuery();
 
                     while (resultSet2.next()) {
-                        if (resultSet2.getString("system_status").equals("A")) {
+                        if (resultSet2.getString("system_status").equals("A") || resultSet2.getString("system_status").equals("R")) {
                             EventModule eventModule = new EventModule();
                             eventModule.setEventId(resultSet.getInt("event_id"));
                             eventModule.setEventName(resultSet.getString("event_name"));
@@ -46,6 +46,7 @@ public class EventRepository {
                             eventModule.setEventNormalTicketPrice(resultSet.getInt("event_normal_ticket_price"));
                             eventModule.setEventVIPTicketPrice(resultSet.getInt("event_vip_ticket_price"));
                             eventModule.setEventImage("assets/event/" + resultSet.getString("event_image") + ".jpg");
+                            eventModule.setSystemStatus(resultSet2.getString("system_status"));
                             logger.info(eventModule);
                             events.add(eventModule);
                         }

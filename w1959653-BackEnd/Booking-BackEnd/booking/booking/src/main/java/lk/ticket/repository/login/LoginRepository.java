@@ -283,4 +283,69 @@ public class LoginRepository {
         }
         return "Removing account failed";
     }
+
+    public UserModule getVendorLoginDetails(String username, String password) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        UserModule userModule = new UserModule();
+
+        try {
+            connection = ConnectionManager.getConnection();
+            if(connection != null) {
+                String sql = "select distinct vendor.vendor_name, vendor.email, vendor.vendor_id, register.id from vendor " +
+                        "inner join register on register.vendor_id = vendor.vendor_id " +
+                        "where register.username = ? and register.password = ? and login_type = 'vendor';";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    userModule.setName(resultSet.getString("vendor_name"));
+                    userModule.setEmail(resultSet.getString("email"));
+                    userModule.setVendorID(resultSet.getString("vendor_id"));
+                    userModule.setUserID(resultSet.getInt("id"));
+                }
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred while checking login" + e.getMessage());
+        }finally {
+            ConnectionManager.close(resultSet);
+            ConnectionManager.close(preparedStatement);
+            ConnectionManager.close(connection);
+        }
+        logger.info(userModule);
+        return userModule;
+    }
+
+    public UserModule getCustomerLoginDetails(String username, String password) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        UserModule userModule = new UserModule();
+
+        try {
+            connection = ConnectionManager.getConnection();
+            if(connection != null) {
+                String sql = "select customer_name, customer_email, id from register where username = ? and password = ? and login_type = 'customer';";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    userModule.setName(resultSet.getString("customer_name"));
+                    userModule.setEmail(resultSet.getString("customer_email"));
+                    userModule.setUserID(resultSet.getInt("id"));
+                }
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred while checking login" + e.getMessage());
+        }finally {
+            ConnectionManager.close(resultSet);
+            ConnectionManager.close(preparedStatement);
+            ConnectionManager.close(connection);
+        }
+        logger.info(userModule);
+        return userModule;
+    }
 }

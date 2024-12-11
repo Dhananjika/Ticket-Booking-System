@@ -8,6 +8,7 @@ import lk.ticket.service.login.LoginService;
 import lk.ticket.service.login.VendorLoginService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -157,14 +158,27 @@ public class LoginController {
      * */
     @DeleteMapping("/removeAccount")
     @Operation(summary = "Remove User Account", description = "User can remove their user account from the system. After remove if user wants to login again user have to register to system again")
-    public String removeAccount() {
+    public String removeAccount(@RequestParam int userID) {
         logger.info("Method called");
         logger.info(userModule);
-        String removeAccount = vendorLogin.removeAccount(userModule.getUserID());
+        String removeAccount = vendorLogin.removeAccount(userID);
         if (session != null) {
             session.invalidate();
         }
         return removeAccount;
     }
 
+    @GetMapping("/getVendorDetails")
+    @Operation(summary = "Vendor Details", description = "Get vendor details.")
+    public ResponseEntity<UserModule> getVendorLoginDetails(@RequestParam String username, @RequestParam String password){
+        logger.info("Method called");
+        return ResponseEntity.ok(vendorLogin.getVendorLoginDetails(username, password));
+    }
+
+    @GetMapping("/getCustomerDetails")
+    @Operation(summary = "Customer Details", description = "Get customer details.")
+    public ResponseEntity<UserModule> getCustomerLoginDetails(@RequestParam String username, @RequestParam String password){
+        logger.info("Method called");
+        return  ResponseEntity.ok(customerLogin.getCustomerLoginDetails(username, password));
+    }
 }

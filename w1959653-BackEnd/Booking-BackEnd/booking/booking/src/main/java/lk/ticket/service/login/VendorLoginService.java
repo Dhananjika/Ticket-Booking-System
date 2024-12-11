@@ -108,4 +108,9 @@ public class VendorLoginService extends LoginService {
         }
         return loginRepository.removeAccount(id);
     }
+
+    public UserModule getVendorLoginDetails(String username, String password) {
+        logger.info("Method called");
+        return loginRepository.getVendorLoginDetails(username, password);
+    }
 }

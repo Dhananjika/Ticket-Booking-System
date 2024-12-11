@@ -56,3 +56,5 @@ UPDATE ticket.configuration SET system_status='I', config_status='I', stop_relea
                             WHERE event_id=2;
 UPDATE ticket.configuration SET system_status='I', config_status='I', stop_release_count=0, stop_pool_size=0
                             WHERE event_id=3;
+
+TRUNCATE TABLE ticket.ticket_pool;

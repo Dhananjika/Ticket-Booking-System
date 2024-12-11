@@ -1,6 +1,5 @@
-package lk.ticket.repository.configuration;
+package lk.ticket.repository.systemControl;
 
-import lk.ticket.model.event.EventModule;
 import lk.ticket.model.systemControl.SystemControlModule;
 import lk.ticket.util.ConnectionManager;
 import org.apache.log4j.Logger;
@@ -9,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 public class SystemControlRepository {

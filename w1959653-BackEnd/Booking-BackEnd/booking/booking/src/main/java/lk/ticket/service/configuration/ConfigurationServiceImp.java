@@ -2,20 +2,23 @@ package lk.ticket.service.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import lk.ticket.exception.ApplicationException;
 import lk.ticket.model.configuration.ConfigurationModule;
 import lk.ticket.model.systemControl.SystemControlModule;
-import lk.ticket.repository.configuration.SystemControlRepository;
+import lk.ticket.repository.systemControl.SystemControlRepository;
 import lk.ticket.util.PropertyReader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -89,19 +92,36 @@ public class ConfigurationServiceImp implements ConfigurationService {
      *  @out jsonFile
      * */
     @Override
-    public String saveJsonFile(ConfigurationModule configuration){
+    public String saveJsonFile(ConfigurationModule configuration) {
         try {
             lock.lock();
             logger.info("Method called");
+            List<ConfigurationModule> configurationsList = new ArrayList<>();
             String file = PropertyReader.getPropertyValue("json.file.path");
             if (file == null) {
                 throw new ApplicationException("File path is not configured.");
             }
             String pathToJsonFile = new File(file).getAbsolutePath();
-            FileWriter fileWriter = new FileWriter(pathToJsonFile);
-            gson.toJson(configuration, fileWriter);
-            fileWriter.flush();
-            fileWriter.close();
+            File jsonFile = new File(pathToJsonFile);
+
+            if (jsonFile.exists()) {
+                try (FileReader fileReader = new FileReader(jsonFile)) {
+                    Type listType = new TypeToken<List<ConfigurationModule>>() {}.getType();
+                    configurationsList = gson.fromJson(fileReader, listType);
+                    if (configurationsList == null) {
+                        configurationsList = new ArrayList<>();
+                    }
+                }
+            }
+            configurationsList.removeIf(config -> config.getEventId() == configuration.getEventId());
+            configurationsList.add(configuration);
+
+            try (FileWriter fileWriter = new FileWriter(pathToJsonFile)) {
+                gson.toJson(configurationsList, fileWriter);
+                fileWriter.flush();
+                fileWriter.close();
+            }
+
             logger.info("Details saved to configuration.json file");
             return "Successful";
         } catch (IOException e) {
@@ -110,10 +130,11 @@ public class ConfigurationServiceImp implements ConfigurationService {
         } catch (ApplicationException e) {
             logger.error("An error occurred while getting property key value " + e.getMessage());
             return "Unsuccessful";
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
+
 
     /**
      *  This method is used to read the configuration details from json file
@@ -123,9 +144,9 @@ public class ConfigurationServiceImp implements ConfigurationService {
      *  @out Details in json file
      * */
     @Override
-    public ConfigurationModule readJsonFile(){
+    public ConfigurationModule readJsonFile(int eventId){
         logger.info("Method called");
-        ConfigurationModule configuration;
+        ConfigurationModule configuration = new ConfigurationModule();
         try {
             lock.lock();
             String file = PropertyReader.getPropertyValue("json.file.path");
@@ -133,7 +154,17 @@ public class ConfigurationServiceImp implements ConfigurationService {
                 throw new ApplicationException("File path is not configured.");
             }
             FileReader fileReader = new FileReader(new File(file).getAbsolutePath());
-            configuration = gson.fromJson(fileReader, ConfigurationModule.class);
+            Type listType = new TypeToken<List<ConfigurationModule>>() {}.getType();
+            List<ConfigurationModule> configurationsList = gson.fromJson(fileReader, listType);
+            if (configurationsList == null || configurationsList.isEmpty()) {
+                logger.warn("No configurations found in the file.");
+                return configuration;
+            }
+            for (ConfigurationModule config : configurationsList) {
+                if (config.getEventId() == eventId) {
+                    configuration = config;
+                }
+            }
             logger.info("Details read from configuration.json file");
             logger.info(configuration);
         }catch (Exception e){

@@ -54,15 +54,16 @@ public class ConfigurationController {
 
     @PostMapping("/submitConfiguration")
     @Operation(summary = "Submit Configuration Parameters", description = "This used to set the configuration details. Use positive numbers.")
-    public String submitConfiguration(@RequestBody ConfigurationModule configuration, @RequestParam int eventID){
+    public String submitConfiguration(@RequestBody ConfigurationModule configuration){
         logger.info(configuration);
-        return this.configurationService.submitConfiguration(configuration, eventID);
+        return this.configurationService.submitConfiguration(configuration, configuration.getEventId());
     }
 
-    @GetMapping("/checkConfigurationAvailability")
-    @Operation(summary = "Test", description = "Test the connection.")
-    public boolean configurationExists(@RequestParam int eventID){
-        logger.info(userModule.getUsername());
-        return this.configurationService.configurationExists(eventID);
+    @GetMapping("/getConfiguration")
+    @Operation(summary = "Get Configuration", description = "Get configurations.")
+    public ConfigurationModule configurationExists(@RequestParam int eventID){
+        return configurationService.readJsonFile(eventID);
     }
+
+
 }

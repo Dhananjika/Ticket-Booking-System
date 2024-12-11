@@ -38,3 +38,10 @@ CREATE TABLE IF NOT EXISTS configuration (
     stop_pool_size INT,
     FOREIGN KEY (event_id) REFERENCES event(event_id)
 );
+
+CREATE TABLE IF NOT EXISTS ticket_pool (
+    event_id INT NOT NULL PRIMARY KEY,
+    released_count INT NOT NULL ,
+    queue_size VARCHAR(2) NOT NULL,
+    FOREIGN KEY (event_id) REFERENCES event(event_id)
+);

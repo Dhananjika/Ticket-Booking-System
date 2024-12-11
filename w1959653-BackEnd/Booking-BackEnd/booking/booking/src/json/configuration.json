@@ -1,6 +1,16 @@
-{
-  "totalTickets": 10,
-  "maxTicketCapacity": 5,
-  "ticketReleaseRate": 3,
-  "customerRetrievalRate": 2
-}
+[
+  {
+    "totalTickets": 10,
+    "maxTicketCapacity": 5,
+    "ticketReleaseRate": 4,
+    "customerRetrievalRate": 3,
+    "eventId": 2
+  },
+  {
+    "totalTickets": 10,
+    "maxTicketCapacity": 5,
+    "ticketReleaseRate": 3,
+    "customerRetrievalRate": 2,
+    "eventId": 1
+  }
+]

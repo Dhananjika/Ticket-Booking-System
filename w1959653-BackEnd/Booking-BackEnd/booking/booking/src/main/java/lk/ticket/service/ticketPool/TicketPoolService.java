@@ -18,5 +18,5 @@ public interface TicketPoolService {
     boolean resumeTicketPool(int releasedTicketCount, int queueSize);
     int getReleasedTicketCount();
 
-    void setConfigurationModule(ConfigurationModule configurationModule);
+    void setConfigurationModule(ConfigurationModule configurationModule, int eventID);
 }

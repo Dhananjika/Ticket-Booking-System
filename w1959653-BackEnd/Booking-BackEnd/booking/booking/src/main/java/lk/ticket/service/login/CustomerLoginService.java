@@ -97,4 +97,8 @@ public class CustomerLoginService extends LoginService {
         return null;
     }
 
+    public UserModule getCustomerLoginDetails(String username, String password) {
+        logger.info("Method called");
+        return loginRepository.getCustomerLoginDetails(username, password);
+    }
 }

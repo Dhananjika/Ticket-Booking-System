@@ -1,7 +1,7 @@
 package lk.ticket.service.userThread;
 
 import lk.ticket.model.systemControl.SystemControlModule;
-import lk.ticket.repository.configuration.SystemControlRepository;
+import lk.ticket.repository.systemControl.SystemControlRepository;
 import lk.ticket.service.ticketPool.TicketPoolService;
 import org.apache.log4j.Logger;
 

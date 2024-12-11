@@ -1,7 +1,12 @@
 package lk.ticket.service.ticketPool;
 
 import lk.ticket.model.configuration.ConfigurationModule;
+import lk.ticket.model.systemControl.SystemControlModule;
+import lk.ticket.model.ticket.TicketPoolModule;
+import lk.ticket.repository.systemControl.SystemControlRepository;
+import lk.ticket.repository.ticket.TicketPoolRepository;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -21,7 +26,12 @@ public class TicketPoolServiceImp implements TicketPoolService {
     private ConfigurationModule configurationModule;
     private int poolSize;
     private int releasedTicketCount;
+    private int eventID;
 
+    @Autowired
+    private TicketPoolRepository ticketPoolRepository;
+    @Autowired
+    private SystemControlRepository systemControlRepository;
     /**
      *  This method is used to set configuration module and pool size.
      *  synchronized block used.
@@ -29,12 +39,14 @@ public class TicketPoolServiceImp implements TicketPoolService {
      *  @in  ConfigurationModule
      *  @out configurationModule, pool size
      * */
-    public void setConfigurationModule(ConfigurationModule configurationModule) {
+    public void setConfigurationModule(ConfigurationModule configurationModule, int eventID) {
         synchronized (this) {
-            if (this.configurationModule == null) {
-                this.configurationModule = configurationModule;
-                this.poolSize = configurationModule.getMaxTicketCapacity();
-            }
+            this.eventID = eventID;
+            this.configurationModule = configurationModule;
+            this.poolSize = configurationModule.getMaxTicketCapacity();
+
+            TicketPoolModule ticketPoolModule = ticketPoolRepository.getTicketPoolDetails(this.eventID);
+            resumeTicketPool(ticketPoolModule.getReleasedTicketCount(), ticketPoolModule.getTicketQueueSize());
         }
     }
 
@@ -55,6 +67,12 @@ public class TicketPoolServiceImp implements TicketPoolService {
                 int ticketReleaseRate = configurationModule.getTicketReleaseRate();
                 if(checkTicketAvailability()){
                     logger.info("All Tickets Are Released. No More Tickets Available. Total Released Ticket Count : " + releasedTicketCount);
+                    SystemControlModule systemControlModule = new SystemControlModule();
+                    systemControlModule.setConfigurationStatus("A");
+                    systemControlModule.setSystemStatus("R");
+                    systemControlModule.setSystemStoppedReleasedTicketCount(releasedTicketCount);
+                    systemControlModule.setSystemStoppedPoolSize(ticketQueue.size());
+                    systemControlRepository.addConfiguration(systemControlModule, eventID);
                     return "All Tickets Are Released. No More Tickets Available.";
                 }
                 if (checkPoolSize()) {
@@ -75,6 +93,7 @@ public class TicketPoolServiceImp implements TicketPoolService {
                 }
                 logger.info(vendorName + " added " + ticketReleaseRate +  " tickets. Available tickets in the pool: " + ticketQueue.size());
                 returnMessage = ticketReleaseRate + " Tickets Added.";
+                ticketPoolRepository.insertTicketPoolDetails(releasedTicketCount,ticketQueue.size(),eventID);
                 notifyAll();
             }catch (Exception e){
                 logger.error("An error occurred while adding tickets to pool : " + e.getMessage());
@@ -101,6 +120,12 @@ public class TicketPoolServiceImp implements TicketPoolService {
             try {
                 if (checkTicketAvailability() && ticketQueue.isEmpty()) {
                     logger.info("Tickets Sold Out. Ticket Queue size : " + ticketQueue.size());
+                    SystemControlModule systemControlModule = new SystemControlModule();
+                    systemControlModule.setConfigurationStatus("A");
+                    systemControlModule.setSystemStatus("S");
+                    systemControlModule.setSystemStoppedReleasedTicketCount(releasedTicketCount);
+                    systemControlModule.setSystemStoppedPoolSize(ticketQueue.size());
+                    systemControlRepository.addConfiguration(systemControlModule, eventID);
                     return "Tickets Sold Out.";
                 }else if(!checkTicketAvailability() && ticketQueue.isEmpty()){
                     logger.info(customerName + " try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.");
@@ -122,6 +147,7 @@ public class TicketPoolServiceImp implements TicketPoolService {
                 }
                 logger.info(customerName + " purchased " +  purchaseTicketCount + " tickets. Remaining tickets in the pool: " + ticketQueue.size());
                 returnMessage = purchaseTicketCount + " Tickets Purchased.";
+                ticketPoolRepository.insertTicketPoolDetails(releasedTicketCount,ticketQueue.size(),eventID);
                 notifyAll();
             }catch (Exception e){
                 logger.error(" An error occurred while removing tickets to pool : " + e.getMessage());

@@ -12,6 +12,6 @@ import lk.ticket.model.configuration.ConfigurationModule;
 public interface ConfigurationService {
     String submitConfiguration(ConfigurationModule configuration, int event_id);
     String saveJsonFile(ConfigurationModule configuration);
-    ConfigurationModule readJsonFile();
+    ConfigurationModule readJsonFile(int eventId);
     boolean configurationExists(int id);
 }
