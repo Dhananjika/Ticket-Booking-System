@@ -218,8 +218,9 @@ public class TicketController {
         return customerService.getReturnMessage();
     }
 
-    @MessageMapping("/sendUpdate")
-    public void sendTicketPoolStatus(){
-        messagingTemplate.convertAndSend("/topic/ticketCount", ticketPoolService.getAvailableTicketsCount());
+    @GetMapping("/getTicketStatus")
+    @Operation(summary = "Get Ticket Count", description = "Get Ticket Pool Status")
+    public int getTicketCount(@RequestParam int eventID) {
+        return ticketPoolService.getAvailableTicketsCount(eventID);
     }
 }

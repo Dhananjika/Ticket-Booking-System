@@ -14,7 +14,7 @@ public interface TicketPoolService {
     String removeTicket(int purchaseTicketCount, boolean purchase, String customerName);
     boolean checkTicketAvailability();
     boolean checkPoolSize();
-    int getAvailableTicketsCount();
+    int getAvailableTicketsCount(int eventID);
     boolean resumeTicketPool(int releasedTicketCount, int queueSize);
     int getReleasedTicketCount();
 

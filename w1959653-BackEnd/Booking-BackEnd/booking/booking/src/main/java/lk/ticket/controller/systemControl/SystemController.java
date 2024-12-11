@@ -55,7 +55,7 @@ public class SystemController {
         systemControlModule.setConfigurationStatus("A");
         systemControlModule.setSystemStatus("I");
         systemControlModule.setSystemStoppedReleasedTicketCount(ticketPoolService.getReleasedTicketCount());
-        systemControlModule.setSystemStoppedPoolSize(ticketPoolService.getAvailableTicketsCount());
+        systemControlModule.setSystemStoppedPoolSize(ticketPoolService.getAvailableTicketsCount(eventID));
         return systemControlService.stopSystem(systemControlModule, eventID);
     }
 

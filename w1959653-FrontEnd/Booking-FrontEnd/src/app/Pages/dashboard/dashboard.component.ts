@@ -1,10 +1,13 @@
 import { HttpParams } from "@angular/common/http";
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Router } from "@angular/router";
+import { interval, Observable, Subscription } from "rxjs";
 import { ConfigurationModule } from "src/app/module/configuration/configuration-module";
 import { EventModule } from "src/app/module/event/event-module";
 import { AuthService } from "src/app/Service/AuthService/auth-service.service";
+import { PollingService } from "src/app/Service/PollingService/polling.service";
 import { TicketServiceService } from "src/app/Service/TicketService/ticket-service.service";
+import { switchMap } from "rxjs/operators";
 
 declare var $: any;
 
@@ -14,24 +17,27 @@ declare var $: any;
   styleUrls: ["./dashboard.component.css"],
 })
 export class DashboardComponent implements OnInit {
-  eventList: EventModule[] = [];
-  username: string;
-  searchEventList: EventModule[] = [];
-  searchTerm: string;
-  errorMessage: string;
-  eventModule: any;
-  warnMessage: string;
-  successMessage: string;
-  confirmMessage: string;
-  infoMessage: string;
-  event: EventModule;
-  configuration: ConfigurationModule;
-  ticketCount: number = 0;
+  private eventList: EventModule[] = [];
+  private username: string;
+  private searchEventList: EventModule[] = [];
+  private searchTerm: string;
+  private errorMessage: string;
+  private eventModule: any;
+  private warnMessage: string;
+  private successMessage: string;
+  private confirmMessage: string;
+  private infoMessage: string;
+  private event: EventModule;
+  private configuration: ConfigurationModule;
+  private ticketCount: number = 0;
+  private subscription: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private env: TicketServiceService,
     private route: Router,
     private authService: AuthService,
+    private polling: PollingService,
   ) {
     this.username = null;
     this.searchTerm = null;
@@ -58,6 +64,28 @@ export class DashboardComponent implements OnInit {
         (response) => {
           this.eventList = response;
           this.searchEventList = [...this.eventList];
+
+          console.log("List length: " + this.eventList.length);
+          if (this.eventList && this.eventList.length > 0) {
+            this.eventList.forEach((value) => {
+              if (value.eventId) {
+                this.startPolling(value.eventId).subscribe(
+                  (response: number) => {
+                    value.availableTickets = response; // Update availableTickets with the response
+                    console.log("Returned value: " + value.availableTickets);
+                  },
+                  (error) => {
+                    console.error(
+                      `Error polling event ${value.eventId}:`,
+                      error,
+                    );
+                  },
+                );
+              } else {
+                console.warn("Invalid event data:", value);
+              }
+            });
+          }
         },
         (error) => {
           console.error("Error:", error);
@@ -69,6 +97,28 @@ export class DashboardComponent implements OnInit {
         (response) => {
           this.eventList = response;
           this.searchEventList = [...this.eventList];
+
+          console.log("List length: " + this.eventList.length);
+          if (this.eventList && this.eventList.length > 0) {
+            this.eventList.forEach((value) => {
+              if (value.eventId) {
+                this.startPolling(value.eventId).subscribe(
+                  (response: number) => {
+                    value.availableTickets = response; // Update availableTickets with the response
+                    console.log("Returned value: " + value.availableTickets);
+                  },
+                  (error) => {
+                    console.error(
+                      `Error polling event ${value.eventId}:`,
+                      error,
+                    );
+                  },
+                );
+              } else {
+                console.warn("Invalid event data:", value);
+              }
+            });
+          }
         },
         (error) => {
           console.error("Error:", error);
@@ -76,6 +126,16 @@ export class DashboardComponent implements OnInit {
       );
     }
     console.log(this.eventList);
+  }
+
+  startPolling(eventID: number): Observable<number> {
+    return interval(1000).pipe(
+      switchMap(() => this.polling.fetchData(eventID)),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   addConfig(eventModule: EventModule) {

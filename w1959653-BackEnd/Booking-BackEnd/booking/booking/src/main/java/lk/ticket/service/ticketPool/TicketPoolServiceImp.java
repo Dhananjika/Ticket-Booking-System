@@ -183,8 +183,9 @@ public class TicketPoolServiceImp implements TicketPoolService {
      *
      *  @out number of tickets in the pool
      * */
-    public synchronized int getAvailableTicketsCount(){
-        return ticketQueue.size();
+    public synchronized int getAvailableTicketsCount(int eventID){
+        TicketPoolModule ticketPoolModule = ticketPoolRepository.getTicketPoolDetails(eventID);
+        return ticketPoolModule.getTicketQueueSize();
     }
 
     public synchronized int getReleasedTicketCount() {
