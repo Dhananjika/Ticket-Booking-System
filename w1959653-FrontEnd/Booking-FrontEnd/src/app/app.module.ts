@@ -14,6 +14,7 @@ import { NavbarComponent } from "./Pages/navbar/navbar.component";
 import { AuthService } from "./Service/AuthService/auth-service.service";
 import { VendorGuard } from "./Security/vendor.guard";
 import { CustomerGuard } from "./Security/customer.guard";
+import { BuyTicketComponent } from "./Pages/buy-ticket/buy-ticket.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CustomerGuard } from "./Security/customer.guard";
     ConfigurationSetupComponent,
     DashboardComponent,
     NavbarComponent,
+    BuyTicketComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [AuthService, VendorGuard, CustomerGuard],

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
     aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,12 +9,22 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
     <ul class="form-inline my-2 my-lg-0">
       <li *ngIf="username" class="nav-item d-flex align-items-center">
-        <a href="#">
+        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" id="userDetailsDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src="../../../assets/icon/user.png" alt="User Icon" class=" mr-2" style="width: 30px; height: 30px;" />
         </a>
         <span class="text-white mr-3">Welcome, {{ username }}!</span>
+        <div class="dropdown-menu dropdown-menu-right custom-dropdown" aria-labelledby="userDetailsDropdown">
+          <h6 class="dropdown-header">User Details</h6>
+          <p class="dropdown-item mb-0" *ngIf = "this.authService.getUserRole() == 'Vendor'">Vendor ID: {{ this.userModule.vendorID }}</p>
+          <p class="dropdown-item mb-0">Name: {{ this.userModule.name }}</p>
+          <p class="dropdown-item mb-0">Email: {{ this.userModule.email }}</p>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" (click)="removeAccount()">Remove Account</a>
+        </div>
       </li>
       <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="Logout()">Logout</button>
+      
     </ul>
   </div>
 </nav>

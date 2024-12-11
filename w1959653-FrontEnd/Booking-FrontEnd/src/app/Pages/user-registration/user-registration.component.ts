@@ -47,7 +47,10 @@ export class UserRegistrationComponent implements OnInit {
       this.env.sendPostRequestWithParams(url, params).subscribe(
         (response) => {
           this.auth.setUserRole(this.registerUser.userType);
-          this.env.setUsername(this.registerUser.username);
+          this.env.setUsername(
+            this.registerUser.username,
+            this.registerUser.password,
+          );
           console.log("Response:", response);
           this.route.navigate(["/dashboard"]);
         },
@@ -67,7 +70,10 @@ export class UserRegistrationComponent implements OnInit {
       this.env.sendPostRequestWithParams(url, params).subscribe(
         (response) => {
           this.auth.setUserRole(this.registerUser.userType);
-          this.env.setUsername(this.registerUser.username);
+          this.env.setUsername(
+            this.registerUser.username,
+            this.registerUser.password,
+          );
           console.log("Response:", response);
           this.route.navigate(["/dashboard"]);
         },

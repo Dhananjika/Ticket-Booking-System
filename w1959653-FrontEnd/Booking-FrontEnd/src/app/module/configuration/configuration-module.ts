@@ -12,4 +12,20 @@ export class ConfigurationModule {
     this.customerRetrievalRate = 0;
     this.eventId = 0;
   }
+
+  dispaly(): void {
+    console.log(
+      "Configuration[Total Number of Tickets - " +
+        this.totalTickets +
+        ", Ticket Release Rate - " +
+        this.ticketReleaseRate +
+        ", Customer Retrieval Rate - " +
+        this.customerRetrievalRate +
+        ", Maximum Ticket Capacity - " +
+        this.maxTicketCapacity +
+        ", Event ID - " +
+        this.eventId +
+        "]",
+    );
+  }
 }

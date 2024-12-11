@@ -1,1 +1,144 @@
-2024-12-09 01:43:14.356  INFO   76 --- [specificLogger] -- [addTicket] : vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 00:54:40.750  INFO   84 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 00:54:43.383  WARN   77 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 00:54:44.224  INFO   84 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 00:54:47.108  INFO   84 --- [specificLogger] -- [addTicket] : Vendor added 15 tickets. Available tickets in the pool: 15
+2024-12-11 00:54:49.626  WARN   77 --- [specificLogger] -- [addTicket] : Only 10 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 00:54:50.624  INFO   84 --- [specificLogger] -- [addTicket] : Vendor added 10 tickets. Available tickets in the pool: 25
+2024-12-11 01:34:22.039  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 01:34:23.227  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 01:34:33.352  WARN   122 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 01:34:46.162  WARN   122 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 01:34:47.493  WARN   122 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 01:35:43.526  WARN   122 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 01:36:54.834  WARN   122 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 01:39:19.537  WARN   122 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 01:39:25.688  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 01:39:35.341  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:41:24.893  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:41:42.974  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 10 tickets. Remaining tickets in the pool: 15
+2024-12-11 01:41:52.989  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 10 tickets. Remaining tickets in the pool: 5
+2024-12-11 01:42:11.201  WARN   122 --- [specificLogger] -- [removeTicket] : Only 5 tickets can purchase
+2024-12-11 01:42:18.338  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 5 tickets. Remaining tickets in the pool: 0
+2024-12-11 01:42:25.784  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:44:23.359  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:44:23.716  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:44:24.008  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:44:52.729  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:45:04.060  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 01:45:13.038  INFO   84 --- [specificLogger] -- [addTicket] : Vendor added 15 tickets. Available tickets in the pool: 15
+2024-12-11 01:45:22.741  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 10 tickets. Remaining tickets in the pool: 5
+2024-12-11 01:45:25.994  WARN   77 --- [specificLogger] -- [addTicket] : Only 10 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 01:45:28.225  INFO   84 --- [specificLogger] -- [addTicket] : Vendor added 10 tickets. Available tickets in the pool: 15
+2024-12-11 01:45:37.025  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 10 tickets. Remaining tickets in the pool: 5
+2024-12-11 01:45:42.969  WARN   122 --- [specificLogger] -- [removeTicket] : Only 5 tickets can purchase
+2024-12-11 01:45:45.552  INFO   132 --- [specificLogger] -- [removeTicket] : Customer purchased 5 tickets. Remaining tickets in the pool: 0
+2024-12-11 01:45:54.270  INFO   112 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0
+2024-12-11 02:03:41.382  INFO   115 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:03:52.004  INFO   112 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0
+2024-12-11 02:05:12.500  INFO   112 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0
+2024-12-11 02:21:50.925  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:21:53.588  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:21:54.820  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:21:58.321  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:22:12.651  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:22:20.087  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:22:27.079  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 02:22:29.896  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:22:40.157  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:22:46.347  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:22:48.423  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:22:49.595  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:22:56.913  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:23:03.174  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:23:08.347  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 02:23:09.315  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:23:21.033  INFO   122 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0
+2024-12-11 02:27:09.336  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:27:11.663  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:27:12.841  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:27:15.492  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:38:28.034  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:38:30.159  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:38:31.456  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:38:34.762  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:40:12.280  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:40:14.738  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:40:15.952  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:40:19.452  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:40:40.235  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:40:47.011  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:40:53.550  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 02:40:57.977  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:41:05.067  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:41:05.221  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:41:08.912  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:41:11.912  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:41:13.018  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:41:21.683  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:41:27.027  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:41:33.155  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 02:41:34.972  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:41:41.469  INFO   122 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0
+2024-12-11 02:44:16.894  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 4 tickets. Available tickets in the pool: 4
+2024-12-11 02:44:19.125  WARN   87 --- [specificLogger] -- [addTicket] : Only 1 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:44:21.573  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 1 tickets. Available tickets in the pool: 5
+2024-12-11 02:44:24.408  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:44:37.422  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 3 tickets. Remaining tickets in the pool: 2
+2024-12-11 02:44:44.423  WARN   138 --- [specificLogger] -- [removeTicket] : Only 2 tickets can purchase
+2024-12-11 02:44:48.865  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:44:56.129  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:45:03.140  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 4 tickets. Available tickets in the pool: 4
+2024-12-11 02:45:05.307  WARN   87 --- [specificLogger] -- [addTicket] : Only 1 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:45:06.335  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 1 tickets. Available tickets in the pool: 5
+2024-12-11 02:45:14.744  INFO   69 --- [specificLogger] -- [addTicket] : All Tickets Are Released. No More Tickets Available. Total Released Ticket Count : 10
+2024-12-11 02:48:17.102  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:48:19.504  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:48:20.858  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:48:23.688  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:48:35.399  WARN   138 --- [specificLogger] -- [removeTicket] : Only 2 tickets can purchase
+2024-12-11 02:48:37.757  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:48:48.605  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:48:58.151  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 02:49:00.112  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:49:07.616  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:49:18.762  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:49:21.314  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:49:22.361  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:49:25.257  INFO   69 --- [specificLogger] -- [addTicket] : All Tickets Are Released. No More Tickets Available. Total Released Ticket Count : 10
+2024-12-11 02:51:16.578  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:51:19.020  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:51:20.114  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:51:23.368  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 02:51:32.872  WARN   138 --- [specificLogger] -- [removeTicket] : Only 2 tickets can purchase
+2024-12-11 02:51:34.107  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:51:39.685  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:51:44.603  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:51:51.494  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 02:52:02.200  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 02:52:04.615  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 02:52:05.722  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 02:52:08.649  INFO   69 --- [specificLogger] -- [addTicket] : All Tickets Are Released. No More Tickets Available. Total Released Ticket Count : 10
+2024-12-11 02:52:18.241  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 02:52:23.108  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 02:52:29.257  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 02:52:30.599  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 02:52:36.509  INFO   122 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0
+2024-12-11 09:45:25.937  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 09:45:35.091  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 09:45:39.701  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 09:45:41.159  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 09:45:43.748  WARN   79 --- [specificLogger] -- [addTicket] : Vendor try to add tickets : Ticket pool is full. Wait until customer purchase tickets.
+2024-12-11 09:45:51.139  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 09:45:56.920  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 09:46:03.627  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 09:46:05.712  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 09:46:11.241  INFO   131 --- [specificLogger] -- [removeTicket] : Customer try to purchase tickets : Ticket pool is empty. Wait until vendor release tickets.
+2024-12-11 09:46:21.538  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 3 tickets. Available tickets in the pool: 3
+2024-12-11 09:46:23.913  WARN   87 --- [specificLogger] -- [addTicket] : Only 2 Tickets Can Be Added Right Now. Would You Like To Add Them?
+2024-12-11 09:46:25.341  INFO   94 --- [specificLogger] -- [addTicket] : Vendor added 2 tickets. Available tickets in the pool: 5
+2024-12-11 09:46:27.973  INFO   69 --- [specificLogger] -- [addTicket] : All Tickets Are Released. No More Tickets Available. Total Released Ticket Count : 10
+2024-12-11 09:46:37.752  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 3
+2024-12-11 09:46:43.156  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 2 tickets. Remaining tickets in the pool: 1
+2024-12-11 09:46:49.495  WARN   138 --- [specificLogger] -- [removeTicket] : Only 1 tickets can purchase
+2024-12-11 09:46:51.188  INFO   148 --- [specificLogger] -- [removeTicket] : Customer purchased 1 tickets. Remaining tickets in the pool: 0
+2024-12-11 09:46:58.996  INFO   122 --- [specificLogger] -- [removeTicket] : Tickets Sold Out. Ticket Queue size : 0

@@ -15,31 +15,41 @@ export class TicketServiceService {
   );
   username$ = this.usernameSource.asObservable();
 
+  private passwordSource = new BehaviorSubject<string | null>(
+    sessionStorage.getItem("password"),
+  );
+  password$ = this.passwordSource.asObservable();
+
   constructor(private http: HttpClient) {
     this.BaseURL = environment.BASE_URL;
   }
 
-  //Set API full URL
-  // setApi(url: string): string {
-  //   return `${this.BaseURL}${url}`;
-  // }
-
   //Set Login username
-  setUsername(username: string): void {
+  setUsername(username: string, password: string): void {
     this.usernameSource.next(username);
     sessionStorage.setItem("username", username);
+
+    this.passwordSource.next(password);
+    sessionStorage.setItem("password", password);
   }
 
   //Clean Login username
-  cleanUsername(username: string): void {
+  cleanUsername(): void {
     this.usernameSource.next(null);
     sessionStorage.removeItem("username");
+
+    this.passwordSource.next(null);
+    sessionStorage.removeItem("password");
   }
 
   //Request Body - Post Request
   sendPostRequest(url: string, data: any): Observable<any> {
     const headers = { "Content-Type": "application/json" };
-    return this.http.post(`${this.BaseURL}${url}`, data, { headers });
+    const responseType = "text";
+    return this.http.post(`${this.BaseURL}${url}`, data, {
+      headers,
+      responseType,
+    });
   }
 
   //Parameters - Post Request
@@ -77,11 +87,28 @@ export class TicketServiceService {
     });
   }
 
-  //Paramerters For Array - Get Request
+  //Paramerters - Get Request
   sendGetRequestWithParams(url: string, params: HttpParams): Observable<any> {
     return this.http.get(`${this.BaseURL}${url}`, {
       params: params,
       responseType: "text" as "json",
+    });
+  }
+
+  //Paramerters - Delete Request
+  sendDeleteRequestWithParam(url: string, params: HttpParams): Observable<any> {
+    return this.http.delete(`${this.BaseURL}${url}`, {
+      params: params,
+      responseType: "text" as "json",
+    });
+  }
+
+  sendGetRequestWithParamsResponseEntity<T>(
+    url: string,
+    params: HttpParams,
+  ): Observable<T> {
+    return this.http.get<T>(`${this.BaseURL}${url}`, {
+      params: params,
     });
   }
 }

@@ -3,14 +3,14 @@
         (ngModelChange)="onSearchTermChange()" />
 </div>
 
-<p *ngIf="searchEventList.length === 0">Event Ticket Releasing Not Started.</p>
+<h4 *ngIf="searchEventList.length === 0">Event Ticket Releasing Not Started.</h4>
 <div class="events-container">
     <div class="event-card" *ngFor="let event of searchEventList">
         <img [src]="event.eventImage" alt="event.eventName" class="event-image"/>
         <div class="event-details">
             <h3 class="event-name">{{ event.eventName }}</h3>
             <p class ="event-data">
-                <b>Available Ticket Count - {{ availableTickets }}</b>
+                <b>Available Ticket Count - {{ ticketCount }}</b>
             </p>
             <p class="event-data">
                 <img src="assets/icon/calendar.png" class="icon"/> {{ event.eventDate }} • {{ event.eventTime }}
@@ -19,28 +19,188 @@
             <p class="event-price">
                 {{ event.eventNormalTicketPrice }} LKR Upwards
             </p>
-            <button class="btn btn-secondary" (click)="addTickets(event)" *ngIf="(event.configurationStatus) === 'A'">Add Configurations</button>
-            <button class="btn btn-secondary" (click)="StartEvent(event)" *ngIf = "(event.systemStatus) === 'I'">Start System</button>
-            <button class="btn btn-secondary" (click)="addTickets(event)" *ngIf = "(event.systemStatus) === 'A'">Add Tickets</button>
-            <button class="btn btn-secondary" (click)="buyTickets(event)" *ngIf = "this.authService.getUserRole() === 'Customer'">Buy Tickets</button>
-            <button class="btn btn-danger" (click)="stopEvent(event)" *ngIf = "(event.systemStatus) === 'A'">Stop System</button>
+            <button class="btn btn-secondary" (click)="addConfig(event)" *ngIf="(event.configurationStatus) === 'I'">Add Configurations</button>
+            <button class="btn btn-secondary" (click)="startEvent(event)" *ngIf="(event.systemStatus === 'I') && (event.configurationStatus === 'A')">Start System</button>
+            <button class="btn btn-secondary" (click)="addTickets(event)" *ngIf="(event.systemStatus === 'A') && (event.configurationStatus === 'A')">Add Tickets</button>
+            <button class="btn btn-secondary" (click)="buyTickets(event)" *ngIf = "(this.authService.getUserRole() === 'Customer') && (event.systemStatus === 'A')">Buy Tickets</button>
+            <button class="btn btn-danger" (click)="stopEvent(event)" *ngIf = "(event.systemStatus === 'A') && (this.authService.getUserRole() === 'Vendor')">Stop System</button>
+            <button class="btn btn-danger" disabled="true" *ngIf="(event.systemStatus === 'S')" style="background-color: #C62E2E;">Sold Out</button>
+            <button class="btn btn-danger" disabled="true" *ngIf="(event.systemStatus === 'R')" style="background-color: #C62E2E;">All Tickets Released</button>
+
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Configuration Modal -->
 <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
-    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
-    <div class="modal-dialog" role="document" style="max-width: 800px; width: 80%; height: 500px;">
-        <div class="modal-content" style="height: 100%;background-color: rgba(0, 0, 0, 0.8); color: white;">
-            <div class="modal-header">
-                <h5 class="modal-title" id="configModalLabel">System Initialization</h5>
+    aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.7);">
+    <div class="modal-dialog" role="document" style="max-width: 800px; width: 60%; display: flex; justify-content: center; align-items: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="modal-content"
+            style="background-color: #2c2f33; color: #f5f5f5; border-radius: 10px; overflow: hidden;">
+            <div class="modal-header"
+                style="background-color: #23272a; color: #ffffff; border-bottom: 2px solid #7289da;">
+                <h5 class="modal-title" id="configModalLabel">System Initialization - {{this.event.eventName}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div class="modal-body" style="margin: 10px 10px 10px 10px;">
+                <app-configuration-setup [eventModule]="eventModule" (configurationSubmitted)="handleConfigurationSubmission($event)"></app-configuration-setup>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Buy Ticket Modal -->
+<div class="modal fade" id="buyTicketModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.7);">
+    <div class="modal-dialog" role="document"
+        style="max-width: 800px; width: 60%; display: flex; justify-content: center; align-items: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="modal-content"
+            style="background-color: #2c2f33; color: #f5f5f5; border-radius: 10px; overflow: hidden;">
+            <div class="modal-header"
+                style="background-color: #23272a; color: #ffffff; border-bottom: 2px solid #7289da;">
+                <h5 class="modal-title" id="configModalLabel">Buy Tickets - {{this.event.eventName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin: 10px 10px 10px 10px;">
+                <app-buy-ticket [eventModule]="eventModule" [configuration] = "configuration"
+                    (buyTicketExecute)="handleBuyTicket($event)"></app-buy-ticket>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorMessage" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
+    <div class="modal-dialog" role="document" style="width: 30%;">
+        <div class="modal-content" >
+            <div class="modal-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/icon/error.png" style="height: 20px; width: 20px;" alt="Error Icon" />
+                    <h6 class="modal-title" id="configModalLabel" style="margin: 0;">Error - {{this.event.eventName}}</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="background: none; border: none; font-size: 20px; line-height: 1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
-                <app-configuration-setup [eventId]="passingValue"></app-configuration-setup>
+                <p style="font-size: 16px; text-align: center;">{{this.errorMessage}}</p>
+                <div style="margin-top:10px;margin-bottom:10px; display: flex; align-items: center; justify-content: center;">
+                    <button class="btn btn-secondary" (click) = "close()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Warn Modal -->
+<div class="modal fade" id="warnMessage" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
+    <div class="modal-dialog" role="document" style="width: 30%;">
+        <div class="modal-content">
+            <div class="modal-header"
+                style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/icon/warning.png" style="height: 20px; width: 20px;" alt="Error Icon" />
+                    <h6 class="modal-title" id="configModalLabel" style="margin: 0;">warning- {{this.event.eventName}}</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="background: none; border: none; font-size: 20px; line-height: 1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 16px; text-align: center;">{{this.warnMessage}}</p>
+                <div
+                    style="margin-top:10px;margin-bottom:10px; display: flex; align-items: center; justify-content: center;">
+                    <button class="btn btn-secondary" (click)="closeWarn()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successMessage" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
+    <div class="modal-dialog" role="document" style="width: 30%;">
+        <div class="modal-content">
+            <div class="modal-header"
+                style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/icon/success.png" style="height: 20px; width: 20px;" alt="Error Icon" />
+                    <h6 class="modal-title" id="configModalLabel" style="margin: 0;">Success- {{this.event.eventName}}</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="background: none; border: none; font-size: 20px; line-height: 1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 16px; text-align: center;">{{this.successMessage}}</p>
+                <div
+                    style="margin-top:10px;margin-bottom:10px; display: flex; align-items: center; justify-content: center;">
+                    <button class="btn btn-secondary" (click)="closeSuccess()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirmMessage" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
+    <div class="modal-dialog" role="document" style="width: 30%;">
+        <div class="modal-content">
+            <div class="modal-header"
+                style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/icon/warning.png" style="height: 20px; width: 20px;" alt="Error Icon" />
+                    <h6 class="modal-title" id="configModalLabel" style="margin: 0;">Confirm - {{this.event.eventName}}</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="background: none; border: none; font-size: 20px; line-height: 1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 16px; text-align: center;">{{this.confirmMessage}}</p>
+                <div
+                    style="margin-top:10px;margin-bottom:10px; display: flex; align-items: center; justify-content: center;gap: 15px;">
+                    <button class="btn btn-secondary" (click)="confirm()">Proceed</button>
+                    <button class="btn btn-secondary" (click)="confirmClose()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Information Box-->
+<div class="modal fade" id="infoMessage" tabindex="-1" role="dialog" aria-labelledby="configModalLabel"
+    aria-hidden="true" style="background-color: rgba(118, 116, 116, 0.8);">
+    <div class="modal-dialog" role="document" style="width: 30%;">
+        <div class="modal-content">
+            <div class="modal-header"
+                style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h6 class="modal-title" id="configModalLabel" style="margin: 0;">Information - {{this.event.eventName}}</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="background: none; border: none; font-size: 20px; line-height: 1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 16px; text-align: center;">{{this.infoMessage}}</p>
+                <div
+                    style="margin-top:10px;margin-bottom:10px; display: flex; align-items: center; justify-content: center;">
+                    <button class="btn btn-secondary" (click)="closeInfo()">OK</button>
+                </div>
             </div>
         </div>
     </div>

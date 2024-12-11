@@ -44,7 +44,10 @@ export class UserLoginComponent implements OnInit {
       (response) => {
         if (response === "Vendor" || response === "Customer") {
           this.auth.setUserRole(response);
-          this.env.setUsername(this.loginModule.username);
+          this.env.setUsername(
+            this.loginModule.username,
+            this.loginModule.password,
+          );
           this.route.navigate(["/dashboard"]);
         } else {
           this.errorMessage = response;

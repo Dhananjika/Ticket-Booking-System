@@ -1,0 +1,32 @@
+<div class="card-group">
+  <div class="card">
+    <img class="card-img-top img-fluid" src="assets/event/1.jpg" alt="Event image" style="height: 100%; object-fit: cover;">
+  </div>
+  <div class="card" style="background-color: black;">
+    <div class="container" style="margin-top: 10px;">
+      <div class="row mb-2">
+        <div class="col-5 font-weight-bold">Ticket Type -</div>
+        <div class="col-6">Normal</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-5 font-weight-bold">Ticket Price -</div>
+        <div class="col-6">Rs. {{eventModule.eventNormalTicketPrice}}.00</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-5 font-weight-bold">Ticket Count -</div>
+        <div class="col-6">
+          <input type="number" class="form-control" placeholder="Enter Ticket Count" style="width: 120%;" [attr.min]="1"
+            [attr.max]="configuration.customerRetrievalRate" [(ngModel)]="ticketCount" (ngModelChange) = "calculateTotalAmount(ticketCount)"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5 font-weight-bold">Total Amount -</div>
+        <div class="col-6">Rs. {{this.totalAmount}}</div>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="buyTicket()" 
+          style="background-color: #161e3a; border: none; border-radius: 5px;">Buy Tickets</button>
+      </div>
+    </div>
+  </div>
+</div>

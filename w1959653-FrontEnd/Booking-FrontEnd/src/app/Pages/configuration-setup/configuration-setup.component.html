@@ -1,24 +1,30 @@
 <form>
   <div class="form-group">
-    <label for="totalTicket">Total Number of Tickets</label>
-    <input type="number" class="form-control custom-input" id="totalTicket"
-      placeholder="Enter Total Number of Tickets" />
+    <label for="totalTicket" style="font-weight: bold;">Total Number of Tickets</label>
+    <input type="number" class="form-control custom-input" id="totalTicket" placeholder="Enter Total Number of Tickets"
+      style="background-color: #40444b; color: #ffffff; border: 1px solid #7289da; border-radius: 5px; width: 100%;" 
+      [(ngModel)]="this.configuration.totalTickets" [ngModelOptions]="{standalone: true}"/>
   </div>
   <div class="form-group">
-    <label for="maxCapacity">Maximum Ticket Capacity</label>
-    <input type="number" class="form-control custom-input" id="maxCapacity"
-      placeholder="Enter Maximum Ticket Capacity" />
+    <label for="maxCapacity" style="font-weight: bold;">Maximum Ticket Capacity</label>
+    <input type="number" class="form-control custom-input" id="maxCapacity" placeholder="Enter Maximum Ticket Capacity"
+      style="background-color: #40444b; color: #ffffff; border: 1px solid #7289da; border-radius: 5px;width: 100%;" 
+      [(ngModel)]="this.configuration.maxTicketCapacity"[ngModelOptions]="{standalone: true}"/>
   </div>
   <div class="form-group">
-    <label for="releaseRate">Ticket Release Rate</label>
-    <input type="number" class="form-control custom-input" id="releaseRate" placeholder="Enter Ticket Release Rate" />
+    <label for="releaseRate" style="font-weight: bold;">Ticket Release Rate</label>
+    <input type="number" class="form-control custom-input" id="releaseRate" placeholder="Enter Ticket Release Rate"
+      style="background-color: #40444b; color: #ffffff; border: 1px solid #7289da; border-radius: 5px;width: 100%;" 
+      [(ngModel)]="this.configuration.ticketReleaseRate"[ngModelOptions]="{standalone: true}"/>
   </div>
   <div class="form-group">
-    <label for="purchaseRate">Customer Retrieval Rate</label>
-    <input type="number" class="form-control custom-input" id="purchaseRate"
-      placeholder="Enter Customer Retrieval Rate" />
+    <label for="purchaseRate" style="font-weight: bold;">Customer Retrieval Rate</label>
+    <input type="number" class="form-control custom-input" id="purchaseRate" placeholder="Enter Customer Retrieval Rate"
+      style="background-color: #40444b; color: #ffffff; border: 1px solid #7289da; border-radius: 5px;width: 100%;" 
+      [(ngModel)]="this.configuration.customerRetrievalRate"[ngModelOptions]="{standalone: true}"/>
   </div>
   <div class="text-center mt-4">
-    <button class="btn btn-outline-secondary btn-lg btn-block" type="button" (click)="submitForm()">Register</button>
+    <button class="btn btn-primary btn-lg btn-block" type="button" (click)="submitConfiguration()"
+      style="background-color: #7289da; border: none; border-radius: 5px;">Submit Configurations</button>
   </div>
 </form>
