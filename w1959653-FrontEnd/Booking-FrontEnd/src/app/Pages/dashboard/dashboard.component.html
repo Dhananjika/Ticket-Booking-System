@@ -22,10 +22,10 @@
             <button class="btn btn-secondary" (click)="addConfig(event)" *ngIf="(event.configurationStatus) === 'I'">Add Configurations</button>
             <button class="btn btn-secondary" (click)="startEvent(event)" *ngIf="(event.systemStatus === 'I') && (event.configurationStatus === 'A')">Start System</button>
             <button class="btn btn-secondary" (click)="addTickets(event)" *ngIf="(event.systemStatus === 'A') && (event.configurationStatus === 'A')">Add Tickets</button>
-            <button class="btn btn-secondary" (click)="buyTickets(event)" *ngIf = "(this.authService.getUserRole() === 'Customer') && (event.systemStatus === 'A')">Buy Tickets</button>
+            <button class="btn btn-secondary" (click)="buyTickets(event)" *ngIf = "(this.authService.getUserRole() === 'Customer') && ((event.systemStatus === 'A') || (event.systemStatus === 'R'))">Buy Tickets</button>
             <button class="btn btn-danger" (click)="stopEvent(event)" *ngIf = "(event.systemStatus === 'A') && (this.authService.getUserRole() === 'Vendor')">Stop System</button>
             <button class="btn btn-danger" disabled="true" *ngIf="(event.systemStatus === 'S')" style="background-color: #C62E2E;">Sold Out</button>
-            <button class="btn btn-danger" disabled="true" *ngIf="(event.systemStatus === 'R')" style="background-color: #C62E2E;">All Tickets Released</button>
+            <button class="btn btn-danger" disabled="true" *ngIf="(this.authService.getUserRole() === 'Vendor') && (event.systemStatus === 'R')" style="background-color: #C62E2E;">All Tickets Released</button>
 
         </div>
     </div>

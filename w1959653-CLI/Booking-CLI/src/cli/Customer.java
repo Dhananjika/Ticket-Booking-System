@@ -34,7 +34,7 @@ public class Customer implements Runnable {
                     break;
                 }
                 ticketPool.removeTicket(Thread.currentThread().getName());
-                Thread.sleep(400);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 Logger.error(methodDetails + " An error occurred while interrupting the customer thread " + Thread.currentThread().getName() + " : " + e.getMessage());
                 break;

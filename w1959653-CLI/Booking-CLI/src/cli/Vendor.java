@@ -34,7 +34,7 @@ public class Vendor implements Runnable {
                     break;
                 }
                 ticketPool.addTicket(Thread.currentThread().getName());
-                Thread.sleep(1000);
+                Thread.sleep(6000);
             } catch (InterruptedException e) {
                 Logger.error(methodDetails + " An error occurred while interrupting the vendor thread " + Thread.currentThread().getName() + " : " + e.getMessage());
                 break;
